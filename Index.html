@@ -112,3 +112,1142 @@
     .btn-primary {
       background: var(--primary);
       color: #fff;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 250, 252, 0.82);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #7c3aed);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 92px 0 72px;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 30%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: center;
+      gap: 58px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .avatar-stack {
+      display: flex;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      margin-left: -10px;
+      background: linear-gradient(135deg, #bfdbfe, #fef3c7);
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 18px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard {
+      overflow: hidden;
+      border-radius: 26px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .dashboard-pill {
+      width: 118px;
+      height: 12px;
+      border-radius: 999px;
+      background: #e2e8f0;
+    }
+
+    .dashboard-body {
+      padding: 26px;
+    }
+
+    .mock-hero {
+      min-height: 210px;
+      border-radius: 22px;
+      padding: 30px;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff 42%, #ffedd5);
+    }
+
+    .mock-line-lg {
+      width: 78%;
+      height: 22px;
+      border-radius: 999px;
+      background: #1e3a8a;
+      margin-bottom: 14px;
+    }
+
+    .mock-line {
+      width: 62%;
+      height: 13px;
+      border-radius: 999px;
+      background: rgba(30, 58, 138, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .mock-button {
+      width: 132px;
+      height: 40px;
+      border-radius: 999px;
+      background: var(--primary);
+      margin-top: 22px;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .floating-card {
+      position: absolute;
+      right: -14px;
+      bottom: 44px;
+      max-width: 230px;
+      padding: 18px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.14);
+      border: 1px solid var(--border);
+    }
+
+    .floating-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .floating-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Trust */
+    .trust {
+      padding: 34px 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .trust p {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .logo-box {
+      display: grid;
+      place-items: center;
+      min-height: 52px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #94a3b8;
+      font-weight: 900;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      color: var(--primary);
+      font-size: 1.45rem;
+    }
+
+    .card h3 {
+      font-size: 1.24rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    /* Problem/Solution split */
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .split-panel {
+      padding: 38px;
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 13px;
+      color: var(--muted);
+    }
+
+    .check-list li::before {
+      content: "✓";
+      flex: 0 0 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .problem-list li::before {
+      content: "!";
+      background: rgba(249, 115, 22, 0.11);
+      color: var(--accent);
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      position: relative;
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 14px;
+      background: var(--text);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .step p {
+      color: var(--muted);
+    }
+
+    /* Feature band */
+    .feature-band {
+      border-radius: 36px;
+      padding: 54px;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .feature-band-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .feature-band h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+    }
+
+    .feature-band p {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 800;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .quote-card {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .stars {
+      color: #f59e0b;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .quote-card blockquote {
+      color: #334155;
+      margin-bottom: 22px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .person-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #bfdbfe, #fed7aa);
+    }
+
+    .person strong {
+      display: block;
+      line-height: 1.2;
+    }
+
+    .person span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* Offer */
+    .offer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      padding: 38px;
+      border-radius: 34px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .price {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .price strong {
+      font-size: 3.5rem;
+      line-height: 1;
+      letter-spacing: -0.07em;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-weight: 800;
+      padding-bottom: 8px;
+    }
+
+    .offer-note {
+      height: 100%;
+      padding: 38px;
+      border-radius: 34px;
+      background: var(--surface-soft);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .offer-note h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.04em;
+    }
+
+    .offer-note p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* FAQ */
+    .faq {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    details {
+      padding: 22px 24px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 76px 32px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 32%),
+        linear-gradient(135deg, var(--primary), #7c3aed);
+      color: #fff;
+    }
+
+    .final-cta h2 {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .final-cta p {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+    }
+
+    .final-cta .btn-primary {
+      background: #fff;
+      color: var(--primary-dark);
+      box-shadow: none;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 42px 0;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .split,
+      .feature-band-grid,
+      .offer,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 68px;
+      }
+
+      .floating-card {
+        position: static;
+        max-width: none;
+        margin-top: 16px;
+      }
+
+      .logos,
+      .card-grid,
+      .steps,
+      .testimonials {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .nav-cta .btn-secondary {
+        display: none;
+      }
+
+      .hero-actions,
+      .hero-proof {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .logos,
+      .card-grid,
+      .steps,
+      .testimonials,
+      .feature-list,
+      .stat-row {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-band,
+      .pricing-card,
+      .offer-note,
+      .split-panel {
+        padding: 28px;
+      }
+
+      .footer-grid {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="BrightLaunch home">
+        <span class="logo-mark">B</span>
+        <span>BrightLaunch</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#benefits">Benefits</a>
+        <a href="#process">Process</a>
+        <a href="#testimonials">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#pricing" class="btn btn-secondary">See Offer</a>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Conversion-focused landing pages</div>
+          <h1>Launch a better website in <span>half the time.</span></h1>
+          <p class="hero-copy">
+            A polished, high-converting landing page template for small businesses, creators, consultants, and startups that need clear messaging and a strong call to action.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Start Your Project →</a>
+            <a href="#process" class="btn btn-secondary">See How It Works</a>
+          </div>
+
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true">
+              <span class="avatar"></span>
+              <span class="avatar"></span>
+              <span class="avatar"></span>
+              <span class="avatar"></span>
+            </div>
+            <span>Trusted by founders, freelancers, and growing teams.</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Landing page preview mockup">
+          <div class="dashboard">
+            <div class="dashboard-top">
+              <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="dashboard-pill"></div>
+            </div>
+            <div class="dashboard-body">
+              <div class="mock-hero">
+                <div class="mock-line-lg"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line" style="width: 48%;"></div>
+                <div class="mock-button"></div>
+              </div>
+
+              <div class="stat-row">
+                <div class="stat-card">
+                  <strong>42%</strong>
+                  <span>More leads</span>
+                </div>
+                <div class="stat-card">
+                  <strong>3x</strong>
+                  <span>Faster launch</span>
+                </div>
+                <div class="stat-card">
+                  <strong>98</strong>
+                  <span>Page score</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card">
+            <strong>Clear next step</strong>
+            <p>Every section guides visitors toward one focused action.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust" aria-label="Trusted by companies">
+      <div class="container trust-grid">
+        <p>Built for teams that value clarity</p>
+        <div class="logos" aria-label="Client logos">
+          <div class="logo-box">NOVA</div>
+          <div class="logo-box">ATLAS</div>
+          <div class="logo-box">LOFT</div>
+          <div class="logo-box">PULSE</div>
+          <div class="logo-box">KIN</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">The problem</div>
+          <h2 style="font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -0.05em; margin-bottom: 18px;">
+            Most pages look fine — but they do not make the offer obvious.
+          </h2>
+          <p style="color: var(--muted); font-size: 1.08rem;">
+            Visitors should immediately understand what you offer, why it matters, and what they should do next. When a page feels cluttered, vague, or slow, people leave before taking action.
+          </p>
+        </div>
+
+        <div class="split-panel">
+          <ul class="check-list problem-list">
+            <li>Visitors cannot quickly tell what the business actually does.</li>
+            <li>The page has too many competing buttons and distractions.</li>
+            <li>The design looks decent on desktop but breaks down on mobile.</li>
+            <li>The copy lists features without explaining the real benefit.</li>
+            <li>There is not enough proof to make the offer feel trustworthy.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits" style="background: #fff;">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">The solution</div>
+          <h2>A landing page designed around one clear goal.</h2>
+          <p>
+            Use a structure that guides visitors from curiosity to confidence to action.
+          </p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="icon">✦</div>
+            <h3>Clear Messaging</h3>
+            <p>Explain your offer in plain language so visitors know exactly what you do and why it matters.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">↗</div>
+            <h3>Higher Conversions</h3>
+            <p>Every section supports your primary call to action instead of distracting from it.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">☉</div>
+            <h3>Mobile-First Layout</h3>
+            <p>The design adapts smoothly across phones, tablets, laptops, and large screens.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚡</div>
+            <h3>Fast Launch</h3>
+            <p>Start with a polished structure instead of staring at a blank page for weeks.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">★</div>
+            <h3>Built-In Trust</h3>
+            <p>Testimonials, proof points, and objection handling make the decision feel easier.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✓</div>
+            <h3>Easy to Customize</h3>
+            <p>Swap the copy, colors, features, and offer details to match your business.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">How it works</div>
+          <h2>Simple enough to launch quickly. Strategic enough to convert.</h2>
+          <p>
+            A strong landing page does not need to be complicated. It needs to be intentional.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <h3>Choose the goal</h3>
+            <p>Decide whether the page should drive bookings, purchases, signups, downloads, or inquiries.</p>
+          </article>
+
+          <article class="step">
+            <h3>Shape the story</h3>
+            <p>Guide visitors through the problem, solution, benefits, proof, and offer.</p>
+          </article>
+
+          <article class="step">
+            <h3>Launch and improve</h3>
+            <p>Publish the page, watch what visitors do, and refine the message over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="feature-band">
+          <div class="feature-band-grid">
+            <div>
+              <div class="eyebrow" style="background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.18);">What is included</div>
+              <h2>Everything a modern landing page needs.</h2>
+              <p>
+                Use these sections as-is or tailor them to your own service, product, course, event, app, or lead magnet.
+              </p>
+            </div>
+
+            <ul class="feature-list">
+              <li>Hero section</li>
+              <li>Trust bar</li>
+              <li>Problem section</li>
+              <li>Benefit cards</li>
+              <li>Three-step process</li>
+              <li>Feature list</li>
+              <li>Testimonials</li>
+              <li>Pricing offer</li>
+              <li>FAQ accordion</li>
+              <li>Final CTA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials" style="background: #fff;">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Social proof</div>
+          <h2>Designed to make your offer easier to trust.</h2>
+          <p>
+            Replace these sample testimonials with real customer quotes, case studies, or measurable outcomes.
+          </p>
+        </div>
+
+        <div class="testimonials">
+          <article class="quote-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              “We finally had a page that explained what we do without overwhelming people. The number of qualified calls increased almost immediately.”
+            </blockquote>
+            <div class="person">
+              <div class="person-img"></div>
+              <div>
+                <strong>Maya R.</strong>
+                <span>Studio Founder</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              “The structure made it obvious what to say and where to say it. We launched faster than expected and looked more polished from day one.”
+            </blockquote>
+            <div class="person">
+              <div class="person-img"></div>
+              <div>
+                <strong>Daniel K.</strong>
+                <span>SaaS Consultant</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              “It helped us cut the fluff and focus on one strong offer. The final page felt clean, confident, and much easier to understand.”
+            </blockquote>
+            <div class="person">
+              <div class="person-img"></div>
+              <div>
+                <strong>Leah S.</strong>
+                <span>Small Business Owner</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container offer">
+        <div class="pricing-card">
+          <div class="eyebrow">Starter offer</div>
+          <h2 style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -0.05em;">Landing Page Starter Package</h2>
+          <p style="color: var(--muted); margin-top: 14px;">
+            A complete landing page foundation for businesses that need a focused, professional page without unnecessary complexity.
+          </p>
+
+          <div class="price">
+            <strong>$999</strong>
+            <span>one-time</span>
+          </div>
+
+          <ul class="check-list" style="margin-bottom: 28px;">
+            <li>Customizable landing page structure</li>
+            <li>Responsive design for mobile and desktop</li>
+            <li>Sections for testimonials, benefits, offer, and FAQ</li>
+            <li>Clear call-to-action placement throughout the page</li>
+            <li>Clean HTML and CSS in one file</li>
+          </ul>
+
+          <a href="#contact" class="btn btn-primary">Book a Free Call →</a>
+        </div>
+
+        <div class="offer-note">
+          <h3>Not ready to list a price?</h3>
+          <p>
+            You can replace the pricing block with a consultation offer, waitlist form, lead magnet download, free trial, or product demo.
+          </p>
+          <ul class="check-list">
+            <li>For services: use “Book a Free Consultation.”</li>
+            <li>For software: use “Start Free Trial.”</li>
+            <li>For courses: use “Join the Waitlist.”</li>
+            <li>For lead magnets: use “Download the Free Guide.”</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="background: #fff;">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">FAQ</div>
+          <h2>Questions visitors may ask before they act.</h2>
+          <p>
+            Use this section to remove hesitation and make the next step feel low-risk.
+          </p>
+        </div>
+
+        <div class="faq">
+          <details open>
+            <summary>Who is this landing page for?</summary>
+            <p>It works well for small businesses, consultants, creators, startups, apps, courses, lead magnets, and service providers who need one focused page with one clear goal.</p>
+          </details>
+
+          <details>
+            <summary>Can I customize the colors and copy?</summary>
+            <p>Yes. The CSS variables at the top of the style section make it easy to change the colors, border radius, shadows, and page width.</p>
+          </details>
+
+          <details>
+            <summary>Does this work on mobile?</summary>
+            <p>Yes. The layout includes responsive breakpoints so sections stack cleanly on smaller screens.</p>
+          </details>
+
+          <details>
+            <summary>Can I connect this to a form?</summary>
+            <p>Yes. You can replace the contact section button with a form, booking link, checkout link, email platform embed, or CRM form.</p>
+          </details>
+
+          <details>
+            <summary>What should my main CTA be?</summary>
+            <p>Choose the one action that matters most: book a call, start a trial, download a guide, buy now, request a quote, or join a waitlist.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Ready to turn more visitors into customers?</h2>
+          <p>
+            Give people a page that makes your offer clear, credible, and easy to act on.
+          </p>
+          <a href="mailto:hello@example.com" class="btn btn-primary">Get Started Today →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <a href="#" class="logo" aria-label="BrightLaunch home">
+        <span class="logo-mark">B</span>
+        <span>BrightLaunch</span>
+      </a>
+
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:hello@example.com">Contact</a>
+      </div>
+
+      <p>© 2026 BrightLaunch. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
