@@ -164,6 +164,10 @@
       box-shadow: 0 10px 30px rgba(35, 31, 24, 0.08);
     }
 
+    .app-card + .app-card {
+      margin-top: 18px;
+    }
+
     .app-icon {
       aspect-ratio: 16 / 10;
       display: grid;
@@ -248,17 +252,18 @@
         <p class="lead">This repository is the home base for focused browser tools, experiments, and small apps built to solve real tasks.</p>
       </div>
       <aside class="summary" aria-label="Repository summary">
-        <strong>01</strong>
-        <p>First app published: a channel tracker that keeps a numbered YouTube series in watch order.</p>
+        <strong data-app-total>02</strong>
+        <p>Two apps published: a practical watchlist and a playful addition game for kids.</p>
       </aside>
     </section>
 
     <section class="apps shell" id="apps" aria-labelledby="apps-title">
       <div class="section-title">
         <h2 id="apps-title">Webapps</h2>
-        <span class="count">1 available</span>
+        <span class="count" data-app-count>2 available</span>
       </div>
 
+      <!-- APP_LIST_START -->
       <article class="app-card">
         <div class="app-icon" aria-hidden="true">01</div>
         <div>
@@ -267,6 +272,15 @@
         </div>
         <a class="button" href="apps/writing-fighting-watchlist.html">Open app</a>
       </article>
+      <article class="app-card">
+        <div class="app-icon" aria-hidden="true">02</div>
+        <div>
+          <h3>Sparkle Sums</h3>
+          <p>A bright addition game for kids with quick problems, cheerful feedback, score tracking, streaks, and rising levels.</p>
+        </div>
+        <a class="button" href="apps/sparkle-sums.html">Open app</a>
+      </article>
+      <!-- APP_LIST_END -->
     </section>
   </main>
 </body>
