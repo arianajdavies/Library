@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing Fighting Watchlist</title>
+  <meta name="description" content="A channel-wide Writing Fighting tracker with watched and need-to-watch filters." />
+  <style>
+    :root {
+      --ink: #182329;
+      --muted: #60717c;
+      --bg: #f6f2ea;
+      --paper: #fffdf8;
+      --soft: #ece4d6;
+      --line: #d8cebd;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --warn: #a35f00;
+      --shadow: 0 16px 42px rgba(34, 29, 22, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 242, 234, 0.9);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .back {
+      color: var(--muted);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .playlist-link {
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 42px 0 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 34px;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 4.9rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .toolbar {
+      margin: 18px 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+
+    .filters {
+      display: inline-grid;
+      grid-template-columns: repeat(3, minmax(104px, 1fr));
+      gap: 6px;
+      padding: 6px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .filter,
+    .action {
+      min-height: 42px;
+      border: 1px solid transparent;
+      padding: 0 14px;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--paper);
+      border-color: var(--line);
+      box-shadow: 0 6px 16px rgba(34, 29, 22, 0.08);
+    }
+
+    .search {
+      min-height: 44px;
+      width: min(320px, 100%);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 0 12px;
+      font: inherit;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 48px;
+    }
+
+    .video {
+      display: grid;
+      grid-template-columns: 178px minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 12px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(34, 29, 22, 0.07);
+    }
+
+    .thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .number {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      min-width: 42px;
+      min-height: 28px;
+      display: grid;
+      place-items: center;
+      background: rgba(24, 35, 41, 0.88);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.86rem;
+    }
+
+    .meta h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      line-height: 1.22;
+    }
+
+    .meta a {
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .video.watched {
+      opacity: 0.74;
+    }
+
+    .video.watched .status {
+      color: var(--accent-dark);
+    }
+
+    .action {
+      min-width: 150px;
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent-dark);
+    }
+
+    .action.secondary {
+      background: var(--paper);
+      color: var(--warn);
+      border-color: var(--line);
+    }
+
+    .empty {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .video {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        max-width: 420px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+      }
+
+      .filters,
+      .search,
+      .action {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="shell" aria-label="App navigation">
+      <a class="back" href="../index.html">Back to Library</a>
+      <a class="playlist-link" href="https://www.youtube.com/playlist?list=PL2FwWWx-JzoAlUiNmJSRvhzPzaNOaEpnX" target="_blank" rel="noreferrer">Open YouTube playlist</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <h1>Writing Fighting Watchlist</h1>
+        <p class="lead">Channel videos are filtered to Writing Fighting entries and sorted by the number in the title, so the series stays in order. Watched videos are saved in this browser.</p>
+      </div>
+      <div class="stats" aria-label="Watch progress">
+        <div class="stat"><strong id="totalCount">0</strong><span>Total</span></div>
+        <div class="stat"><strong id="needCount">0</strong><span>Need to Watch</span></div>
+        <div class="stat"><strong id="watchedCount">0</strong><span>Watched</span></div>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="List controls">
+      <div class="filters" role="group" aria-label="Filter videos">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="need">Need to Watch</button>
+        <button class="filter" type="button" data-filter="watched">Watched</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search titles" aria-label="Search titles" />
+    </section>
+
+    <section class="list" id="videoList" aria-live="polite"></section>
+  </main>
+
+  <script>
+    const playlist = [
+      ["S2a5ijnaZBg", "Writing Fighting 40"],
+      ["ugrEy8ZT9Ik", "Writing Fighting 41 Parries and Covers"],
+      ["lqU9RbkfCQw", "Writing Fighting 42 Subtle Biomechanics"],
+      ["zB4WJ227LfQ", "Writing Fighting 43 Long Seax"],
+      ["Ef1ZG4KQ7bY", "Writing Fighting 44 Answer for JC Duncan"],
+      ["j_YY6H9p0EM", "Writing Fighting 45 ? The Axe"],
+      ["TP-VCYSkh34", "Writing Fighting 46"],
+      ["zTdn8Y7kx8A", "Writing Fighting 47"],
+      ["DZJan8TgV5E", "Writing Fighting 48 The Big Barbarian"],
+      ["JrKdPCjUR0w", "Writing Fighting 49 ?Why Blades Lock?"],
+      ["KIQ847PUz7k", "Writing Fighting 50!sword and buckler 1"],
+      ["sx0NAGRZ__8", "Writing Fighting 51 the centerline vulnerability"],
+      ["E9WxAKxJG1s", "Writing Fighting 52 cuts"],
+      ["UOiF6r5Xtt0", "Writing Fighting 53 parries"],
+      ["AJJr0_W1JI0", "Writing Fighting 54"],
+      ["7dy63aLKOcA", "Writing Fighting 55 Longsword and longer swords"],
+      ["HTc3sFdFzTA", "Writing Fighting 56"],
+      ["-Elb82RqtaU", "Writing Fighting 57"],
+      ["V5-Db-rlDsA", "Writing Fighting 58"],
+      ["gSw0oPO_wb8", "Writing Fighting 59"],
+      ["D-cvc4_pUSk", "Writing Fighting 60"],
+      ["0yqVl44elyQ", "Writing Fighting 61"],
+      ["PTrVsJKygGo", "Writing Fighting 62"],
+      ["x0xkMUYDj-k", "Writing Fighting 63"],
+      ["1PFfNxK_YS8", "Writing Fighting 64"],
+      ["jIzapfRFQW4", "Writing Fighting 65"],
+      ["fmfTWu3nTz8", "Writing Fighting 66"],
+      ["gwESqyHZz48", "Writing Fighting 67"],
+      ["EKQ7W3XXbyU", "Writing Fighting 68"],
+      ["_OIMA26KDeg", "Writing Fighting 69"],
+      ["CWXL1UpkNxI", "Writing Fighting 70"],
+      ["LpWJwT_nwd0", "Writing Fighting 71"],
+      ["wQ-ZSqVJuLk", "Writing Fighting 72 hat and arm armour"],
+      ["5oJI5u3ifAE", "Writing Fighting 73 Arms and a dagger"],
+      ["oW6CML55lhk", "Writing Fighting 74"],
+      ["9TidYLb6-34", "Writing Fighting 75"],
+      ["L0VKh1UOpFc", "Writing Fighting 76"],
+      ["X9tQ9Ij1v2U", "Writing Fighting 77"],
+      ["t7TS844APKc", "Writing Fighting 78"],
+      ["8Ha5eSuEhRQ", "Writing Fighting 79"],
+      ["sScISHeWu9w", "Writing Fighting 80"],
+      ["cMbtLDwYgT4", "Writing Fighting 81"],
+      ["MsGmnUZfeFo", "Writing Fighting 82"],
+      ["F-8wdfTeTrc", "Writing Fighting 83"],
+      ["o5_q0wsA6Pw", "Writing Fighting 85"],
+      ["7GJx_pYov1U", "Writing Fighting 86"],
+      ["niT1YuXoXew", "Writing Fighting 87"],
+      ["NxhaQm_loc0", "Writing Fighting 88"],
+      ["kvs6jPbVzrQ", "Writing Fighting 89"],
+      ["6_xBSbOlBMo", "Writing Fighting 90"],
+      ["SyRNtAUU1Go", "Writing Fighting 91"],
+      ["Rx_pa4pK5y0", "Writing Fighting 92"],
+      ["UWhdvHlhy14", "Writing Fighting 93"],
+      ["O-fIaJcndIw", "Writing Fighting 94"],
+      ["6177aWgpP-M", "Writing Fighting 95"],
+      ["7R7vXRh-Dlc", "Writing Fighting 96"],
+      ["6tTpXA9h3is", "Writing Fighting 97"],
+      ["m-7ZwcPKMPA", "Writing Fighting 98"],
+      ["Dd3lcdZoNmM", "Writing Fighting 100"],
+      ["wGwL6coSmN4", "Writing Fighting 101"],
+      ["mv3AbJg783w", "Writing Fighting 102"],
+      ["kZfX0gvpKUg", "Writing Fighting 103"],
+      ["Z2Hx10_2zWc", "Writing Fighting 104"],
+      ["-IzyU6erYRA", "Writing Fighting 105"],
+      ["LwB2GwrV4m0", "Writing Fighting 106"],
+      ["3h9bzAHb-oU", "Writing Fighting 107"],
+      ["UMIzp4LXSJ4", "Writing Fighting 108"],
+      ["_5SL2aDsLrM", "Writing Fighting 109"],
+      ["qADKGT51IwY", "Writing Fighting 110"],
+      ["ZR2hY8nYjtA", "Writing Fighting 111"],
+      ["HJRy63lHlAc", "Writing Fighting 112"],
+      ["V-cDiHq8FqA", "Writing Fighting 113"],
+      ["61JiMKwJyUw", "Writing Fighting 114"],
+      ["mYL-S4vuQHo", "Writing Fighting 115"],
+      ["_X59xrDxcf4", "Writing Fighting 116"],
+      ["v18aUX7nSi0", "Writing Fighting 117"],
+      ["krOp7YTMssE", "Writing Fighting 118"],
+      ["wahA3QsdUk0", "Writing Fighting 119"],
+      ["HzE-pss50Sk", "Writing Fighting 120"],
+      ["YsY_j9KEug4", "Writing Fighting 121"],
+      ["rDM8udRAjdw", "Writing Fighting 122"],
+      ["5cRikM1aQ8E", "Writing Fighting 123"],
+      ["gVv6ORedbfE", "Writing Fighting 124"],
+      ["ia9FRMZYstA", "Writing Fighting 125"],
+      ["EE2dWyyrYEY", "Writing Fighting 126"],
+      ["6J8c7o0sqLU", "Writing Fighting 127"],
+      ["3g9thfBOwnU", "Writing Fighting 128"],
+      ["ERscaGx2av0", "Writing Fighting 129"],
+      ["XG-W0p84Tfg", "Writing Fighting 130"],
+      ["qnCyvgAlWqo", "Writing Fighting 131"],
+      ["g279an77FDg", "Writing Fighting 132"],
+      ["PB2u8E8zvGI", "Writing Fighting 133"],
+      ["84PUzi0jjf4", "Writing Fighting 134"],
+      ["jYZ3zMxOoUA", "Writing Fighting 135"],
+      ["ynBgWnV7eug", "Writing Fighting 138"],
+      ["olLqiRN1tuw", "Writing Fighting 139"],
+      ["vRuwfNwpW60", "Writing Fighting 140"],
+      ["fxrxcnrHE0w", "Writing Fighting 141"],
+      ["6rEoZmbYYbo", "Writing Fighting 142"],
+      ["3Q8_qiRB5Oc", "Writing Fighting 143"],
+      ["tNoRNuuNiCU", "Writing Fighting 144"],
+      ["yMar5hsJ8Ek", "Writing Fighting 145"],
+      ["paW9g2zV4a4", "Writing Fighting 146"],
+      ["9ONFd4Y1Q0Q", "Writing Fighting 147"],
+      ["5NErtZ1XLKk", "Writing Fighting 148"],
+      ["JPRbfl06O3s", "Writing Fighting 149"],
+      ["-AcOGHBUB5U", "Writing Fighting 150"],
+      ["zbxJyniu3m8", "Writing Fighting 151"],
+      ["XoVW__oqxX0", "Writing Fighting 153"],
+      ["xp19_Y-qTDA", "Writing Fighting 154"],
+      ["459ZkqJmr-A", "Writing Fighting 155"],
+      ["_yqm0_ruLH0", "Writing Fighting 156"],
+      ["K4SWxE-7Udo", "Writing Fighting 157"],
+      ["0rIrhMpDl9I", "Writing Fighting 158"],
+      ["AEGR1EZFSio", "Writing Fighting 159"],
+      ["_lB5689egr8", "Writing Fighting 160"],
+      ["KNE6O3JCMVo", "Writing Fighting 161"],
+      ["tY9fMb4rc-s", "Writing Fighting 162"],
+      ["XqaCgw4SNPo", "Writing Fighting 163"],
+      ["V1ZU2lj8cLM", "Writing Fighting 164"],
+      ["HaJIRyJlxhA", "Writing Fighting 165"],
+      ["E3j6NKzdnNI", "Writing Fighting 166"],
+      ["tL68rv8bsDM", "Writing Fighting 167"],
+      ["IFZQy87MlD0", "Writing Fighting 168"],
+      ["zTphYVZ3p38", "Writing Fighting 169"],
+      ["pOoDmjIt2U8", "Writing Fighting 170"],
+      ["1YSP7tQkml4", "Writing Fighting 171"],
+      ["JIFkydJoYtA", "Writing Fighting 172"],
+      ["D91g10NrQuY", "Writing Fighting 173"],
+      ["7isd_-fPe2w", "Writing Fighting 174"],
+      ["knD1_VtTabM", "Writing Fighting 175"],
+      ["XyVeFESA4uc", "Writing Fighting 176"],
+      ["5u4zq3vNo6M", "Writing Fighting 177"],
+      ["-J66xaknDik", "Writing Fighting 178"],
+      ["Kqnv75tHoUU", "Writing Fighting 179"],
+      ["FTQKKXLW0pk", "Writing Fighting 180"],
+      ["w_5SYdZqq3I", "Writing Fighting 181"],
+      ["7OGi89hqJr4", "Writing Fighting 182"],
+      ["o1M-dLb7kiw", "Writing Fighting 185A"],
+      ["tO6F5KDO4cQ", "Writing Fighting 186"],
+      ["oEGt4puYCi4", "Writing Fighting 187"],
+      ["r2e1wi4cRUg", "Writing Fighting 188"],
+      ["Yi4VM4yYjsY", "Writing Fighting 189"],
+      ["H8-KeUJdyhI", "Writing Fighting 190"],
+      ["b5uYnchhFQw", "Writing Fighting 191"],
+      ["ZwZCJ3dNHmc", "Writing Fighting 192"],
+      ["HVQHb8pdt9w", "Writing Fighting 193"],
+      ["uO6KLs6NqQU", "Writing Fighting 194"],
+      ["aKM-CUnq8AQ", "Writing Fighting 195"],
+      ["SE_7Q8Gbx0s", "Writing Fighting 196"],
+      ["ww-nZscFUzM", "Writing Fighting 197"],
+      ["87tGyi2K2mo", "Writing Fighting 198"],
+      ["MLl02RLQg3s", "Writing Fighting 199"],
+      ["w8Uj8f2C2Qc", "Writing Fighting 200"],
+      ["_9ZZ0K8_y1A", "Writing Fighting 201"],
+      ["qye7juCfdtM", "Writing Fighting 202"],
+      ["-Gt2vnVGZnI", "Writing Fighting 203"],
+      ["KvkiIGQtI4o", "Writing Fighting 204"],
+      ["kElw1ah9rMQ", "Writing Fighting 205"],
+      ["mc2wGPWcXtg", "Writing Fighting 208 Tempo208"],
+      ["m41JR2Mpx2o", "Writing Fighting 209"],
+      ["Cmbn4TgUXg4", "Writing Fighting 213"],
+      ["WBEKTf0ft1U", "Writing Fighting 214"],
+      ["MkwABgZfSDw", "Writing Fighting 215 (why swords 1)"],
+      ["ehsbu4qAZck", "Writing Fighting 216"],
+      ["b3theCG-gyw", "Writing Fighting 217"],
+      ["28nFA0jQlkM", "Writing Fighting 218"],
+      ["muFYAqcPEyc", "Writing Fighting 219"],
+      ["JeTdgLILNyg", "Writing Fighting 220"],
+      ["4ARFP49sWds", "Writing Fighting 221"],
+      ["GYrHjzWkszU", "Writing Fighting 222"],
+      ["cgOmrJyD4sc", "Writing Fighting 223"],
+      ["wTZ01j7nDbg", "Writing Fighting 224"],
+      ["C9w-mTTACtY", "Writing Fighting 225"],
+      ["AIAQSpCVg3w", "Writing Fighting 226"],
+      ["Dbbr9GAQl1M", "Writing Fighting 227"],
+      ["6R72m1EPvhM", "Writing Fighting 228"],
+      ["mXxIfEy-CSU", "Writing Fighting 229"],
+      ["kk5Xtauywz8", "Writing Fighting Horse Archery"]
+    ].map(([id, title], index) => ({ id, title, originalIndex: index }));
+
+    const storageKey = "library-writing-fighting-watched";
+    const watched = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+    const list = document.querySelector("#videoList");
+    const search = document.querySelector("#search");
+    const filterButtons = [...document.querySelectorAll(".filter")];
+    let activeFilter = "all";
+
+    const videos = playlist.sort((a, b) => {
+      const aNumber = titleNumber(a.title);
+      const bNumber = titleNumber(b.title);
+      if (aNumber !== bNumber) return aNumber - bNumber;
+      return a.originalIndex - b.originalIndex;
+    });
+
+    function titleNumber(title) {
+      const match = title.match(/\bWriting Fighting\s+(\d+)\b/i);
+      return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+    }
+
+    function saveWatched() {
+      localStorage.setItem(storageKey, JSON.stringify([...watched]));
+    }
+
+    function updateStats() {
+      document.querySelector("#totalCount").textContent = videos.length;
+      document.querySelector("#watchedCount").textContent = watched.size;
+      document.querySelector("#needCount").textContent = videos.length - watched.size;
+    }
+
+    function render() {
+      const query = search.value.trim().toLowerCase();
+      const visible = videos.filter((video) => {
+        const isWatched = watched.has(video.id);
+        const matchesFilter =
+          activeFilter === "all" ||
+          (activeFilter === "need" && !isWatched) ||
+          (activeFilter === "watched" && isWatched);
+        return matchesFilter && video.title.toLowerCase().includes(query);
+      });
+
+      updateStats();
+
+      if (!visible.length) {
+        list.innerHTML = '<div class="empty">No videos match this view.</div>';
+        return;
+      }
+
+      list.innerHTML = visible.map((video) => {
+        const isWatched = watched.has(video.id);
+        const displayNumber = titleNumber(video.title);
+        const numberLabel = Number.isSafeInteger(displayNumber) ? displayNumber : "Extra";
+        const url = `https://www.youtube.com/watch?v=${video.id}&list=PL2FwWWx-JzoAlUiNmJSRvhzPzaNOaEpnX`;
+        return `
+          <article class="video ${isWatched ? "watched" : ""}">
+            <a class="thumb" href="${url}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(video.title)} on YouTube">
+              <img src="https://i.ytimg.com/vi/${video.id}/hqdefault.jpg" alt="" loading="lazy">
+              <span class="number">${numberLabel}</span>
+            </a>
+            <div class="meta">
+              <h2><a href="${url}" target="_blank" rel="noreferrer">${escapeHtml(video.title)}</a></h2>
+              <div class="status">${isWatched ? "Watched" : "Need to Watch"}</div>
+            </div>
+            <button class="action ${isWatched ? "secondary" : ""}" type="button" data-id="${video.id}">
+              ${isWatched ? "Unmark watched" : "Mark watched"}
+            </button>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[character]));
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        render();
+      });
+    });
+
+    search.addEventListener("input", render);
+
+    list.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-id]");
+      if (!button) return;
+
+      if (watched.has(button.dataset.id)) {
+        watched.delete(button.dataset.id);
+      } else {
+        watched.add(button.dataset.id);
+      }
+
+      saveWatched();
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
