@@ -186,7 +186,7 @@
       display: grid;
       grid-template-columns: 178px minmax(0, 1fr) auto;
       gap: 16px;
-      align-items: center;
+      align-items: start;
       padding: 12px;
       background: var(--paper);
       border: 1px solid var(--line);
@@ -261,6 +261,88 @@
       border-color: var(--line);
     }
 
+    .notes {
+      grid-column: 2 / 4;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 12px;
+      align-items: start;
+      padding-top: 4px;
+    }
+
+    .notes label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 850;
+    }
+
+    .notes textarea {
+      min-height: 112px;
+      width: 100%;
+      resize: vertical;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      padding: 10px 12px;
+      font: inherit;
+      line-height: 1.4;
+    }
+
+    .image-note {
+      display: grid;
+      gap: 8px;
+    }
+
+    .image-note input {
+      width: 100%;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 750;
+    }
+
+    .image-note input::file-selector-button {
+      min-height: 34px;
+      margin-right: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--accent-dark);
+      font: inherit;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .note-preview {
+      min-height: 106px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px dashed var(--line);
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .note-preview img {
+      width: 100%;
+      height: 100%;
+      max-height: 150px;
+      object-fit: cover;
+    }
+
+    .clear-image {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--warn);
+      font: inherit;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
     .empty {
       padding: 32px;
       text-align: center;
@@ -272,6 +354,11 @@
     @media (max-width: 860px) {
       .hero,
       .video {
+        grid-template-columns: 1fr;
+      }
+
+      .notes {
+        grid-column: auto;
         grid-template-columns: 1fr;
       }
 
@@ -524,7 +611,11 @@
     ].map(([id, title], index) => ({ id, title, originalIndex: index }));
 
     const storageKey = "library-writing-fighting-watched";
+    const notesKey = "library-writing-fighting-notes";
+    const imagesKey = "library-writing-fighting-note-images";
     const watched = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+    const notes = JSON.parse(localStorage.getItem(notesKey) || "{}");
+    const noteImages = JSON.parse(localStorage.getItem(imagesKey) || "{}");
     const list = document.querySelector("#videoList");
     const search = document.querySelector("#search");
     const filterButtons = [...document.querySelectorAll(".filter")];
@@ -544,6 +635,14 @@
 
     function saveWatched() {
       localStorage.setItem(storageKey, JSON.stringify([...watched]));
+    }
+
+    function saveNotes() {
+      localStorage.setItem(notesKey, JSON.stringify(notes));
+    }
+
+    function saveNoteImages() {
+      localStorage.setItem(imagesKey, JSON.stringify(noteImages));
     }
 
     function updateStats() {
@@ -575,6 +674,11 @@
         const displayNumber = titleNumber(video.title);
         const numberLabel = Number.isSafeInteger(displayNumber) ? displayNumber : "Extra";
         const url = `https://www.youtube.com/watch?v=${video.id}&list=PL2FwWWx-JzoAlUiNmJSRvhzPzaNOaEpnX`;
+        const note = notes[video.id] || "";
+        const noteImage = noteImages[video.id] || "";
+        const preview = noteImage
+          ? `<img src="${noteImage}" alt="Uploaded note reference for ${escapeHtml(video.title)}">`
+          : "No note image";
         return `
           <article class="video ${isWatched ? "watched" : ""}">
             <a class="thumb" href="${url}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(video.title)} on YouTube">
@@ -588,6 +692,20 @@
             <button class="action ${isWatched ? "secondary" : ""}" type="button" data-id="${video.id}">
               ${isWatched ? "Unmark watched" : "Mark watched"}
             </button>
+            <div class="notes">
+              <label>
+                Notes
+                <textarea data-note-id="${video.id}" placeholder="Write notes for this video">${escapeHtml(note)}</textarea>
+              </label>
+              <div class="image-note">
+                <label>
+                  Note picture
+                  <input type="file" accept="image/*" data-image-id="${video.id}">
+                </label>
+                <div class="note-preview" data-preview-id="${video.id}">${preview}</div>
+                ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
+              </div>
+            </div>
           </article>
         `;
       }).join("");
@@ -615,6 +733,15 @@
 
     list.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-id]");
+      const clearImageButton = event.target.closest("button[data-clear-image-id]");
+
+      if (clearImageButton) {
+        delete noteImages[clearImageButton.dataset.clearImageId];
+        saveNoteImages();
+        render();
+        return;
+      }
+
       if (!button) return;
 
       if (watched.has(button.dataset.id)) {
@@ -625,6 +752,35 @@
 
       saveWatched();
       render();
+    });
+
+    list.addEventListener("input", (event) => {
+      const textarea = event.target.closest("textarea[data-note-id]");
+      if (!textarea) return;
+
+      const id = textarea.dataset.noteId;
+      if (textarea.value.trim()) {
+        notes[id] = textarea.value;
+      } else {
+        delete notes[id];
+      }
+      saveNotes();
+    });
+
+    list.addEventListener("change", (event) => {
+      const input = event.target.closest("input[data-image-id]");
+      if (!input || !input.files.length) return;
+
+      const file = input.files[0];
+      if (!file.type.startsWith("image/")) return;
+
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        noteImages[input.dataset.imageId] = reader.result;
+        saveNoteImages();
+        render();
+      });
+      reader.readAsDataURL(file);
     });
 
     render();
