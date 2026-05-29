@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book List</title>
+  <meta name="description" content="A browseable fantasy and romance book tracker with plot, setting, tropes, series, romance, and magic notes." />
+  <style>
+    :root {
+      --ink: #1b2226;
+      --muted: #60717c;
+      --bg: #f5f1e9;
+      --paper: #fffdf8;
+      --panel: #ebe3d5;
+      --line: #d8cebd;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --berry: #8a3d62;
+      --gold: #b2762f;
+      --shadow: 0 16px 42px rgba(34, 29, 22, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1320px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(245, 241, 233, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .back {
+      color: var(--muted);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 38px 0 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 28px;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      min-height: 92px;
+      padding: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(34, 29, 22, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--accent-dark);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .toolbar {
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(150px, 200px));
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .chip[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent-dark);
+      color: #fff;
+    }
+
+    .content {
+      padding: 24px 0 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .books {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .book-card {
+      min-height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(34, 29, 22, 0.08);
+      overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+    }
+
+    .book-card:focus-visible,
+    .chip:focus-visible {
+      outline: 3px solid rgba(15, 118, 110, 0.35);
+      outline-offset: 2px;
+    }
+
+    .cover-wrap {
+      position: relative;
+      aspect-ratio: 5 / 7;
+      background: linear-gradient(140deg, #27343a, #8a3d62 52%, #b2762f);
+      overflow: hidden;
+    }
+
+    .cover-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fallback-cover {
+      height: 100%;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 22px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .fallback-cover strong {
+      font-size: 1.55rem;
+      line-height: 1.08;
+    }
+
+    .fallback-cover span {
+      opacity: 0.8;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 8px;
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid rgba(216, 206, 189, 0.9);
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 0.74rem;
+    }
+
+    .book-card .badge {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+    }
+
+    .book-body {
+      padding: 15px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .book-body h2 {
+      margin: 0;
+      font-size: 1.22rem;
+      line-height: 1.12;
+    }
+
+    .author {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 7px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .quick {
+      margin: 0;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .detail {
+      position: sticky;
+      top: 84px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      max-height: calc(100vh - 104px);
+      overflow: auto;
+    }
+
+    .detail-empty {
+      padding: 22px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .detail-cover {
+      aspect-ratio: 5 / 7;
+      background: linear-gradient(140deg, #27343a, #8a3d62 52%, #b2762f);
+    }
+
+    .detail-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-body {
+      padding: 18px;
+    }
+
+    .detail-body h2 {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .section {
+      padding-top: 16px;
+      margin-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section h3 {
+      margin: 0 0 7px;
+      font-size: 0.86rem;
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .section p {
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .source-list a {
+      color: var(--accent-dark);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .note {
+      margin-top: 12px;
+      padding: 12px;
+      border-left: 4px solid var(--gold);
+      background: #fbf2df;
+      color: #5c3b08;
+      font-weight: 700;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .content,
+      .control-row {
+        grid-template-columns: 1fr;
+      }
+
+      .detail {
+        position: static;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .stats,
+      .books {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="shell" aria-label="Main navigation">
+      <a class="back" href="../index.html">Back to Library</a>
+      <strong>Book List</strong>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Book List</h1>
+        <p class="lead">Browse the books by plot, setting, magic, romance, tropes, and series status so the next read is easier to pick.</p>
+      </div>
+      <div class="stats" aria-label="Book list summary">
+        <div class="stat">
+          <strong id="totalBooks">0</strong>
+          <span>books tracked</span>
+        </div>
+        <div class="stat">
+          <strong id="visibleBooks">0</strong>
+          <span>currently shown</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Book filters">
+      <div class="control-row">
+        <label>
+          Search
+          <input id="searchInput" type="search" placeholder="Title, author, trope, setting..." />
+        </label>
+        <label>
+          Romance
+          <select id="romanceFilter">
+            <option value="">Any romance level</option>
+            <option value="none">None or minimal</option>
+            <option value="subplot">Subplot</option>
+            <option value="central">Central</option>
+            <option value="explicit">Explicit/open door</option>
+          </select>
+        </label>
+        <label>
+          Series
+          <select id="seriesFilter">
+            <option value="">Any series status</option>
+            <option value="standalone">Standalone</option>
+            <option value="ongoing">Ongoing series</option>
+            <option value="complete">Complete series</option>
+            <option value="uncertain">Needs confirmation</option>
+          </select>
+        </label>
+        <label>
+          Sort
+          <select id="sortSelect">
+            <option value="list">List order</option>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="series">Series status</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips" id="chips" aria-label="Browse by category"></div>
+    </section>
+
+    <section class="content">
+      <div>
+        <div class="books" id="bookGrid"></div>
+        <div class="empty-state" id="emptyState">No books match those filters.</div>
+      </div>
+      <aside class="detail" id="detailPanel" aria-live="polite">
+        <div class="detail-empty">Select a book to see the full notes.</div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const books = [
+      {
+        title: "To Cage a Wild Bird",
+        author: "Brooke Fast",
+        coverQuery: "To Cage a Wild Bird Brooke Fast",
+        plot: "A romantasy about captivity, loyalty, and a heroine caught between survival and the dangerous person or power trying to claim her.",
+        setting: "Fantasy kingdom politics with court intrigue, wilderness danger, and a captive-bird motif.",
+        magic: "Magic appears tied to bloodline, power, and political control; confirm finer rules while reading.",
+        romance: "Central romantasy. Treat heat level as needs-confirmation until you check your edition or a trusted romance database.",
+        romanceLevel: "central",
+        tropes: ["romantasy", "captivity", "political intrigue", "dangerous alliance"],
+        series: "Listed online as part of Divided Fates. Series details and completion status need confirmation.",
+        seriesStatus: "uncertain",
+        note: "This title is less consistently cataloged than the bigger releases, so author and series data should be confirmed before relying on it.",
+        sources: [{ label: "Search", url: "https://www.google.com/search?q=To+Cage+a+Wild+Bird+Brooke+Fast" }]
+      },
+      {
+        title: "The Raven Scholar",
+        author: "Antonia Hodgson",
+        coverQuery: "The Raven Scholar Antonia Hodgson",
+        plot: "A murder mystery and succession contest collide when scholars and power brokers try to determine who should inherit an empire.",
+        setting: "An imperial fantasy world built around scholarship, trials, secrets, and palace politics.",
+        magic: "Magic is present but the hook is more political-mystery than rule-heavy wizardry.",
+        romance: "Romance does not appear to be the main engine; expect light or secondary romantic content.",
+        romanceLevel: "subplot",
+        tropes: ["locked-room mystery", "succession contest", "scholars", "court politics"],
+        series: "First book in The Eternal Path. Later books are planned; series is not complete.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Publisher", url: "https://www.hachettebookgroup.com/titles/antonia-hodgson/the-raven-scholar/9780316584293/" }]
+      },
+      {
+        title: "Beneath the Silent Stars",
+        author: "Miranda Lyn",
+        coverQuery: "Beneath the Silent Stars Miranda Lyn",
+        plot: "A romantasy centered on hidden power, fated danger, and a heroine moving through secrets that could reshape her future.",
+        setting: "A celestial-flavored fantasy realm with gods, courts, prophecy, and high-stakes alliances.",
+        magic: "Magic appears divine or celestial in flavor, with power linked to identity and destiny.",
+        romance: "Central romantasy. Heat level varies by reader reports, so verify before choosing for spice level.",
+        romanceLevel: "central",
+        tropes: ["fated mates", "hidden identity", "gods", "romantasy"],
+        series: "Part of The Celestial Court series. Completion status needs confirmation.",
+        seriesStatus: "uncertain",
+        sources: [{ label: "Author", url: "https://mirandalynauthor.com/" }]
+      },
+      {
+        title: "Alchemised",
+        author: "SenLinYu",
+        coverQuery: "Alchemised SenLinYu",
+        plot: "A dark fantasy about a woman with missing memories, a brutal regime, and alchemical secrets that make her valuable and vulnerable.",
+        setting: "Gothic, war-scarred fantasy with laboratories, occupied territory, and militarized magic.",
+        magic: "Alchemy is the central supernatural science, tied to experimentation, transformation, and power extraction.",
+        romance: "Dark romantic thread with mature themes. Expect heavier content than cozy fantasy; confirm explicitness before reading.",
+        romanceLevel: "explicit",
+        tropes: ["dark fantasy", "memory loss", "captor/captive", "alchemy", "war aftermath"],
+        series: "Standalone novel.",
+        seriesStatus: "standalone",
+        sources: [{ label: "Penguin Random House", url: "https://www.penguinrandomhouse.com/books/772770/alchemised-by-senlinyu/" }]
+      },
+      {
+        title: "Kings of the Wyld",
+        author: "Nicholas Eames",
+        coverQuery: "Kings of the Wyld Nicholas Eames",
+        plot: "A retired band of mercenaries reunites for one last desperate rescue mission.",
+        setting: "A funny, dangerous fantasy world where mercenary groups are treated like rock bands.",
+        magic: "Classic high-fantasy magic, monsters, enchanted gear, and strange creatures; the book favors adventure over hard rules.",
+        romance: "Minimal. Friendship, aging, found family, and adventure are the draw.",
+        romanceLevel: "none",
+        tropes: ["found family", "one last job", "mercenary band", "quest", "humor"],
+        series: "Book 1 of The Band. Book 2 is Bloody Rose. A third book has been expected, so the series is not cleanly finished.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Orbit", url: "https://www.orbitbooks.net/orbit-excerpts/kings-of-the-wyld/" }]
+      },
+      {
+        title: "Empire of the Vampire",
+        author: "Jay Kristoff",
+        coverQuery: "Empire of the Vampire Jay Kristoff",
+        plot: "A vampire hunter recounts his life, faith, failures, and the fight against an endless night ruled by vampires.",
+        setting: "A grim, religious, gothic fantasy world where sunlight has failed and vampire empires are rising.",
+        magic: "Blood, faith, relics, vampire powers, and holy orders shape the supernatural rules.",
+        romance: "Romance exists but is not the main selling point. Mature violence and dark content are more prominent.",
+        romanceLevel: "subplot",
+        tropes: ["vampire hunter", "gothic fantasy", "frame narrative", "fallen order"],
+        series: "Book 1 of Empire of the Vampire. Book 2 is Empire of the Damned. Further books are expected.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Macmillan", url: "https://us.macmillan.com/books/9781250245298/empireofthevampire/" }]
+      },
+      {
+        title: "Warborn Saga: first book",
+        author: "Needs author confirmation",
+        coverQuery: "Warborn Saga fantasy book one",
+        plot: "There are multiple online matches using Warborn or War Born phrasing, so this entry is parked until the author is confirmed.",
+        setting: "Needs confirmation.",
+        magic: "Needs confirmation.",
+        romance: "Needs confirmation.",
+        romanceLevel: "none",
+        tropes: ["needs confirmation"],
+        series: "Needs confirmation. Send the author and I can replace this with the exact first book and series list.",
+        seriesStatus: "uncertain",
+        note: "Possible matches include different indie fantasy or science-fiction series. I did not choose one because the title alone is ambiguous.",
+        sources: [{ label: "Search", url: "https://www.google.com/search?q=Warborn+Saga+book+1" }]
+      },
+      {
+        title: "Beguilement",
+        author: "Lois McMaster Bujold",
+        coverQuery: "The Sharing Knife Beguilement Lois McMaster Bujold",
+        plot: "A farmer's daughter and a weary Lakewalker patroller become entangled after a dangerous malice attack.",
+        setting: "A frontier fantasy landscape of farms, river roads, patrollers, and communities divided by fear.",
+        magic: "Lakewalkers use ground-sense and bonded knives to fight malices, with magic rooted in life force and sacrifice.",
+        romance: "Central slow-burn romance with an age-gap pairing; generally more emotional than explicit.",
+        romanceLevel: "central",
+        tropes: ["frontier fantasy", "age gap", "protective hero", "journey", "culture clash"],
+        series: "Book 1 of The Sharing Knife. Followed by Legacy, Passage, and Horizon. The main series is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Author", url: "https://www.dendarii.com/beguilement.html" }]
+      },
+      {
+        title: "The Knight and the Moth",
+        author: "Rachel Gillig",
+        coverQuery: "The Knight and the Moth Rachel Gillig",
+        plot: "A prophetess is pulled from temple life into a dangerous investigation with a knight after impossible events shatter her certainties.",
+        setting: "Dreamy gothic fantasy with holy orders, omens, riddles, and an eerie quest structure.",
+        magic: "Prophecy, visions, divine mystery, and enchanted forces drive the magic more than technical spell rules.",
+        romance: "Romantic tension is important but the book is not marketed as high-spice romance.",
+        romanceLevel: "central",
+        tropes: ["gothic romantasy", "reluctant allies", "prophecy", "quest", "slow burn"],
+        series: "Book 1 of The Stonewater Kingdom. More books are planned.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Hachette", url: "https://www.hachettebookgroup.com/titles/rachel-gillig/the-knight-and-the-moth/9780316580400/" }]
+      },
+      {
+        title: "Moon Chosen",
+        author: "P. C. Cast",
+        coverQuery: "Moon Chosen P C Cast",
+        plot: "Mari uncovers dangerous truths about her identity while clans, companions, and enemies collide in a transformed world.",
+        setting: "A post-apocalyptic fantasy world divided among Earth Walkers, Companions, Skin Stealers, and other peoples.",
+        magic: "Earth-centered powers, animal bonds, moon rituals, and clan spirituality shape the supernatural elements.",
+        romance: "Romance is present as a YA-style thread, not the only plot engine.",
+        romanceLevel: "subplot",
+        tropes: ["chosen one", "animal companion", "post-apocalyptic fantasy", "secret identity"],
+        series: "Book 1 of Tales of a New World. Followed by Sun Warrior and Wind Rider. The series appears complete at three books.",
+        seriesStatus: "complete",
+        sources: [{ label: "Macmillan", url: "https://us.macmillan.com/books/9781250100740/moonchosen/" }]
+      },
+      {
+        title: "Soulbound",
+        author: "Bethany Adams",
+        coverQuery: "Soulbound Bethany Adams Return of the Elves",
+        plot: "A woman discovers hidden elven heritage and a bond that pulls her into conflict between worlds.",
+        setting: "Modern Earth linked to an elven realm, with family secrets, portals, and court tension.",
+        magic: "Elven magic, soul bonds, portals, and inherited abilities drive the fantasy framework.",
+        romance: "Central fantasy romance with bond dynamics; heat level should be checked if explicitness matters.",
+        romanceLevel: "central",
+        tropes: ["soul bond", "hidden heritage", "portal fantasy", "elves", "fated connection"],
+        series: "Book 1 of Return of the Elves. The series contains multiple sequels and related entries; check author order for the latest count.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://bethanyadamsbooks.com/books/soulbound/" }]
+      },
+      {
+        title: "The Road of Bones",
+        author: "Demi Winters",
+        coverQuery: "The Road of Bones Demi Winters",
+        plot: "Silla flees a brutal queen and joins dangerous travelers on a cold road where loyalty and identity are tested.",
+        setting: "Norse-inspired fantasy with winter roads, clans, legends, and political pursuit.",
+        magic: "Magic is tied to old powers, mythic bloodlines, and dangerous secrets rather than classroom-style rules.",
+        romance: "Central romantic fantasy with tension and mature stakes; reader reports often describe spice as present but not constant.",
+        romanceLevel: "central",
+        tropes: ["Norse-inspired", "found family", "hidden identity", "road trip", "slow burn"],
+        series: "Book 1 of The Ashen. Followed by Kingdom of Claw. More books are expected.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://demiwinters.com/books/the-road-of-bones/" }]
+      },
+      {
+        title: "The Bridge Kingdom",
+        author: "Danielle L. Jensen",
+        coverQuery: "The Bridge Kingdom Danielle L Jensen",
+        plot: "A trained princess marries an enemy king as a spy, then finds her loyalties changing as she learns what is really at stake.",
+        setting: "Tropical island and bridge-controlled kingdom politics with trade routes, espionage, and war pressure.",
+        magic: "Little to no foregrounded magic; this is more political fantasy romance than spell fantasy.",
+        romance: "Central enemies-to-lovers romance. Contains on-page sexual content, generally treated as open door rather than erotica.",
+        romanceLevel: "explicit",
+        tropes: ["arranged marriage", "enemies to lovers", "spy heroine", "political fantasy", "betrayal"],
+        series: "Book 1 of The Bridge Kingdom. Lara and Aren's arc continues in The Traitor Queen; later books follow other couples. Series is ongoing.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://danielleljensen.com/books/the-bridge-kingdom/" }]
+      },
+      {
+        title: "Shiver",
+        author: "Maggie Stiefvater",
+        coverQuery: "Shiver Maggie Stiefvater",
+        plot: "Grace becomes drawn to Sam, a boy with a wolf-shaped secret, as winter threatens to take him away.",
+        setting: "Small-town Mercy Falls, Minnesota, with woods, cold weather, and a melancholy paranormal mood.",
+        magic: "Werewolf transformation is temperature-linked, making winter and warmth central to the rules.",
+        romance: "Central YA paranormal romance. Expect emotional intimacy rather than explicit adult scenes.",
+        romanceLevel: "central",
+        tropes: ["werewolves", "small town", "star-crossed romance", "YA paranormal", "bittersweet"],
+        series: "Book 1 of The Wolves of Mercy Falls. Followed by Linger, Forever, and companion/sequel Sinner. Main trilogy is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Publisher", url: "https://www.simonandschuster.com/books/Shiver/Maggie-Stiefvater/The-Wolves-of-Mercy-Falls/9780545123280" }]
+      },
+      {
+        title: "Penric's Demon",
+        author: "Lois McMaster Bujold",
+        coverQuery: "Penric's Demon Lois McMaster Bujold",
+        plot: "A young nobleman accidentally inherits a chaos demon and must learn to live with the many personalities inside it.",
+        setting: "The World of the Five Gods, with temples, scholars, healers, and travel between city-states.",
+        magic: "Demon magic is theological and practical: chaos demons can do sorcery through hosts, with divine rules and costs.",
+        romance: "Minimal in the first novella. Later Penric and Desdemona stories include a romance arc.",
+        romanceLevel: "none",
+        tropes: ["novella series", "demon companion", "clerical magic", "gentle fantasy", "mentor voice"],
+        series: "First Penric and Desdemona story. The series has many novellas and novels and remains active.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://www.dendarii.com/penric.html" }]
+      },
+      {
+        title: "Starter Villain",
+        author: "John Scalzi",
+        coverQuery: "Starter Villain John Scalzi",
+        plot: "An ordinary man inherits his uncle's supervillain business and all the enemies, absurd logistics, and talking cats that come with it.",
+        setting: "Contemporary comic thriller territory with volcano lairs, corporate villainy, and spy-tech ridiculousness.",
+        magic: "No magic system; the speculative hook is tech-heavy supervillain infrastructure.",
+        romance: "Minimal to none. The pleasure is comic escalation and workplace absurdity.",
+        romanceLevel: "none",
+        tropes: ["inheritance", "supervillain lair", "talking cats", "comic thriller", "fish out of water"],
+        series: "Standalone.",
+        seriesStatus: "standalone",
+        sources: [{ label: "Macmillan", url: "https://us.macmillan.com/books/9780765389220/startervillain/" }]
+      },
+      {
+        title: "By the Sword",
+        author: "Mercedes Lackey",
+        coverQuery: "By the Sword Mercedes Lackey",
+        plot: "Kerowyn rejects the life expected of her and becomes a mercenary, eventually tying her story into Valdemar's larger conflicts.",
+        setting: "Valdemar and neighboring lands, with keeps, mercenary companies, Heralds, and battlefield politics.",
+        magic: "Valdemar-style mind-magic, Companions, Herald abilities, and enchanted weapons exist around Kerowyn's martial arc.",
+        romance: "Romance is present but not the central drive; career, honor, and warfare dominate.",
+        romanceLevel: "subplot",
+        tropes: ["woman warrior", "mercenary life", "magic sword", "coming of age", "Valdemar"],
+        series: "A Valdemar novel. It can stand alone but connects to Tarma and Kethry and later Heralds material.",
+        seriesStatus: "complete",
+        sources: [{ label: "Penguin Random House", url: "https://www.penguinrandomhouse.com/books/100124/by-the-sword-by-mercedes-lackey/" }]
+      },
+      {
+        title: "Mystic and Rider",
+        author: "Sharon Shinn",
+        coverQuery: "Mystic and Rider Sharon Shinn",
+        plot: "A mystic and a mixed group of riders investigate growing unrest that could threaten their kingdom.",
+        setting: "The Twelve Houses of Gillengaria, a kingdom of noble houses, roads, inns, rebels, and court tension.",
+        magic: "Mystics have varied innate gifts, including elemental, healing, and other abilities that make them politically controversial.",
+        romance: "Romantic subplot with a classic guarded-heroine and loyal-protector feel; not explicit-forward.",
+        romanceLevel: "subplot",
+        tropes: ["road journey", "found party", "magic prejudice", "court politics", "slow burn"],
+        series: "Assumed match for your 'twelve hours' note: Book 1 of The Twelve Houses. Followed by The Thirteenth House, Dark Moon Defender, Reader and Raelynx, and Fortune and Fate. Main series is complete.",
+        seriesStatus: "complete",
+        note: "I assumed you meant The Twelve Houses, because that is the well-known fantasy series with this first book. If you meant a literal Twelve Hours series, send the author.",
+        sources: [{ label: "Penguin Random House", url: "https://www.penguinrandomhouse.com/books/288728/mystic-and-rider-by-sharon-shinn/" }]
+      },
+      {
+        title: "An Ember in the Ashes",
+        author: "Sabaa Tahir",
+        coverQuery: "An Ember in the Ashes Sabaa Tahir",
+        plot: "Laia spies inside a brutal military academy to save her brother, while Elias questions the empire he has been trained to serve.",
+        setting: "A Roman-inspired martial empire with occupied peoples, academies, resistance cells, deserts, and supernatural threats.",
+        magic: "Jinn, augurs, prophecy, and ancient supernatural powers grow more important as the series expands.",
+        romance: "YA romantic tension and triangle elements are present, but rebellion and survival drive the plot.",
+        romanceLevel: "subplot",
+        tropes: ["rebellion", "spy mission", "military academy", "dual POV", "chosen path"],
+        series: "Book 1 of An Ember in the Ashes. Followed by A Torch Against the Night, A Reaper at the Gates, and A Sky Beyond the Storm. Series is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Publisher", url: "https://www.penguinrandomhouse.com/books/318882/an-ember-in-the-ashes-by-sabaa-tahir/" }]
+      },
+      {
+        title: "Legends Are Made: first book",
+        author: "Needs author confirmation",
+        coverQuery: "Legends Are Made series book 1 fantasy",
+        plot: "This series wording has multiple possible matches online, including fantasy-romance and indie fantasy listings.",
+        setting: "Needs confirmation.",
+        magic: "Needs confirmation.",
+        romance: "Needs confirmation.",
+        romanceLevel: "none",
+        tropes: ["needs confirmation"],
+        series: "Needs author confirmation before I can safely list the first book and sequels.",
+        seriesStatus: "uncertain",
+        note: "Send the author for 'Legends Are Made' and I will fill this in precisely.",
+        sources: [{ label: "Search", url: "https://www.google.com/search?q=%22Legends+Are+Made%22+series+first+book" }]
+      },
+      {
+        title: "The Winner's Curse",
+        author: "Marie Rutkoski",
+        coverQuery: "The Winner's Curse Marie Rutkoski",
+        plot: "A general's daughter buys an enslaved young man and becomes caught in rebellion, strategy, and forbidden attachment.",
+        setting: "A conquered, classical-feeling fantasy world of aristocratic society, military occupation, and revolt.",
+        magic: "Little to no magic; the tension is political, social, and strategic.",
+        romance: "Central YA forbidden romance with high emotional stakes and no explicit adult heat.",
+        romanceLevel: "central",
+        tropes: ["forbidden romance", "enemies to lovers", "rebellion", "court strategy", "class divide"],
+        series: "Book 1 of The Winner's Trilogy. Followed by The Winner's Crime and The Winner's Kiss. Series is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Macmillan", url: "https://us.macmillan.com/books/9780374384685/thewinnerscurse/" }]
+      },
+      {
+        title: "Dance of Thieves",
+        author: "Mary E. Pearson",
+        coverQuery: "Dance of Thieves Mary E Pearson",
+        plot: "A reformed thief turned royal soldier and an outlaw leader collide in a mission full of secrets, loyalty tests, and attraction.",
+        setting: "The Remnant world, especially the independent Ballenger territory and post-kingdom political edges.",
+        magic: "Light fantasy inheritance from the Remnant setting; politics, secrets, and skills are more central than spellcasting.",
+        romance: "Central YA romantic fantasy, enemies-to-lovers tone, not explicit-forward.",
+        romanceLevel: "central",
+        tropes: ["enemies to lovers", "outlaw family", "spy mission", "duology", "banter"],
+        series: "Book 1 of Dance of Thieves. Followed by Vow of Thieves. Duology is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Publisher", url: "https://us.macmillan.com/books/9781250159014/danceofthieves/" }]
+      },
+      {
+        title: "The Deed of Paksenarrion",
+        author: "Elizabeth Moon",
+        coverQuery: "The Deed of Paksenarrion Elizabeth Moon",
+        plot: "Paks leaves home to become a soldier and grows through mercenary service, hardship, faith, and a paladin's calling.",
+        setting: "Traditional secondary-world fantasy with armies, towns, temples, wilderness travel, and military campaigns.",
+        magic: "Divine power, paladin gifts, healing, elves, dwarves, and evil magic appear in a classic fantasy structure.",
+        romance: "Minimal to none. The story is about vocation, ethics, trauma, and military life.",
+        romanceLevel: "none",
+        tropes: ["paladin", "military fantasy", "training arc", "quest", "classic fantasy"],
+        series: "Omnibus of Sheepfarmer's Daughter, Divided Allegiance, and Oath of Gold. Paks's trilogy is complete, with later related books in the same world.",
+        seriesStatus: "complete",
+        sources: [{ label: "Author", url: "https://elizabethmoon.com/books/the-deed-of-paksenarrion/" }]
+      },
+      {
+        title: "Half a Soul",
+        author: "Olivia Atwater",
+        coverQuery: "Half a Soul Olivia Atwater",
+        plot: "Theodora, who has only half a soul after a faerie curse, navigates Regency society and an irritable magician.",
+        setting: "Regency England with faerie bargains, drawing rooms, charitable work, and social rules.",
+        magic: "Faerie magic, curses, glamour, and human magicians coexist with Regency manners.",
+        romance: "Central but gentle fantasy romance. Closed-door or low-spice in tone.",
+        romanceLevel: "central",
+        tropes: ["Regency fantasy", "faerie curse", "grumpy/sunshine", "manners", "cozy romance"],
+        series: "Book 1 of Regency Faerie Tales. Followed by Ten Thousand Stitches and Longshadow, with related stories. Main sequence is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Orbit", url: "https://www.orbitbooks.net/titles/olivia-atwater/half-a-soul/9780316462805/" }]
+      },
+      {
+        title: "Malice",
+        author: "John Gwynne",
+        coverQuery: "Malice John Gwynne",
+        plot: "Rising war, prophecy, giants, and competing kingdoms draw several characters toward a massive conflict between good and evil.",
+        setting: "The Banished Lands, a rugged epic fantasy world of clans, fortresses, forests, warriors, and ancient powers.",
+        magic: "Prophecy, giants, wyrms, angels and demons, enchanted weapons, and old powers shape the world more than formal spellcasting.",
+        romance: "Minimal compared with war, loyalty, betrayal, and coming-of-age arcs.",
+        romanceLevel: "none",
+        tropes: ["epic fantasy", "prophecy", "war bands", "coming of age", "ancient evil"],
+        series: "Book 1 of The Faithful and the Fallen. Followed by Valour, Ruin, and Wrath. Series is complete.",
+        seriesStatus: "complete",
+        sources: [{ label: "Orbit", url: "https://www.orbitbooks.net/titles/john-gwynne/malice/9780316399712/" }]
+      },
+      {
+        title: "Dungeon Crawler Carl",
+        author: "Matt Dinniman",
+        coverQuery: "Dungeon Crawler Carl Matt Dinniman",
+        plot: "Carl and Princess Donut are forced through a deadly alien-run dungeon game after Earth is transformed into entertainment.",
+        setting: "A post-apocalyptic, televised dungeon crawl packed with game floors, traps, loot, factions, and absurd sponsors.",
+        magic: "LitRPG mechanics replace traditional magic: stats, classes, achievements, items, skills, and dungeon rules.",
+        romance: "Minimal to none. Action, comedy, survival, and friendship carry the series.",
+        romanceLevel: "none",
+        tropes: ["LitRPG", "death game", "post-apocalyptic", "dark humor", "unlikely duo"],
+        series: "Book 1 of Dungeon Crawler Carl. The series has multiple sequels and is ongoing.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://mattdinniman.com/books/dungeon-crawler-carl/" }]
+      },
+      {
+        title: "The Mist Thief",
+        author: "L. J. Andrews",
+        coverQuery: "The Mist Thief L J Andrews",
+        plot: "A fantasy romance built around stolen power, dangerous bargains, and a heroine navigating enemies and secrets.",
+        setting: "The Ever Seas world, with fae-style courts, sea kingdoms, curses, and pirate-adjacent danger.",
+        magic: "Mist, curses, fae power, and kingdom magic shape the conflicts.",
+        romance: "Central romantic fantasy. L. J. Andrews titles often include open-door adult romance; verify exact heat level if that is a deciding factor.",
+        romanceLevel: "explicit",
+        tropes: ["fae romance", "enemies to lovers", "curses", "pirate fantasy", "stolen magic"],
+        series: "Part of The Ever Seas related sequence. Exact reading order depends on whether you are following the connected Broken Kingdoms/Ever Seas world.",
+        seriesStatus: "ongoing",
+        sources: [{ label: "Author", url: "https://www.ljandrews.com/books" }]
+      }
+    ];
+
+    const chipData = [
+      "romantasy",
+      "epic fantasy",
+      "political fantasy",
+      "YA",
+      "gothic",
+      "found family",
+      "enemies to lovers",
+      "standalone",
+      "complete",
+      "ongoing",
+      "needs confirmation"
+    ];
+
+    const state = {
+      query: "",
+      romance: "",
+      series: "",
+      sort: "list",
+      chip: ""
+    };
+
+    const grid = document.querySelector("#bookGrid");
+    const detailPanel = document.querySelector("#detailPanel");
+    const emptyState = document.querySelector("#emptyState");
+    const totalBooks = document.querySelector("#totalBooks");
+    const visibleBooks = document.querySelector("#visibleBooks");
+    const chips = document.querySelector("#chips");
+
+    totalBooks.textContent = books.length;
+
+    function coverFallback(book) {
+      return `<div class="fallback-cover"><strong>${book.title}</strong><span>${book.author}</span></div>`;
+    }
+
+    function searchText(book) {
+      return [
+        book.title,
+        book.author,
+        book.plot,
+        book.setting,
+        book.magic,
+        book.romance,
+        book.series,
+        book.seriesStatus,
+        ...book.tropes
+      ].join(" ").toLowerCase();
+    }
+
+    function matchesChip(book) {
+      if (!state.chip) return true;
+      if (state.chip === "YA") return searchText(book).includes(" ya ") || searchText(book).includes("young adult");
+      if (["standalone", "complete", "ongoing"].includes(state.chip)) return book.seriesStatus === state.chip;
+      if (state.chip === "needs confirmation") return book.seriesStatus === "uncertain" || searchText(book).includes("needs confirmation");
+      return searchText(book).includes(state.chip.toLowerCase());
+    }
+
+    function filteredBooks() {
+      const query = state.query.trim().toLowerCase();
+      let list = books
+        .map((book, index) => ({ ...book, index }))
+        .filter((book) => !query || searchText(book).includes(query))
+        .filter((book) => !state.romance || book.romanceLevel === state.romance)
+        .filter((book) => !state.series || book.seriesStatus === state.series)
+        .filter(matchesChip);
+
+      if (state.sort === "title") list.sort((a, b) => a.title.localeCompare(b.title));
+      if (state.sort === "author") list.sort((a, b) => a.author.localeCompare(b.author));
+      if (state.sort === "series") list.sort((a, b) => a.seriesStatus.localeCompare(b.seriesStatus) || a.title.localeCompare(b.title));
+      return list;
+    }
+
+    async function findCover(book, img) {
+      const params = new URLSearchParams({ q: book.coverQuery || `${book.title} ${book.author}`, limit: "1" });
+      try {
+        const response = await fetch(`https://openlibrary.org/search.json?${params.toString()}`);
+        if (!response.ok) throw new Error("Cover lookup failed");
+        const data = await response.json();
+        const coverId = data.docs && data.docs[0] && data.docs[0].cover_i;
+        if (!coverId) throw new Error("No cover");
+        img.src = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+        img.alt = `${book.title} cover`;
+      } catch {
+        const wrap = img.closest(".cover-wrap, .detail-cover");
+        if (wrap) wrap.innerHTML = coverFallback(book);
+      }
+    }
+
+    function renderCards() {
+      const list = filteredBooks();
+      visibleBooks.textContent = list.length;
+      emptyState.style.display = list.length ? "none" : "block";
+      grid.innerHTML = list.map((book) => `
+        <button class="book-card" type="button" data-index="${book.index}">
+          <div class="cover-wrap">
+            <img data-cover="${book.index}" alt="" />
+            <span class="badge">${book.seriesStatus === "uncertain" ? "Check details" : book.seriesStatus}</span>
+          </div>
+          <div class="book-body">
+            <div>
+              <h2>${book.title}</h2>
+              <p class="author">${book.author}</p>
+            </div>
+            <div class="meta-row">
+              ${book.tropes.slice(0, 4).map((trope) => `<span class="tag">${trope}</span>`).join("")}
+            </div>
+            <p class="quick">${book.plot}</p>
+          </div>
+        </button>
+      `).join("");
+
+      grid.querySelectorAll(".book-card").forEach((card) => {
+        card.addEventListener("click", () => showDetail(Number(card.dataset.index)));
+      });
+
+      grid.querySelectorAll("img[data-cover]").forEach((img) => {
+        findCover(books[Number(img.dataset.cover)], img);
+      });
+
+      if (list.length && !detailPanel.dataset.index) {
+        showDetail(list[0].index);
+      }
+    }
+
+    function showDetail(index) {
+      const book = books[index];
+      detailPanel.dataset.index = String(index);
+      detailPanel.innerHTML = `
+        <div class="detail-cover"><img data-detail-cover="${index}" alt="" /></div>
+        <div class="detail-body">
+          <h2>${book.title}</h2>
+          <p class="author">${book.author}</p>
+          <div class="meta-row" style="margin-top: 12px;">
+            ${book.tropes.map((trope) => `<span class="tag">${trope}</span>`).join("")}
+          </div>
+          ${book.note ? `<div class="note">${book.note}</div>` : ""}
+          ${section("Plot", book.plot)}
+          ${section("Setting", book.setting)}
+          ${section("Magic System", book.magic)}
+          ${section("Romance", book.romance)}
+          ${section("Series", book.series)}
+          <div class="section">
+            <h3>Sources</h3>
+            <p>Use these links for deeper checking, especially for newer or indie titles.</p>
+            <div class="source-list">
+              ${book.sources.map((source) => `<a href="${source.url}" target="_blank" rel="noreferrer">${source.label}</a>`).join("")}
+              <a href="https://openlibrary.org/search?q=${encodeURIComponent(book.coverQuery || book.title)}" target="_blank" rel="noreferrer">Cover lookup</a>
+            </div>
+          </div>
+        </div>
+      `;
+      findCover(book, detailPanel.querySelector("img[data-detail-cover]"));
+    }
+
+    function section(title, text) {
+      return `<div class="section"><h3>${title}</h3><p>${text}</p></div>`;
+    }
+
+    function renderChips() {
+      chips.innerHTML = chipData.map((chip) => `
+        <button class="chip" type="button" aria-pressed="${state.chip === chip}" data-chip="${chip}">${chip}</button>
+      `).join("");
+      chips.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          state.chip = state.chip === chip.dataset.chip ? "" : chip.dataset.chip;
+          renderChips();
+          renderCards();
+        });
+      });
+    }
+
+    document.querySelector("#searchInput").addEventListener("input", (event) => {
+      state.query = event.target.value;
+      renderCards();
+    });
+
+    document.querySelector("#romanceFilter").addEventListener("change", (event) => {
+      state.romance = event.target.value;
+      renderCards();
+    });
+
+    document.querySelector("#seriesFilter").addEventListener("change", (event) => {
+      state.series = event.target.value;
+      renderCards();
+    });
+
+    document.querySelector("#sortSelect").addEventListener("change", (event) => {
+      state.sort = event.target.value;
+      renderCards();
+    });
+
+    renderChips();
+    renderCards();
+  </script>
+</body>
+</html>
