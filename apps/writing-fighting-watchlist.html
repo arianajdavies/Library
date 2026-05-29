@@ -184,7 +184,7 @@
 
     .video {
       display: grid;
-      grid-template-columns: 178px minmax(0, 1fr) auto;
+      grid-template-columns: 178px minmax(180px, 0.75fr) minmax(320px, 1.25fr) auto;
       gap: 16px;
       align-items: start;
       padding: 12px;
@@ -250,6 +250,7 @@
 
     .action {
       min-width: 150px;
+      align-self: start;
       background: var(--accent);
       color: #fff;
       border-color: var(--accent-dark);
@@ -262,12 +263,10 @@
     }
 
     .notes {
-      grid-column: 1 / -1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 190px;
+      grid-template-columns: minmax(180px, 1fr) 170px;
       gap: 12px;
       align-items: start;
-      padding-top: 4px;
     }
 
     .notes label {
@@ -358,7 +357,6 @@
       }
 
       .notes {
-        grid-column: auto;
         grid-template-columns: 1fr;
       }
 
@@ -689,9 +687,6 @@
               <h2><a href="${url}" target="_blank" rel="noreferrer">${escapeHtml(video.title)}</a></h2>
               <div class="status">${isWatched ? "Watched" : "Need to Watch"}</div>
             </div>
-            <button class="action ${isWatched ? "secondary" : ""}" type="button" data-id="${video.id}">
-              ${isWatched ? "Unmark watched" : "Mark watched"}
-            </button>
             <div class="notes">
               <label>
                 Notes
@@ -706,6 +701,9 @@
                 ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
               </div>
             </div>
+            <button class="action ${isWatched ? "secondary" : ""}" type="button" data-id="${video.id}">
+              ${isWatched ? "Unmark watched" : "Mark watched"}
+            </button>
           </article>
         `;
       }).join("");
