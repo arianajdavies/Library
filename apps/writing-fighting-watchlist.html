@@ -284,6 +284,7 @@
     }
 
     .notes {
+      grid-column: 1 / -1;
       margin-top: 12px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 190px;
@@ -728,24 +729,24 @@
               <button class="notes-toggle" type="button" data-toggle-notes-id="${video.id}" aria-expanded="${notesAreExpanded}" aria-controls="${notesPanelId}">
                 Notes
               </button>
-              <div class="notes" id="${notesPanelId}" ${notesAreExpanded ? "" : "hidden"}>
-                <label>
-                  Notes
-                  <textarea data-note-id="${video.id}" placeholder="Write notes for this video">${escapeHtml(note)}</textarea>
-                </label>
-                <div class="image-note">
-                  <label>
-                    Note picture
-                    <input type="file" accept="image/*" data-image-id="${video.id}">
-                  </label>
-                  <div class="note-preview" data-preview-id="${video.id}">${preview}</div>
-                  ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
-                </div>
-              </div>
             </div>
             <button class="action ${isWatched ? "secondary" : ""}" type="button" data-watch-id="${video.id}">
               ${isWatched ? "Unmark watched" : "Mark watched"}
             </button>
+            <div class="notes" id="${notesPanelId}" ${notesAreExpanded ? "" : "hidden"}>
+              <label>
+                Notes
+                <textarea data-note-id="${video.id}" placeholder="Write notes for this video">${escapeHtml(note)}</textarea>
+              </label>
+              <div class="image-note">
+                <label>
+                  Note picture
+                  <input type="file" accept="image/*" data-image-id="${video.id}">
+                </label>
+                <div class="note-preview" data-preview-id="${video.id}">${preview}</div>
+                ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
+              </div>
+            </div>
           </article>
         `;
       }).join("");
