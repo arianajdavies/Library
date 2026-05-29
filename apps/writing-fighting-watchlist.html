@@ -127,13 +127,18 @@
     .toolbar {
       margin: 18px 0 22px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
       flex-wrap: wrap;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       padding: 14px 0;
+    }
+
+    .filter-stack {
+      display: grid;
+      gap: 8px;
     }
 
     .filters {
@@ -150,7 +155,9 @@
     }
 
     .filter,
-    .action {
+    .action,
+    .notes-toggle,
+    .expand-notes {
       min-height: 42px;
       border: 1px solid transparent;
       padding: 0 14px;
@@ -164,6 +171,20 @@
       background: var(--paper);
       border-color: var(--line);
       box-shadow: 0 6px 16px rgba(34, 29, 22, 0.08);
+    }
+
+    .expand-notes,
+    .notes-toggle {
+      width: fit-content;
+      background: var(--paper);
+      border-color: var(--line);
+      color: var(--accent-dark);
+    }
+
+    .notes-toggle {
+      min-height: 36px;
+      margin-top: 12px;
+      padding: 0 12px;
     }
 
     .search {
@@ -184,7 +205,7 @@
 
     .video {
       display: grid;
-      grid-template-columns: 178px minmax(180px, 0.75fr) minmax(320px, 1.25fr) auto;
+      grid-template-columns: 178px minmax(0, 1fr) auto;
       gap: 16px;
       align-items: start;
       padding: 12px;
@@ -263,10 +284,15 @@
     }
 
     .notes {
+      margin-top: 12px;
       display: grid;
-      grid-template-columns: minmax(180px, 1fr) 170px;
+      grid-template-columns: minmax(0, 1fr) 190px;
       gap: 12px;
       align-items: start;
+    }
+
+    .notes[hidden] {
+      display: none;
     }
 
     .notes label {
@@ -368,7 +394,9 @@
         align-items: stretch;
       }
 
+      .filter-stack,
       .filters,
+      .expand-notes,
       .search,
       .action {
         width: 100%;
@@ -414,10 +442,13 @@
     </section>
 
     <section class="toolbar" aria-label="List controls">
-      <div class="filters" role="group" aria-label="Filter videos">
-        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" type="button" data-filter="need">Need to Watch</button>
-        <button class="filter" type="button" data-filter="watched">Watched</button>
+      <div class="filter-stack">
+        <div class="filters" role="group" aria-label="Filter videos">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="need">Need to Watch</button>
+          <button class="filter" type="button" data-filter="watched">Watched</button>
+        </div>
+        <button class="expand-notes" id="expandAllNotes" type="button" aria-pressed="false">Expand all notes</button>
       </div>
       <input class="search" id="search" type="search" placeholder="Search titles" aria-label="Search titles" />
     </section>
@@ -616,8 +647,12 @@
     const noteImages = JSON.parse(localStorage.getItem(imagesKey) || "{}");
     const list = document.querySelector("#videoList");
     const search = document.querySelector("#search");
+    const expandAllNotesButton = document.querySelector("#expandAllNotes");
     const filterButtons = [...document.querySelectorAll(".filter")];
+    const expandedNotes = new Set();
+    const collapsedNotes = new Set();
     let activeFilter = "all";
+    let allNotesExpanded = false;
 
     const videos = playlist.sort((a, b) => {
       const aNumber = titleNumber(a.title);
@@ -647,6 +682,8 @@
       document.querySelector("#totalCount").textContent = videos.length;
       document.querySelector("#watchedCount").textContent = watched.size;
       document.querySelector("#needCount").textContent = videos.length - watched.size;
+      expandAllNotesButton.textContent = allNotesExpanded ? "Collapse all notes" : "Expand all notes";
+      expandAllNotesButton.setAttribute("aria-pressed", String(allNotesExpanded));
     }
 
     function render() {
@@ -674,6 +711,8 @@
         const url = `https://www.youtube.com/watch?v=${video.id}&list=PL2FwWWx-JzoAlUiNmJSRvhzPzaNOaEpnX`;
         const note = notes[video.id] || "";
         const noteImage = noteImages[video.id] || "";
+        const notesAreExpanded = allNotesExpanded ? !collapsedNotes.has(video.id) : expandedNotes.has(video.id);
+        const notesPanelId = `notes-${video.id}`;
         const preview = noteImage
           ? `<img src="${noteImage}" alt="Uploaded note reference for ${escapeHtml(video.title)}">`
           : "No note image";
@@ -686,22 +725,25 @@
             <div class="meta">
               <h2><a href="${url}" target="_blank" rel="noreferrer">${escapeHtml(video.title)}</a></h2>
               <div class="status">${isWatched ? "Watched" : "Need to Watch"}</div>
-            </div>
-            <div class="notes">
-              <label>
+              <button class="notes-toggle" type="button" data-toggle-notes-id="${video.id}" aria-expanded="${notesAreExpanded}" aria-controls="${notesPanelId}">
                 Notes
-                <textarea data-note-id="${video.id}" placeholder="Write notes for this video">${escapeHtml(note)}</textarea>
-              </label>
-              <div class="image-note">
+              </button>
+              <div class="notes" id="${notesPanelId}" ${notesAreExpanded ? "" : "hidden"}>
                 <label>
-                  Note picture
-                  <input type="file" accept="image/*" data-image-id="${video.id}">
+                  Notes
+                  <textarea data-note-id="${video.id}" placeholder="Write notes for this video">${escapeHtml(note)}</textarea>
                 </label>
-                <div class="note-preview" data-preview-id="${video.id}">${preview}</div>
-                ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
+                <div class="image-note">
+                  <label>
+                    Note picture
+                    <input type="file" accept="image/*" data-image-id="${video.id}">
+                  </label>
+                  <div class="note-preview" data-preview-id="${video.id}">${preview}</div>
+                  ${noteImage ? `<button class="clear-image" type="button" data-clear-image-id="${video.id}">Remove picture</button>` : ""}
+                </div>
               </div>
             </div>
-            <button class="action ${isWatched ? "secondary" : ""}" type="button" data-id="${video.id}">
+            <button class="action ${isWatched ? "secondary" : ""}" type="button" data-watch-id="${video.id}">
               ${isWatched ? "Unmark watched" : "Mark watched"}
             </button>
           </article>
@@ -729,9 +771,36 @@
 
     search.addEventListener("input", render);
 
+    expandAllNotesButton.addEventListener("click", () => {
+      allNotesExpanded = !allNotesExpanded;
+      collapsedNotes.clear();
+      if (!allNotesExpanded) {
+        expandedNotes.clear();
+      }
+      render();
+    });
+
     list.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-id]");
+      const button = event.target.closest("button[data-watch-id]");
+      const notesToggleButton = event.target.closest("button[data-toggle-notes-id]");
       const clearImageButton = event.target.closest("button[data-clear-image-id]");
+
+      if (notesToggleButton) {
+        const id = notesToggleButton.dataset.toggleNotesId;
+        if (allNotesExpanded) {
+          if (collapsedNotes.has(id)) {
+            collapsedNotes.delete(id);
+          } else {
+            collapsedNotes.add(id);
+          }
+        } else if (expandedNotes.has(id)) {
+          expandedNotes.delete(id);
+        } else {
+          expandedNotes.add(id);
+        }
+        render();
+        return;
+      }
 
       if (clearImageButton) {
         delete noteImages[clearImageButton.dataset.clearImageId];
@@ -742,10 +811,10 @@
 
       if (!button) return;
 
-      if (watched.has(button.dataset.id)) {
-        watched.delete(button.dataset.id);
+      if (watched.has(button.dataset.watchId)) {
+        watched.delete(button.dataset.watchId);
       } else {
-        watched.add(button.dataset.id);
+        watched.add(button.dataset.watchId);
       }
 
       saveWatched();
