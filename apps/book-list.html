@@ -234,6 +234,29 @@
       background: #1f3635;
     }
 
+    .head-with-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .sydney-toggle {
+      min-height: 28px;
+      padding: 0 9px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sydney-toggle:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
     .book-strip {
       display: grid;
       grid-template-columns: 76px minmax(0, 1fr);
@@ -331,6 +354,12 @@
       margin: 0;
       color: var(--ink);
       font-size: 0.94rem;
+    }
+
+    .plot-hidden {
+      color: var(--muted);
+      font-weight: 800;
+      font-style: italic;
     }
 
     .section {
@@ -904,7 +933,8 @@
       romance: "",
       series: "",
       sort: "list",
-      chip: ""
+      chip: "",
+      sydneyFilter: true
     };
 
     const grid = document.querySelector("#bookGrid");
@@ -992,8 +1022,13 @@
       visibleBooks.textContent = list.length;
       emptyState.style.display = list.length ? "none" : "block";
       grid.innerHTML = `
-        ${["Book", "Plot", "Setting", "Magic System", "Romance", "Tropes", "Series", "Sources"].map((heading, index) => `
-          <div class="sheet-cell sheet-head ${index === 0 ? "sheet-book" : ""}">${heading}</div>
+        <div class="sheet-cell sheet-head sheet-book">Book</div>
+        <div class="sheet-cell sheet-head head-with-action">
+          <span>Plot</span>
+          <button class="sydney-toggle" id="sydneyToggle" type="button">${state.sydneyFilter ? "Sydney Filter: ON" : "Sydney Filter: OFF"}</button>
+        </div>
+        ${["Setting", "Magic System", "Romance", "Tropes", "Series", "Sources"].map((heading) => `
+          <div class="sheet-cell sheet-head">${heading}</div>
         `).join("")}
         ${list.map((book) => `
           <div class="sheet-cell sheet-book">
@@ -1005,7 +1040,7 @@
               </div>
             </div>
           </div>
-          ${sheetCell(book.plot)}
+          ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : book.plot)}
           ${sheetCell(book.setting)}
           ${sheetCell(book.magic)}
           ${sheetCell(book.romance)}
@@ -1022,6 +1057,11 @@
 
       grid.querySelectorAll("img[data-cover]").forEach((img) => {
         findCover(books[Number(img.dataset.cover)], img);
+      });
+
+      document.querySelector("#sydneyToggle").addEventListener("click", () => {
+        state.sydneyFilter = !state.sydneyFilter;
+        renderCards();
       });
     }
 
