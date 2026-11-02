@@ -232,6 +232,55 @@
         width: 100%;
       }
     }
+
+    [hidden] { display: none !important; }
+
+    .people {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .person-button {
+      min-height: 180px;
+      padding: 32px 20px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--accent-dark);
+      box-shadow: var(--shadow);
+      font: inherit;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .person-button:hover { border-color: var(--accent); }
+    .person-button[aria-expanded="true"] {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      color: #fff;
+    }
+    :is(button, a):focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 5px;
+    }
+    .person-panel { scroll-margin-top: 90px; }
+    .empty-state {
+      padding: 36px;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--muted);
+    }
+    .other-apps { margin: 32px 0 0; color: var(--muted); }
+    .other-apps a { color: var(--accent-dark); text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .people { grid-template-columns: 1fr; gap: 14px; }
+      .person-button { min-height: 108px; padding: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -241,15 +290,15 @@
         <span class="mark">L</span>
         <span>Library</span>
       </a>
-      <a class="nav-link" href="#apps">Webapps</a>
+      <a class="nav-link" href="#apps">Choose a name</a>
     </nav>
   </header>
 
   <main>
     <section class="hero shell">
       <div>
-        <h1>A growing shelf of practical webapps.</h1>
-        <p class="lead">This repository is the home base for focused browser tools, experiments, and small apps built to solve real tasks.</p>
+        <h1>A little library for everyone.</h1>
+        <p class="lead">Choose a name to find your apps, games, and next good read.</p>
       </div>
       <aside class="summary" aria-label="Repository summary">
         <strong data-app-total>06</strong>
@@ -259,62 +308,111 @@
 
     <section class="apps shell" id="apps" aria-labelledby="apps-title">
       <div class="section-title">
-        <h2 id="apps-title">Webapps</h2>
-        <span class="count" data-app-count>6 available</span>
+        <h2 id="apps-title">Choose your library</h2>
+        <span class="count" data-app-count>6 apps available</span>
+      </div>
+      <div class="people" aria-label="Choose a person">
+        <button class="person-button" type="button" id="ariana-button" aria-controls="ariana" aria-expanded="true">Ariana</button>
+        <button class="person-button" type="button" id="joseph-button" aria-controls="joseph" aria-expanded="true">Joseph</button>
+        <button class="person-button" type="button" id="dean-button" aria-controls="dean" aria-expanded="true">Dean</button>
       </div>
 
       <!-- APP_LIST_START -->
-      <article class="app-card">
-        <div class="app-icon" aria-hidden="true">01</div>
-        <div>
-          <h3>Writing Fighting Watchlist</h3>
-          <p>Browse the Writing Fighting videos by the number in each title, mark videos watched, filter the list, and move anything back to Need to Watch.</p>
+      <section class="person-panel" id="ariana" aria-labelledby="ariana-title">
+        <div class="section-title">
+          <h2 id="ariana-title">Ariana</h2>
+          <span class="count">2 apps</span>
         </div>
-        <a class="button" href="apps/writing-fighting-watchlist.html">Open app</a>
-      </article>
-      <article class="app-card">
-        <div class="app-icon" aria-hidden="true">02</div>
-        <div>
-          <h3>Sparkle Sums</h3>
-          <p>A bright addition game for kids with quick problems, cheerful feedback, score tracking, streaks, and rising levels.</p>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">01</div>
+          <div>
+            <h3>Writing Fighting Watchlist</h3>
+            <p>Browse the Writing Fighting videos by the number in each title, mark videos watched, filter the list, and move anything back to Need to Watch.</p>
+          </div>
+          <a class="button" href="apps/writing-fighting-watchlist.html">Open app</a>
+        </article>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">03</div>
+          <div>
+            <h3>Book List</h3>
+            <p>Browse a researched fantasy reading list by plot, setting, magic, romance, tropes, and series status.</p>
+          </div>
+          <a class="button" href="apps/book-list.html">Open app</a>
+        </article>
+      </section>
+      <section class="person-panel" id="joseph" aria-labelledby="joseph-title">
+        <div class="section-title">
+          <h2 id="joseph-title">Joseph</h2>
+          <span class="count">3 apps</span>
         </div>
-        <a class="button" href="apps/sparkle-sums.html">Open app</a>
-      </article>
-      <article class="app-card">
-        <div class="app-icon" aria-hidden="true">03</div>
-        <div>
-          <h3>Book List</h3>
-          <p>Browse a researched fantasy reading list by plot, setting, magic, romance, tropes, and series status.</p>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">04</div>
+          <div>
+            <h3>Pattern Detectives</h3>
+            <p>Explore picture puzzles about similarities, spot the odd one out, guess sorting rules, and find where new objects belong.</p>
+          </div>
+          <a class="button" href="apps/pattern-detectives.html">Open app</a>
+        </article>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">05</div>
+          <div>
+            <h3>Shape Garden</h3>
+            <p>Learn eight shapes, count their sides, find and color hidden shapes in 20 scenes, finish shape and color patterns, and make your own.</p>
+          </div>
+          <a class="button" href="apps/shape-garden.html">Open app</a>
+        </article>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">06</div>
+          <div>
+            <h3>Tree Detective</h3>
+            <p>Identify seven trees from photos of their shape, leaves or needles, and seeds, with hints and a field guide.</p>
+          </div>
+          <a class="button" href="apps/tree-detective.html">Open app</a>
+        </article>
+      </section>
+      <section class="person-panel" id="dean" aria-labelledby="dean-title">
+        <div class="section-title">
+          <h2 id="dean-title">Dean</h2>
+          <span class="count">0 apps</span>
         </div>
-        <a class="button" href="apps/book-list.html">Open app</a>
-      </article>
-      <article class="app-card">
-        <div class="app-icon" aria-hidden="true">04</div>
-        <div>
-          <h3>Pattern Detectives</h3>
-          <p>Explore picture puzzles about similarities, spot the odd one out, guess sorting rules, and find where new objects belong.</p>
-        </div>
-        <a class="button" href="apps/pattern-detectives.html">Open app</a>
-      </article>
-            <article class="app-card">
-        <div class="app-icon" aria-hidden="true">05</div>
-        <div>
-          <h3>Shape Garden</h3>
-          <p>Learn eight shapes, count their sides, find and color hidden shapes in 20 scenes, finish shape and color patterns, and make your own.</p>
-        </div>
-        <a class="button" href="apps/shape-garden.html">Open app</a>
-      </article>
-            <article class="app-card">
-        <div class="app-icon" aria-hidden="true">06</div>
-        <div>
-          <h3>Tree Detective</h3>
-          <p>Identify seven trees from photos of their shape, leaves or needles, and seeds, with hints and a field guide.</p>
-        </div>
-        <a class="button" href="apps/tree-detective.html">Open app</a>
-      </article>
+        <p class="empty-state">No apps here yet.</p>
+      </section>
+      <details class="other-apps">
+        <summary>Also in the library: Sparkle Sums</summary>
+        <article class="app-card">
+          <div class="app-icon" aria-hidden="true">02</div>
+          <div>
+            <h3>Sparkle Sums</h3>
+            <p>A bright addition game for kids with quick problems, cheerful feedback, score tracking, streaks, and rising levels.</p>
+          </div>
+          <a class="button" href="apps/sparkle-sums.html">Open app</a>
+        </article>
+      </details>
       <!-- APP_LIST_END -->
     </section>
   </main>
+  <script>
+    const people = ['ariana', 'joseph', 'dean'];
+    function showLibrary(person) {
+      people.forEach(name => {
+        const selected = name === person;
+        document.getElementById(name).hidden = !selected;
+        document.getElementById(name + '-button').setAttribute('aria-expanded', String(selected));
+      });
+    }
+    people.forEach(name => {
+      document.getElementById(name + '-button').addEventListener('click', () => {
+        showLibrary(name);
+        history.pushState(null, '', '#' + name);
+      });
+    });
+    function showFromHash() {
+      const person = location.hash.slice(1);
+      showLibrary(people.includes(person) ? person : null);
+    }
+    window.addEventListener('hashchange', showFromHash);
+    showFromHash();
+  </script>
 </body>
 </html>
 
