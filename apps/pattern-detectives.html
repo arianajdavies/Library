@@ -12,17 +12,17 @@
 <header><div class="top"><div class="brand"><span class="logo" aria-hidden="true">⌕</span> Pattern Detectives</div><a class="back" href="../index.html">← Back to library</a></div></header>
 <main>
 <section class="intro"><div><div class="eyebrow">Little observations. Big discoveries.</div><h1>Put your noticing hat on.</h1><p>Look closely, find what’s alike, and crack the sorting rule.</p></div><div class="badge"><strong>Look.<br>Think.</strong>Let’s play!</div></section>
-<div class="layout"><aside><div class="eyebrow">Your detective toolkit</div><nav class="modes" aria-label="Game modes" id="modes"></nav><div class="side-note"><strong>Every idea starts with a look.</strong>Say what you notice before choosing. More than one idea can make sense!</div></aside>
+<div class="layout"><aside><div class="eyebrow">Your detective toolkit</div><nav class="modes" aria-label="Game modes" id="modes"></nav><div class="side-note"><strong>51 pictures. 20 fresh trails per mode.</strong>Say what you notice before choosing. Each new trail brings different puzzles!</div></aside>
 <div><section class="game" aria-label="Picture game"><div class="game-top"><span id="round-label"></span><div class="dots" id="dots" aria-hidden="true"></div></div><div class="stage" id="stage"></div><div class="controls" id="controls"><button class="quiet" id="hint-button">✧ Give me a clue</button><button class="primary" id="next" disabled>Next puzzle →</button></div></section><div class="under"><p>Made for curious minds, ages 4–7. Play together or take your time on your own.</p><span>No timer. Just good thinking.</span></div></div></div>
-<details><summary>A note for grown-ups</summary><p>Inspired by collecting objects by likeness and sorting everyday objects. The four modes move from noticing a shared attribute to applying a rule to a new item. Each mode has six puzzles. Read object names together, or use the speaker button for prompts and choices when your browser supports speech.</p><p>Before showing choices, ask your child to describe what they see. The choices use one intended rule, but a different explanation can be thoughtful too. Ask “What makes you think that?” and use “We found another way!” to discuss an alternative and move on. There are no lost points or time limits.</p><p>Keep exploring away from the screen: collect safe household items, sort them two ways, and invite your child to invent a rule for you to guess.</p></details>
+<details><summary>A note for grown-ups</summary><p>Inspired by collecting objects by likeness and sorting everyday objects. Each mode has 120 different puzzles, served as six-puzzle trails: 20 plays per mode before puzzles repeat. There are 51 kinds of pictures, with different colors, sizes, shapes, patterns, and uses. Familiar rules return with different objects, so children practice noticing instead of memorizing a picture or button position.</p><p id="save-note">Your browser remembers which puzzles it has dealt, including after refreshes. After all 120 puzzles in a mode have been dealt, that mode starts a newly shuffled deck. Clearing browser data resets this history.</p><p>Read object names together, or use the speaker button for prompts and choices when your browser supports speech. Ask your child to describe what they see before reading the choices. The choices use one intended rule, but a different explanation can be thoughtful too. Ask “What makes you think that?” and use “We found another way!” to discuss an alternative and move on. There are no lost points or time limits.</p><p>Keep exploring away from the screen: collect safe household items, sort them two ways, and invite your child to invent a rule for you to guess.</p></details>
 </main>
 <script>
 'use strict';
 // Original, portable SVG illustrations: no external images, fonts, or services.
-const colors={red:'#e56f5f',blue:'#649dc6',yellow:'#efc454',green:'#79aa7a',purple:'#ac8cc1',white:'#fffdf5'};
+const colors={red:'#e56f5f',blue:'#649dc6',yellow:'#efc454',green:'#79aa7a',purple:'#ac8cc1',orange:'#ed9a52',pink:'#e798b7',white:'#fffdf5'};
 const O=(kind,color='red',size='normal',pattern=false)=>({kind,color,size,pattern});
-const names={apple:'apple',ball:'ball',cup:'cup',car:'car',sock:'sock',book:'book',crayon:'crayon',spoon:'spoon',fork:'fork',brush:'paintbrush',banana:'banana',pear:'pear',block:'block',bowl:'bowl'};
-function label(o){return `${o.size==='small'?'Small ':o.size==='big'?'Big ':''}${o.pattern?'spotted ':''}${o.color} ${names[o.kind]}`;}
+const names={apple:'apple',ball:'ball',cup:'cup',car:'car',sock:'sock',book:'book',crayon:'crayon',spoon:'spoon',fork:'fork',brush:'paintbrush',banana:'banana',pear:'pear',block:'block',bowl:'bowl',strawberry:'strawberry',orange:'orange',grapes:'grapes',cat:'cat',dog:'dog',fish:'fish',bird:'bird',butterfly:'butterfly',snail:'snail',shirt:'shirt',hat:'hat',shoe:'shoe',mitten:'mitten',bus:'bus',train:'train',boat:'sailboat',plane:'airplane',drum:'drum',guitar:'guitar',bell:'bell',trumpet:'trumpet',flower:'flower',tree:'tree',leaf:'leaf',mushroom:'mushroom',pencil:'pencil',palette:'paint palette',teapot:'teapot',plate:'plate',kite:'kite',teddy:'teddy bear',circle:'circle',square:'square',triangle:'triangle',star:'star',heart:'heart',diamond:'diamond'};
+function label(o){return `${o.size==='small'?'Small ':o.size==='big'?'Big ':''}${o.pattern===true?'spotted ':o.pattern?o.pattern+' ':''}${o.color} ${names[o.kind]}`;}
 function art(o){const c=colors[o.color],shape={
 apple:`<path d="M61 40C37 25 20 45 25 70c5 24 21 31 35 23 17 8 32-2 36-25 4-23-13-38-35-28Z" fill="${c}"/><path d="M60 40l4-19"/><path d="M65 30q22 1 23-15-19-5-23 15" fill="#79aa7a"/>`,
 ball:`<circle cx="60" cy="61" r="37" fill="${c}"/><path d="M28 44q36 9 50 47M28 81q25-40 61-43M55 25q-10 40 36 57" fill="none" stroke="#fffdf5" stroke-width="4"/>`,
@@ -37,39 +37,145 @@ brush:`<g transform="rotate(28 60 60)"><path d="M53 48h14l-2 55q-5 7-10 0Z" fill
 banana:`<path d="M29 28q7 58 65 34-13 45-49 27Q16 74 23 32Z" fill="${c}"/><path d="M29 28l-4-10M91 62l6-8M29 42q9 44 49 37" fill="none"/>`,
 pear:`<path d="M61 25c-17 0-13 20-24 33-24 31-3 48 24 48s45-19 21-48C72 45 78 25 61 25Z" fill="${c}"/><path d="M61 25l6-16"/><path d="M67 20q21 0 18-12-14-1-18 12Z" fill="#79aa7a"/>`,
 block:`<path d="M24 36l38-18 36 19v49l-37 19-37-20Z" fill="${c}"/><path d="M24 36l37 18 37-17M61 54v51" fill="none"/>`,
-bowl:`<path d="M18 49h84q-3 44-42 44T18 49Z" fill="${c}"/><ellipse cx="60" cy="49" rx="42" ry="9" fill="#fffdf5"/>`
-};const spots=o.pattern?'<g fill="#355354" stroke="none"><circle cx="55" cy="45" r="4"/><circle cx="70" cy="61" r="4"/><circle cx="54" cy="73" r="4"/><circle cx="79" cy="86" r="4"/></g>':'';const scale=o.size==='small'?.62:o.size==='big'?1.04:.9;return `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g stroke="#355354" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" transform="translate(60 60) scale(${scale}) translate(-60 -60)">${shape[o.kind]}${spots}</g></svg>`;}
-const R=(items,rule,options,hint,explain,odd=3)=>({items,rule,options,hint,explain,odd});
-const likeness=[
-R([O('apple'),O('cup'),O('car'),O('crayon')],'They are all red.',['They are all red.','They all have wheels.','We wear them.'],'Look at their colors.','An apple, cup, car, and crayon can all be red, even though we use them differently.'),
-R([O('fork','blue'),O('spoon','yellow'),O('bowl','green'),O('cup','purple')],'We use them to eat or drink.',['They are all the same color.','We use them to eat or drink.','They are all toys.'],'Imagine sitting down for a meal.','These objects help us eat or drink. That is a rule about what things are used for.'),
-R([O('crayon','yellow'),O('brush','blue'),O('crayon','purple'),O('brush','red')],'We make art with them.',['They are all red.','We wear them on our feet.','We make art with them.'],'What could you make using these objects?','Paintbrushes and crayons are tools for making art.'),
-R([O('sock','blue','normal',true),O('sock','red','normal',true),O('sock','yellow','normal',true),O('sock','green','normal',true)],'They all have spots.',['They all have spots.','They are all blue.','They all have wheels.'],'Look for a design repeated on every sock.','Their colors are different, but every sock has spots.'),
-R([O('apple','red'),O('pear','green'),O('banana','yellow'),O('apple','green')],'They are all fruit.',['We draw with them.','They are all fruit.','They are all yellow.'],'Which part of a snack could these be?','Apples, pears, and bananas belong to the fruit group.'),
-R([O('book','blue','small'),O('cup','red','small'),O('sock','purple','small'),O('block','yellow','small')],'They are all small.',['They are all the same shape.','They are all green.','They are all small.'],'Think about how much space each picture takes up.','Different objects can share a size. These pictures all show small objects.')
+bowl:`<path d="M18 49h84q-3 44-42 44T18 49Z" fill="${c}"/><ellipse cx="60" cy="49" rx="42" ry="9" fill="#fffdf5"/>`,
+strawberry:`<path d="M30 42Q60 24 90 42q-3 35-30 60Q33 77 30 42Z" fill="${c}"/><path d="M60 40L39 24l18 4 7-15 4 16 18-5-13 17" fill="#79aa7a"/><path d="M43 52l2 4m20-7 2 4m12 7-2 4m-24 0 2 4m10 8-2 4" fill="none" stroke="#fffdf5" stroke-width="3"/>`,
+orange:`<circle cx="60" cy="65" r="35" fill="${c}"/><path d="M60 30l3-13M64 26q20 0 22-13-19-2-22 13Z" fill="#79aa7a"/><path d="M39 56l1 1m9 23 1 1m28-20 1 1" fill="none"/>`,
+grapes:`<path d="M60 23l8-13m-8 14q17-15 29-3-10 12-29 3" fill="#79aa7a"/><g fill="${c}"><circle cx="44" cy="39" r="14"/><circle cx="72" cy="39" r="14"/><circle cx="30" cy="61" r="14"/><circle cx="58" cy="61" r="14"/><circle cx="86" cy="61" r="14"/><circle cx="44" cy="83" r="14"/><circle cx="72" cy="83" r="14"/><circle cx="58" cy="102" r="12"/></g>`,
+cat:`<path d="M26 50l1-30 25 15h17l24-15v30q20 53-33 53T26 50Z" fill="${c}"/><path d="M39 62h1m39 0h1" stroke-width="6"/><path d="M54 75h12l-6 7Zm-1 11-10 5m24-5 10 5M18 70l23 4m-22 9 22-2m60-11-23 4m22 9-22-2" fill="none"/>`,
+dog:`<path d="M31 43Q60 18 89 43l3 40q-30 38-64 0Z" fill="${c}"/><path d="M33 38Q6 29 12 74q12 16 22-12m52-24q28-9 22 36-12 16-22-12" fill="${c}"/><path d="M43 60h1m31 0h1" stroke-width="6"/><ellipse cx="60" cy="81" rx="16" ry="12" fill="#fffdf5"/><path d="M55 76h10l-5 6Zm5 6v8"/>`,
+fish:`<path d="M29 60Q61 16 92 60 61 104 29 60L10 39v42Z" fill="${c}"/><circle cx="76" cy="53" r="3" fill="#355354"/><path d="M52 46l-3 28 16-12M81 73l8-5" fill="none"/>`,
+bird:`<path d="M35 56q-5-38 25-38 28 0 25 37l20 6-22 9q-13 30-46 21L14 66Z" fill="${c}"/><path d="M58 52Q27 55 44 76q17 5 25-9M46 93v12m21-13v13" fill="none"/><circle cx="69" cy="38" r="3" fill="#355354"/>`,
+butterfly:`<path d="M58 56Q5 2 13 58l20 8q-29 48 23 23Zm4 0q53-54 45 2l-20 8q29 48-23 23Z" fill="${c}"/><path d="M59 43v55M56 43 45 27m18 16 11-16" fill="none" stroke-width="5"/><circle cx="32" cy="47" r="8" fill="#fffdf5"/><circle cx="88" cy="47" r="8" fill="#fffdf5"/>`,
+snail:`<path d="M18 84h63V59q18-15 23 2v29q-6 13-33 13H23Z" fill="#c6d5ab"/><circle cx="47" cy="65" r="31" fill="${c}"/><path d="M47 65q-14-8-17 7 0 21 23 15 28-10 12-33-12-16-28-6M86 57V40m12 18 5-15" fill="none"/><circle cx="86" cy="39" r="3"/><circle cx="104" cy="41" r="3"/>`,
+shirt:`<path d="M40 22l-25 22 14 19 13-9v48h38V54l13 9 14-19-26-22-12 10H52Z" fill="${c}"/><path d="M49 25q10 21 23 0" fill="none"/>`,
+hat:`<path d="M32 74l9-42q19-14 38 0l10 42Z" fill="${c}"/><path d="M20 73h81q10 20-40 20T20 73Z" fill="${c}"/><path d="M36 59h48v14H33Z" fill="#fffdf5"/>`,
+shoe:`<path d="M23 41h29l16 25 28 6q15 4 12 26H19V69Z" fill="${c}"/><path d="M19 90h89M51 53l15-6M57 63l16-6M65 72l15-6" fill="none"/>`,
+mitten:`<path d="M40 83V30q13-24 28 0l4 26 11-13q19-8 18 11L83 88v16H40Z" fill="${c}"/><path d="M41 88h41v14H41Z" fill="#fffdf5"/>`,
+bus:`<rect x="12" y="29" width="96" height="59" rx="9" fill="${c}"/><path d="M23 39h17v22H23Zm26 0h17v22H49Zm26 0h20v37H75Z" fill="#e6f4f2"/><circle cx="32" cy="89" r="11" fill="#355354"/><circle cx="88" cy="89" r="11" fill="#355354"/>`,
+train:`<path d="M21 24h32v45h40V49h12v40H14V69h7Z" fill="${c}"/><path d="M29 33h16v21H29Z" fill="#e6f4f2"/><path d="M65 69V36h13v33Z" fill="${c}"/><circle cx="33" cy="91" r="13" fill="#355354"/><circle cx="65" cy="91" r="11" fill="#355354"/><circle cx="94" cy="91" r="11" fill="#355354"/><path d="M70 25q-12-14 4-17" fill="none"/>`,
+boat:`<path d="M15 80h91L89 102H35Z" fill="${c}"/><path d="M59 13v67M54 20 23 70h31Zm11 12v38h32Z" fill="${c}"/><path d="M10 110q10-8 20 0t20 0 20 0 20 0 20 0" fill="none" stroke="#649dc6"/>`,
+plane:`<path d="M54 13q6-10 12 0l3 33 36 24v10L68 67v24l15 13v7l-23-8-23 8v-7l15-13V67L15 80V70l36-24Z" fill="${c}"/>`,
+drum:`<path d="M23 40h74v49q-37 26-74 0Z" fill="${c}"/><ellipse cx="60" cy="40" rx="37" ry="12" fill="#fffdf5"/><path d="M24 49l17 43 19-39 20 39 16-43M22 14l54 18M96 13 45 31" fill="none"/>`,
+guitar:`<g transform="rotate(23 60 60)"><path d="M48 56q-25-13-24 9 0 12 10 15-14 29 18 32 32-3 19-32 10-3 10-15 0-22-24-9Z" fill="${c}"/><path d="M49 12h14v57H49Z" fill="#c6a581"/><circle cx="56" cy="81" r="10" fill="#355354"/><path d="M54 16v82m5-82v82M45 19h22M45 29h22" fill="none" stroke-width="1.5"/></g>`,
+bell:`<path d="M27 81q13-18 13-42 20-29 40 0 0 24 13 42Z" fill="${c}"/><ellipse cx="60" cy="81" rx="33" ry="7" fill="#fffdf5"/><path d="M57 25v-9h7v9M54 89q6 16 13 0" fill="${c}"/>`,
+trumpet:`<path d="M18 53h49l31-23v58L67 66H18Z" fill="${c}"/><path d="M38 66v22h36V67M40 43v10m13-10v10M66 43v10" fill="none" stroke-width="7"/>`,
+flower:`<path d="M60 56v52m0-20q-31 0-29-20 26-2 29 20m0 8q32 0 30-22-25-2-30 22" fill="#79aa7a"/><g fill="${c}"><circle cx="60" cy="23" r="16"/><circle cx="81" cy="40" r="16"/><circle cx="73" cy="62" r="16"/><circle cx="47" cy="62" r="16"/><circle cx="39" cy="40" r="16"/></g><circle cx="60" cy="43" r="15" fill="#efc454"/>`,
+tree:`<path d="M53 63h16v45H53Z" fill="#b08259"/><path d="M60 11 28 47h15L18 77h84L77 47h15Z" fill="${c}"/>`,
+leaf:`<path d="M23 96Q6 26 96 17q12 78-61 83Z" fill="${c}"/><path d="M18 107 82 33M40 84l-3-24m18 9 23 2m-10-18 1-18" fill="none"/>`,
+mushroom:`<path d="M48 56h24l7 45q-19 10-38 0Z" fill="#fff5df"/><path d="M15 64Q19 8 60 13q41-5 45 51Z" fill="${c}"/><g fill="#fffdf5"><circle cx="41" cy="39" r="8"/><circle cx="73" cy="30" r="7"/><circle cx="84" cy="51" r="6"/></g>`,
+pencil:`<g transform="rotate(30 60 60)"><path d="M49 30h22v64H49Z" fill="${c}"/><path d="M49 30 60 9l11 21Z" fill="#dfc8a2"/><path d="M57 15l3-6 3 6Z"/><path d="M49 94h22v13H49Z" fill="#e798b7"/><path d="M60 32v58" fill="none"/></g>`,
+palette:`<path d="M96 72q24-39-20-52Q24 2 14 53q-5 42 45 51 24 4 20-16-1-12 17-16Z" fill="${c}"/><ellipse cx="75" cy="48" rx="9" ry="12" fill="#fffdf5"/><circle cx="43" cy="34" r="8" fill="#649dc6"/><circle cx="29" cy="57" r="8" fill="#efc454"/><circle cx="43" cy="82" r="8" fill="#79aa7a"/>`,
+teapot:`<path d="M86 48q33-17 23 20-5 14-23 12M35 49 11 35l15 38 13 8" fill="${c}"/><ellipse cx="61" cy="69" rx="33" ry="29" fill="${c}"/><path d="M36 43q25-19 50 0ZM58 30v-9h8v9" fill="${c}"/>`,
+plate:`<circle cx="60" cy="60" r="44" fill="${c}"/><circle cx="60" cy="60" r="32" fill="#fffdf5"/><circle cx="60" cy="60" r="26" fill="none" stroke="${c}"/>`,
+kite:`<path d="M60 10 95 49 60 86 25 49Z" fill="${c}"/><path d="M60 10v76M25 49h70M60 86q-19 14 0 23t0 10" fill="none"/><path d="M50 98l17-5v12Z" fill="${c}"/>`,
+teddy:`<g fill="${c}"><circle cx="35" cy="29" r="15"/><circle cx="85" cy="29" r="15"/><ellipse cx="60" cy="78" rx="27" ry="30"/><ellipse cx="27" cy="73" rx="12" ry="20"/><ellipse cx="93" cy="73" rx="12" ry="20"/><circle cx="39" cy="103" r="13"/><circle cx="81" cy="103" r="13"/><circle cx="60" cy="42" r="28"/></g><ellipse cx="60" cy="53" rx="14" ry="11" fill="#fffdf5"/><path d="M47 35h1m24 0h1M57 49h6l-3 5Z" stroke-width="4"/>`,
+circle:`<circle cx="60" cy="60" r="40" fill="${c}"/>`,
+square:`<rect x="23" y="23" width="74" height="74" rx="3" fill="${c}"/>`,
+triangle:`<path d="M60 16 105 99H15Z" fill="${c}"/>`,
+star:`<path d="M60 10 74 41 109 45 83 69 90 105 60 87 30 105 37 69 11 45 46 41Z" fill="${c}"/>`,
+heart:`<path d="M60 102Q4 65 18 34q17-25 42-1 25-24 42 1 14 31-42 68Z" fill="${c}"/>`,
+diamond:`<path d="M60 12 99 60 60 108 21 60Z" fill="${c}"/>`
+};const decoration=o.pattern==='striped'?'<path d="M44 43h36M44 57h36M49 75l34 14" fill="none" stroke="#355354" stroke-width="5"/>':o.pattern?'<g fill="#355354" stroke="none"><circle cx="55" cy="45" r="4"/><circle cx="70" cy="61" r="4"/><circle cx="54" cy="73" r="4"/><circle cx="79" cy="86" r="4"/></g>':'';const scale=o.size==='small'?.62:o.size==='big'?1.04:.9;return `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><g stroke="#355354" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" transform="translate(60 60) scale(${scale}) translate(-60 -60)">${shape[o.kind]}${decoration}</g></svg>`;}
+// A reproducible bank lets saved decks survive refreshes without repeating puzzles.
+const TRAIL_LENGTH=6, BANK_SIZE=120, DECK_KEY='pattern-detectives-decks-v2';
+const categories={
+  fruit:{title:'fruit',kinds:['apple','pear','banana','strawberry','orange','grapes']},
+  animals:{title:'animals',kinds:['cat','dog','fish','bird','butterfly','snail']},
+  clothes:{title:'things we wear',kinds:['sock','shirt','hat','shoe','mitten']},
+  vehicles:{title:'vehicles',kinds:['car','bus','train','boat','plane']},
+  art:{title:'art tools',kinds:['crayon','brush','pencil','palette']},
+  kitchen:{title:'things for eating or drinking',kinds:['spoon','fork','cup','bowl','plate','teapot']},
+  music:{title:'musical instruments',kinds:['drum','guitar','bell','trumpet']},
+  nature:{title:'things that grow',kinds:['flower','tree','leaf','mushroom']},
+  toys:{title:'toys',kinds:['ball','block','kite','teddy']}
+};
+const palette=Object.keys(colors).filter(c=>c!=='white');
+const shapes=['circle','square','triangle','star','heart','diamond'];
+const kinds=Object.keys(names);
+const patternName=p=>p||'plain';
+function seeded(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function shuffle(items,rng=Math.random){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(a,rng){return a[Math.floor(rng()*a.length)];}
+function sample(a,n,rng){return shuffle(a,rng).slice(0,n);}
+function picture(kind,rng,changes={}){return {...O(kind,pick(palette,rng)),...changes};}
+const rules=[
+  ...palette.map(color=>({id:'color-'+color,text:`They are all ${color}.`,test:o=>o.color===color,pool:rng=>kinds.map(k=>picture(k,rng,{color})),hint:'Look at the main color of each object.'})),
+  ...Object.entries(categories).map(([id,g])=>({id:'category-'+id,text:`They are all ${g.title}.`,test:o=>g.kinds.includes(o.kind),pool:rng=>g.kinds.map(k=>picture(k,rng)),hint:'Think about what these objects are or what we do with them.'})),
+  ...['big','small'].map(size=>({id:'size-'+size,text:`They are all ${size}.`,test:o=>o.size===size,pool:rng=>kinds.map(k=>picture(k,rng,{size})),hint:'Compare how much space the pictures take up.'})),
+  ...['spotted','striped',false].map(pattern=>({id:'pattern-'+patternName(pattern),text:`They are all ${patternName(pattern)} socks.`,test:o=>o.kind==='sock'&&o.pattern===pattern,pool:rng=>palette.map(color=>O('sock',color,'normal',pattern)),hint:'Look closely at the designs on the socks.'})),
+  ...shapes.map(kind=>({id:'shape-'+kind,text:`They are all ${kind==='heart'?'hearts':kind+'s'}.`,test:o=>o.kind===kind,pool:rng=>palette.map(color=>O(kind,color)),hint:'Look at the outlines. What shape can you name?'}))
 ];
-const odd=[
-R([O('apple'),O('cup'),O('car'),O('book','blue')],'',[],'Three objects share a color.','The blue book is the only blue object. The other three are red.'),
-R([O('spoon','blue'),O('fork','green'),O('bowl','yellow'),O('sock','purple')],'',[],'Which three belong at a meal?','We use the spoon, fork, and bowl for eating. We wear a sock.'),
-R([O('sock','blue','normal',true),O('sock','yellow'),O('sock','red','normal',true),O('sock','green','normal',true)],'',[],'Look for spots.','The yellow sock is plain. The other three have spots.',1),
-R([O('apple','red'),O('crayon','blue'),O('pear','green'),O('banana','yellow')],'',[],'Which three could you eat?','The crayon is an art tool. The others are fruit.',1),
-R([O('book','blue','big'),O('book','blue','small'),O('book','blue','big'),O('book','blue','big')],'',[],'Compare their sizes.','This is the only small book. The other books are big.',1),
-R([O('brush','green'),O('crayon','yellow'),O('spoon','red'),O('crayon','purple')],'',[],'Which three help you make art?','The spoon is for eating. The paintbrush and crayons are for art.',2)
-];
-const S=(a,b,rule,options,hint,explain,item,answer)=>({a,b,rule,options,hint,explain,item,answer});
-const sorts=[
-S([O('cup'),O('car'),O('book')],[O('apple','blue'),O('sock','blue'),O('block','blue')],'Red things / blue things',['Red things / blue things','Big things / small things','Food / art tools'],'Compare the colors in each group.','Group A has red things. Group B has blue things.',O('crayon','blue'),1),
-S([O('book','green','big'),O('book','red','big')],[O('book','blue','small'),O('book','yellow','small')],'Big books / small books',['Red books / blue books','Big books / small books','Spotted books / plain books'],'The colors vary. Compare the sizes.','Group A has big books. Group B has small books.',O('book','purple','big'),0),
-S([O('sock','green','normal',true),O('sock','blue','normal',true)],[O('sock','red'),O('sock','yellow')],'Spotted socks / plain socks',['Big socks / small socks','Red socks / yellow socks','Spotted socks / plain socks'],'Look at the designs on the socks.','Group A has spotted socks. Group B has plain socks.',O('sock','purple','normal',true),0),
-S([O('spoon','red'),O('fork','blue'),O('bowl','yellow')],[O('brush','green'),O('crayon','purple'),O('crayon','blue')],'Eating tools / art tools',['Eating tools / art tools','Red things / blue things','Fruit / toys'],'Think about what you do with each group.','Group A has eating tools. Group B has art tools.',O('brush','yellow'),1),
-S([O('apple','green'),O('pear','yellow')],[O('car','blue'),O('block','red'),O('ball','purple')],'Fruit / toys',['Things we wear / things we read','Fruit / toys','Big things / small things'],'Which group could be a snack? Which could be for play?','Group A has fruit. Group B has toys. A spoon belongs in neither group.',O('spoon','green'),2),
-S([O('book','red','big'),O('book','green','big')],[O('book','blue','small'),O('book','yellow','small')],'Big books / small books',['Red things / blue things','Eating tools / art tools','Big books / small books'],'First notice what kind of object is in both groups.','Both groups contain books: big books in A, small books in B. A cup is not a book, so it fits neither group.',O('cup','purple','small'),2)
-];
-const modes=[{name:'All alike',tag:'Find the connection',prompt:'How are these pictures alike?',sub:'Look at every picture. What do they share?',data:likeness},{name:'Odd one out',tag:'Spot the difference',prompt:'Which object doesn’t belong?',sub:'Find three that go together. Tap the one that is different.',data:odd},{name:'Guess the rule',tag:'Crack the sorting code',prompt:'What’s our secret sorting rule?',sub:'Look inside both groups. How did we separate the objects?',data:sorts},{name:'Where does it go?',tag:'Try out the rule',prompt:'Where does the new object belong?',sub:'Discover the rule, then find a home for the new object.',data:sorts}];
+function objectKey(o){return [o.kind,o.color,o.size,o.pattern||'plain'].join(':');}
+function puzzleKey(r){const group=a=>a.map(objectKey).sort().join('|');return r.items?`${r.ruleId};${group(r.items)};${r.odd===undefined?'':objectKey(r.items[r.odd])}`:`${r.ruleId};${group(r.a)};${group(r.b)};${r.item?objectKey(r.item):''}`;}
+function makeNoticing(i,rng,isOdd){const rule=rules[i%rules.length];let items=sample(rule.pool(rng),isOdd?3:4,rng);let outsider;
+  if(isOdd){
+    if(rule.id.startsWith('size-'))outsider=picture(pick(kinds,rng),rng,{size:rule.id==='size-big'?'small':'big'});
+    else if(rule.id.startsWith('pattern-'))outsider=O('sock',pick(palette,rng),'normal',pick(['spotted','striped',false].filter(p=>!rule.test(O('sock','red','normal',p))),rng));
+    else if(rule.id.startsWith('shape-'))outsider=picture(pick(shapes.filter(k=>!rule.test(O(k))),rng),rng);
+    else outsider=picture(pick(kinds.filter(k=>!rule.test(O(k,rule.id.startsWith('color-')?'white':'red'))),rng),rng);
+    // A color rule requires a genuinely different color, regardless of object kind.
+    if(rule.id.startsWith('color-'))outsider.color=pick(palette.filter(c=>!rule.test(O(outsider.kind,c))),rng);
+    items=shuffle([...items,outsider],rng);
+  }
+  const options=isOdd?[]:shuffle([rule.text,...sample(rules.filter(other=>other.id!==rule.id&&!items.every(other.test)),2,rng).map(other=>other.text)],rng);
+  return {ruleId:rule.id,items,rule:rule.text,options,hint:rule.hint,explain:isOdd?`The ${label(outsider)} is the one that differs. The other three fit this rule: ${rule.text}`:rule.text+' Different objects can share a feature.',...(isOdd?{odd:items.indexOf(outsider)}:{})};
+}
+const pairKinds=['color','category','size','pattern','shape'];
+function makeSorting(i,rng,placement){
+  const family=pairKinds[i%pairKinds.length];let a,b,item,rule,hint,explain,acceptA,acceptB;const answer=i%3;
+  if(family==='color'){
+    const [x,y,z]=sample(palette,3,rng);const items=sample(kinds,7,rng);
+    a=items.slice(0,3).map(k=>picture(k,rng,{color:x}));b=items.slice(3,6).map(k=>picture(k,rng,{color:y}));item=picture(items[6],rng,{color:[x,y,z][answer]});
+    rule=`${x} things / ${y} things`;hint='Compare the main color of each group.';explain=`Group A has ${x} things. Group B has ${y} things.`;acceptA=o=>o.color===x;acceptB=o=>o.color===y;
+  }else if(family==='category'){
+    const [x,y,z]=sample(Object.values(categories),3,rng);a=sample(x.kinds,3,rng).map(k=>picture(k,rng));b=sample(y.kinds,3,rng).map(k=>picture(k,rng));const g=[x,y,z][answer];const used=[...a,...b].map(o=>o.kind);item=picture(pick(g.kinds.filter(k=>!used.includes(k)),rng),rng);
+    rule=`${x.title} / ${y.title}`;hint='Think about what the objects are or what we use them for.';explain=`Group A has ${x.title}. Group B has ${y.title}.`;acceptA=o=>x.kinds.includes(o.kind);acceptB=o=>y.kinds.includes(o.kind);
+  }else if(family==='size'){
+    const kind=pick(['book','ball','block','cup','shirt','teddy','circle','star'],rng),sizes=shuffle(['big','small'],rng),cs=sample(palette,7,rng);
+    a=cs.slice(0,3).map(c=>O(kind,c,sizes[0]));b=cs.slice(3,6).map(c=>O(kind,c,sizes[1]));item=O(answer===2?pick(kinds.filter(k=>k!==kind),rng):kind,cs[6],answer===2?'small':sizes[answer]);
+    rule=`${sizes[0]} ${names[kind]} pictures / ${sizes[1]} ${names[kind]} pictures`;hint='Notice the kind of object AND its size.';explain=`Both groups contain ${names[kind]} pictures: ${sizes[0]} in A and ${sizes[1]} in B.`;acceptA=o=>o.kind===kind&&o.size===sizes[0];acceptB=o=>o.kind===kind&&o.size===sizes[1];
+  }else if(family==='pattern'){
+    const [x,y,z]=shuffle(['spotted','striped',false],rng),cs=sample(palette,7,rng);a=cs.slice(0,3).map(c=>O('sock',c,'normal',x));b=cs.slice(3,6).map(c=>O('sock',c,'normal',y));item=O('sock',cs[6],'normal',[x,y,z][answer]);
+    rule=`${patternName(x)} socks / ${patternName(y)} socks`;hint='Look at the patterns on the socks, rather than their colors.';explain=`Group A has ${patternName(x)} socks. Group B has ${patternName(y)} socks.`;acceptA=o=>o.kind==='sock'&&o.pattern===x;acceptB=o=>o.kind==='sock'&&o.pattern===y;
+  }else{
+    const [x,y,z]=sample(shapes,3,rng),cs=sample(palette,7,rng);a=cs.slice(0,3).map(c=>O(x,c));b=cs.slice(3,6).map(c=>O(y,c));item=O([x,y,z][answer],cs[6]);
+    rule=`${x} shapes / ${y} shapes`;hint='Trace the outlines with your finger. Compare their shapes.';explain=`Group A has ${x} shapes. Group B has ${y} shapes.`;acceptA=o=>o.kind===x;acceptB=o=>o.kind===y;
+  }
+  const decoys=[
+    {text:'Things we wear / musical instruments',a:o=>categories.clothes.kinds.includes(o.kind),b:o=>categories.music.kinds.includes(o.kind)},
+    {text:'Big books / small books',a:o=>o.kind==='book'&&o.size==='big',b:o=>o.kind==='book'&&o.size==='small'},
+    {text:'Red things / blue things',a:o=>o.color==='red',b:o=>o.color==='blue'},
+    {text:'Spotted socks / plain socks',a:o=>o.kind==='sock'&&o.pattern==='spotted',b:o=>o.kind==='sock'&&!o.pattern},
+    {text:'Fruit / vehicles',a:o=>categories.fruit.kinds.includes(o.kind),b:o=>categories.vehicles.kinds.includes(o.kind)}
+  ].filter(d=>!(a.every(d.a)&&b.every(d.b)));
+  const options=shuffle([rule,...sample(decoys,2,rng).map(d=>d.text)],rng);
+  const actual=acceptA(item)?0:acceptB(item)?1:2;
+  if(actual!==answer)throw new Error('Invalid sorting candidate');
+  if(placement)explain+=answer===2?` The ${label(item)} fits neither rule, so it belongs in neither group.`:` The ${label(item)} fits Group ${answer===0?'A':'B'}.`;
+  return {ruleId:family+':'+rule,a:shuffle(a,rng),b:shuffle(b,rng),item,rule,options,hint,explain,answer,acceptA,acceptB};
+}
+function buildBank(modeIndex){const rng=seeded(34191+modeIndex*1097),result=[],seen=new Set();let attempt=0;while(result.length<BANK_SIZE&&attempt<10000){const r=modeIndex<2?makeNoticing(attempt,rng,modeIndex===1):makeSorting(attempt,rng,modeIndex===3);attempt++;const key=puzzleKey(r);if(seen.has(key))continue;seen.add(key);r.id=`${modeIndex}:${result.length}`;result.push(r);}if(result.length<BANK_SIZE)throw new Error('Puzzle bank is incomplete');return result;}
+const banks=[0,1,2,3].map(buildBank);
+let savedDecks={};let canSaveDecks=true;
+try{const raw=JSON.parse(localStorage.getItem(DECK_KEY)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))savedDecks=raw;}catch{canSaveDecks=false;}
+function saveDecks(){try{localStorage.setItem(DECK_KEY,JSON.stringify(savedDecks));}catch{canSaveDecks=false;}}
+function freshTrail(modeIndex){
+  const bank=banks[modeIndex],valid=new Set(bank.map(r=>r.id));let saved=savedDecks[modeIndex];
+  if(!saved||!Array.isArray(saved.remaining)||saved.remaining.some(id=>!valid.has(id))||new Set(saved.remaining).size!==saved.remaining.length)saved={remaining:[],cycle:0};
+  if(saved.remaining.length<TRAIL_LENGTH){saved.remaining=shuffle(bank.map(r=>r.id));saved.cycle=(Number(saved.cycle)||0)+1;}
+  // Prefer different rules within each trail; reserve every selected puzzle once.
+  const ids=[],usedRules=new Set();
+  for(const id of saved.remaining){const r=bank.find(p=>p.id===id);if(!usedRules.has(r.ruleId)){ids.push(id);usedRules.add(r.ruleId);}if(ids.length===TRAIL_LENGTH)break;}
+  for(const id of saved.remaining){if(ids.length===TRAIL_LENGTH)break;if(!ids.includes(id))ids.push(id);}
+  saved.remaining=saved.remaining.filter(id=>!ids.includes(id));savedDecks[modeIndex]=saved;saveDecks();
+  return ids.map(id=>bank.find(r=>r.id===id));
+}
+const modes=[{name:'All alike',tag:'Find the connection',prompt:'How are these pictures alike?',sub:'Look at every picture. What do they share?'},{name:'Odd one out',tag:'Spot the difference',prompt:'Which object doesn’t belong?',sub:'Find three that go together. Tap the one that is different.'},{name:'Guess the rule',tag:'Crack the sorting code',prompt:'What’s our secret sorting rule?',sub:'Look inside both groups. How did we separate the objects?'},{name:'Where does it go?',tag:'Try out the rule',prompt:'Where does the new object belong?',sub:'Discover the rule, then find a home for the new object.'}].map(m=>({...m,data:[]}));
+modes[0].data=freshTrail(0);
 let mode=0,round=0,answered=false,complete=false,alternative=false,attempts=0;
 const $=s=>document.querySelector(s),stage=$('#stage');
 function object(o,selectable=false,i=0){return `<${selectable?'button':'div'} class="object${selectable?' selectable':''}" ${selectable?`data-odd="${i}" aria-label="${label(o)}"`:''}>${art(o)}<span>${label(o)}</span></${selectable?'button':'div'}>`;}
-function render(){answered=false;complete=false;alternative=false;attempts=0;window.speechSynthesis?.cancel();$('#modes').innerHTML=modes.map((m,i)=>`<button class="mode ${i===mode?'active':''}" data-mode="${i}" aria-pressed="${i===mode}"><span class="num">0${i+1}</span><span><strong>${m.name}</strong><small>${m.tag}</small></span></button>`).join('');const m=modes[mode],r=m.data[round];$('#round-label').textContent=`${m.name} · Puzzle ${round+1} of ${m.data.length}`;$('#dots').innerHTML=m.data.map((_,i)=>`<span class="dot ${i<round?'done':i===round?'current':''}"></span>`).join('');$('#controls').hidden=false;$('#next').disabled=true;$('#next').textContent=round===5?'Finish this trail →':'Next puzzle →';$('#hint-button').disabled=false;
+function render(){answered=false;complete=false;alternative=false;attempts=0;window.speechSynthesis?.cancel();$('#modes').innerHTML=modes.map((m,i)=>`<button class="mode ${i===mode?'active':''}" data-mode="${i}" aria-pressed="${i===mode}"><span class="num">0${i+1}</span><span><strong>${m.name}</strong><small>${m.tag}</small></span></button>`).join('');const m=modes[mode],r=m.data[round];if(!canSaveDecks)document.getElementById("save-note").textContent='Your browser is not saving puzzle history. Puzzles still do not repeat while this page stays open.';$('#round-label').textContent=`${m.name} · Puzzle ${round+1} of ${m.data.length}`;$('#dots').innerHTML=m.data.map((_,i)=>`<span class="dot ${i<round?'done':i===round?'current':''}"></span>`).join('');$('#controls').hidden=false;$('#next').disabled=true;$('#next').textContent=round===TRAIL_LENGTH-1?'Finish this trail →':'Next puzzle →';$('#hint-button').disabled=false;
 stage.innerHTML=`<div class="prompt-row"><div><h2 tabindex="-1" id="question">${m.prompt}</h2><p class="sub">${m.sub}</p></div><button class="icon-btn" id="speak" aria-label="Read puzzle aloud" title="Read puzzle aloud">♫</button></div>`;
 if(mode<2)stage.innerHTML+=`<div class="picture-grid">${r.items.map((o,i)=>object(o,mode===1,i)).join('')}</div>`;
 else stage.innerHTML+=`<div class="groups">${[r.a,r.b].map((g,i)=>`<div class="group"><div class="group-title">Group ${i===0?'A':'B'}</div><div class="group-items">${g.map(o=>object(o)).join('')}</div></div>`).join('')}</div>`;
@@ -81,9 +187,21 @@ if(!('speechSynthesis' in window))$('#speak').hidden=true;
 }
 function answer(i,button){if(answered||complete)return;const r=modes[mode].data[round];const correct=mode===1?r.odd:mode===3?r.answer:r.options.indexOf(r.rule);const ok=i===correct;attempts++;const f=$('#feedback');f.hidden=false;f.className='feedback'+(ok?'':' retry');if(ok){answered=true;button.classList.add('correct');stage.querySelectorAll('[data-answer],[data-odd]').forEach(b=>b.disabled=true);f.innerHTML=`<strong>Good noticing!</strong>${r.explain}`;$('#discussion').hidden=false;$('#discussion').textContent=mode===3?'Tell someone: “It belongs here because…”':'Talk it over: Could you find a different way to group these pictures?';$('#another').hidden=true;$('#next').disabled=false;}else{button.classList.add('wrong');f.innerHTML=`<strong>Let’s take another look.</strong>${r.hint} You can try again.`;$('#another').hidden=false;} }
 function clue(){const r=modes[mode].data[round];$('#hint').hidden=false;$('#hint').textContent=r.hint;$('#hint-button').disabled=true;}
-function finish(){complete=true;$('#controls').hidden=true;$('#dots').innerHTML=modes[mode].data.map(()=>'<span class="dot done"></span>').join('');$('#round-label').textContent='Trail complete';stage.innerHTML=`<div id="complete"><div class="medal" aria-hidden="true">✦</div><div class="eyebrow">Detective work, nicely done</div><h2 tabindex="-1" id="question">You explored six puzzles!</h2><p>You practiced ${['finding things that are alike','noticing what is different','discovering sorting rules','using a rule to sort something new'][mode]}. What did you notice that surprised you?</p><button class="primary" id="continue">${mode===3?'Start a new adventure':'Try '+modes[mode+1].name} →</button><br><button class="quiet" id="replay">Play this trail again</button></div>`;$('#question').focus();}
+function finish(){complete=true;$('#controls').hidden=true;$('#dots').innerHTML=modes[mode].data.map(()=>'<span class="dot done"></span>').join('');$('#round-label').textContent='Trail complete';stage.innerHTML=`<div id="complete"><div class="medal" aria-hidden="true">✦</div><div class="eyebrow">Detective work, nicely done</div><h2 tabindex="-1" id="question">You explored six puzzles!</h2><p>You practiced ${['finding things that are alike','noticing what is different','discovering sorting rules','using a rule to sort something new'][mode]}. What did you notice that surprised you?</p><button class="primary" id="continue">${mode===3?'Start a new adventure':'Try '+modes[mode+1].name} →</button><br><button class="quiet" id="replay">Play a fresh trail</button></div>`;$('#question').focus();}
 function speak(){const r=modes[mode].data[round];const options=mode===1?[]:mode===3?['Group A','Group B','Neither group']:r.options;const description=mode<2?r.items.map(label).join(', '):'Group A: '+r.a.map(label).join(', ')+'. Group B: '+r.b.map(label).join(', ')+(mode===3?'. New object: '+label(r.item):'');const u=new SpeechSynthesisUtterance(modes[mode].prompt+'. '+description+'. '+options.join('. '));u.rate=.85;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.mode!==undefined){mode=Number(b.dataset.mode);round=0;render();}else if(b.dataset.odd!==undefined)answer(Number(b.dataset.odd),b);else if(b.dataset.answer!==undefined)answer(Number(b.dataset.answer),b);else if(b.id==='hint-button')clue();else if(b.id==='speak')speak();else if(b.id==='another'){alternative=true;answered=true;$('#feedback').className='feedback';$('#feedback').innerHTML='<strong>Another way to think!</strong>Explain your rule aloud. Here is the rule this puzzle was using: '+modes[mode].data[round].explain;stage.querySelectorAll('[data-answer],[data-odd]').forEach(x=>x.disabled=true);b.hidden=true;$('#next').disabled=false;}else if(b.id==='next'&&answered){if(round===5)finish();else{round++;render();$('#question').focus();}}else if(b.id==='continue'){mode=(mode+1)%4;round=0;render();$('#question').focus();}else if(b.id==='replay'){round=0;render();$('#question').focus();}});
+function startTrail(nextMode){mode=nextMode;round=0;modes[mode].data=freshTrail(mode);render();$('#question').focus();}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.mode!==undefined){const nextMode=Number(b.dataset.mode);if(nextMode!==mode||complete)startTrail(nextMode);}
+  else if(b.dataset.odd!==undefined)answer(Number(b.dataset.odd),b);
+  else if(b.dataset.answer!==undefined)answer(Number(b.dataset.answer),b);
+  else if(b.id==='hint-button')clue();
+  else if(b.id==='speak')speak();
+  else if(b.id==='another'){alternative=true;answered=true;$('#feedback').className='feedback';$('#feedback').innerHTML='<strong>Another way to think!</strong>Explain your rule aloud. Here is the rule this puzzle was using: '+modes[mode].data[round].explain;stage.querySelectorAll('[data-answer],[data-odd]').forEach(x=>x.disabled=true);b.hidden=true;$('#next').disabled=false;}
+  else if(b.id==='next'&&answered){if(round===TRAIL_LENGTH-1)finish();else{round++;render();$('#question').focus();}}
+  else if(b.id==='continue')startTrail((mode+1)%4);
+  else if(b.id==='replay')startTrail(mode);
+});
 window.addEventListener('pagehide',()=>window.speechSynthesis?.cancel());render();
 </script>
 </body>
