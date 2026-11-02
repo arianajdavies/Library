@@ -1,0 +1,184 @@
+{
+  "pear": [
+    {
+      "caption": "'Bradford' form",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus_calleryana_Bra_tyJSC0e3c6FC.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>CC BY-NC-ND 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
+      "file": "assets/tree-detective/pear-1.jpg",
+      "author": "Jim Robbins"
+    },
+    {
+      "caption": "'Bradford' Fruit and Leaves",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus_calleryana_Bra_EQjF0iw4713U.jpeg",
+      "license": "<a href='http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>CC BY-NC-ND 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
+      "file": "assets/tree-detective/pear-2.jpg",
+      "author": "Jim Robbins"
+    },
+    {
+      "caption": "Fruit Close-up (Wake County, NC)",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus-calleryana-Bra_NiJa4PYJ0ixt.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
+      "file": "assets/tree-detective/pear-3.jpg",
+      "author": "Cathy Dewitt"
+    }
+  ],
+  "spruce": [
+    {
+      "caption": "Picea pungens showing conical form",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Picea_pungens_form_U_c5UwslUDDqpg.jpg",
+      "license": "<a href='https://creativecommons.org/publicdomain/zero/1.0/'>CC0 1.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/picea-pungens/",
+      "file": "assets/tree-detective/spruce-1.jpg",
+      "author": "USDA-NRCS PLANTS Database / Herman, D.E. et al. 1996."
+    },
+    {
+      "caption": "Picea pungens 'Roundabout' Needles & Cones. Nov. 29. Wake Co., NC",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Picea-pungens-Rounda_VVxLl5toGJ5l.jpeg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/picea-pungens/",
+      "file": "assets/tree-detective/spruce-2.jpg",
+      "author": "Cathy DeWitt"
+    },
+    {
+      "caption": "Picea pungens. Seed cones",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Picea_pungens_seed_c_xWT9IZtMSuFC.jpeg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/picea-pungens/",
+      "file": "assets/tree-detective/spruce-3.jpg",
+      "author": "Chris"
+    }
+  ],
+  "birch": [
+    {
+      "caption": "Form with green leaves",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Betula_papyrifera_by_Xt0JViZBNw4F.jfif",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/betula-papyrifera/",
+      "file": "assets/tree-detective/birch-1.jpg",
+      "author": "brewbooks"
+    },
+    {
+      "caption": "Leaves and leaf arrangement",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Betula_papyrifera_by_r5ViQ5mZoe5n.jpg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC BY-SA 3.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/betula-papyrifera/",
+      "file": "assets/tree-detective/birch-2.jpg",
+      "author": "Walter Siegmund (Wsiegmund)"
+    },
+    {
+      "caption": "seeds",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Betula_papyrifera_se_AZ6uJtjh46RU.jpg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/betula-papyrifera/",
+      "file": "assets/tree-detective/birch-3.jpg",
+      "author": "Babij"
+    }
+  ],
+  "oak": [
+    {
+      "caption": "form in spring Brunswick Nature Park",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/white_oak_in_spring__FXbeMInoRg0I.jpeg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/quercus-alba/",
+      "file": "assets/tree-detective/oak-1.jpg",
+      "author": "skdavidson"
+    },
+    {
+      "caption": "Leaves",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Quercus-alba--Windy-Cutler--CC-BY.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by/2.0/legalcode'>CC BY 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/quercus-alba/",
+      "file": "assets/tree-detective/oak-2.jpg",
+      "author": "Wendy Cutler"
+    },
+    {
+      "caption": "Leaf and acorn (Cabarrus County, NC)-Fall",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/quercus-alba-fall-le_QWnvCVYGTRWB.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/quercus-alba/",
+      "file": "assets/tree-detective/oak-3.jpg",
+      "author": "Cathy Dewitt"
+    }
+  ],
+  "maple": [
+    {
+      "caption": "Form (Warren County, NC)-Early Spring",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Acer_Rubrum-form-Mar_mVxkfhkvR9wj.jpeg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/acer-rubrum/",
+      "file": "assets/tree-detective/maple-1.jpg",
+      "author": "Cathy Dewitt"
+    },
+    {
+      "caption": "Leaves",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/acer_rubrum_leaves_frankenschultz_CC_BY-NC-SA_2-0.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode'>CC BY-NC-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/acer-rubrum/",
+      "file": "assets/tree-detective/maple-2.jpg",
+      "author": "Frankenschulz"
+    },
+    {
+      "caption": "Double-winged samaras have a red color.",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/acer_rubrum_samara_Carol_Jacobs-Carre_ccbysa20.jpeg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC BY-SA 3.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/acer-rubrum/",
+      "file": "assets/tree-detective/maple-3.jpg",
+      "author": "Carol Jacobs-Carre"
+    }
+  ],
+  "pine": [
+    {
+      "caption": "",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pinus_strobus_tree--FD_Richards--CC-BY-SA.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by-sa/4.0/legalcode'>CC BY-SA 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pinus-strobus/",
+      "file": "assets/tree-detective/pine-1.jpg",
+      "author": "F. D. Richards"
+    },
+    {
+      "caption": "",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pinus_strobus_needles--Forest_and_Kim_Starr--CC-BY.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pinus-strobus/",
+      "file": "assets/tree-detective/pine-2.jpg",
+      "author": "Forest and Kim Starr"
+    },
+    {
+      "caption": "",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pinus_strobus_cone--Forest_and_Kim_Starr--CC-BY.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/pinus-strobus/",
+      "file": "assets/tree-detective/pine-3.jpg",
+      "author": "Forest and Kim Starr"
+    }
+  ],
+  "gum": [
+    {
+      "caption": "Growth habit",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Liquidamber-styracifula--F-D-Richards--cc-by-sa-2-0.jpg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/liquidambar-styraciflua/",
+      "file": "assets/tree-detective/gum-1.jpg",
+      "author": "F. D. Richards"
+    },
+    {
+      "caption": "leaf in spring Brunswick Nature Park",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/sweet_gum_20200411_1_vcurcbmbVz73.jpg",
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/liquidambar-styraciflua/",
+      "file": "assets/tree-detective/gum-2.jpg",
+      "author": "skdavidson"
+    },
+    {
+      "caption": "Fruits",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Liquidambar_styracif_b4ezJ9QbrQ6C.jpg",
+      "license": "<a href='http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>CC BY-NC-ND 4.0</a>",
+      "source": "https://plants.ces.ncsu.edu/plants/liquidambar-styraciflua/",
+      "file": "assets/tree-detective/gum-3.jpg",
+      "author": "Jim Robbins"
+    }
+  ]
+}
