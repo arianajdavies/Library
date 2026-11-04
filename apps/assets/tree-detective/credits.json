@@ -1,20 +1,20 @@
 {
   "pear": [
     {
-      "caption": "'Bradford' form",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus_calleryana_Bra_tyJSC0e3c6FC.jpg",
-      "license": "<a href='http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>CC BY-NC-ND 4.0</a>",
+      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus_calleryana_Bra_QbLy0aYJDQXI.jpeg",
+      "caption": "Bradford pear in bloom",
+      "author": "Jim Janke",
       "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
       "file": "assets/tree-detective/pear-1.jpg",
-      "author": "Jim Robbins"
+      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>"
     },
     {
-      "caption": "'Bradford' Fruit and Leaves",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Pyrus_calleryana_Bra_EQjF0iw4713U.jpeg",
-      "license": "<a href='http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>CC BY-NC-ND 4.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Pyrus_calleryana_leaf_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "caption": "File:Pyrus calleryana leaf 1.jpg",
+      "author": "Downtowngal",
+      "source": "https://commons.wikimedia.org/wiki/File:Pyrus_calleryana_leaf_1.jpg",
       "file": "assets/tree-detective/pear-2.jpg",
-      "author": "Jim Robbins"
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a>"
     },
     {
       "caption": "Fruit Close-up (Wake County, NC)",
@@ -23,6 +23,14 @@
       "source": "https://plants.ces.ncsu.edu/plants/pyrus-calleryana/",
       "file": "assets/tree-detective/pear-3.jpg",
       "author": "Cathy Dewitt"
+    },
+    {
+      "original": "https://thebenjamin.wordpress.com/wp-content/uploads/2008/12/bradford1.jpg",
+      "caption": "Bradford pear in leaf, without flowers",
+      "author": "The Benjamins Weblog",
+      "source": "https://thebenjamin.wordpress.com/2008/12/06/a-tale-of-two-trees/",
+      "file": "assets/tree-detective/pear-in-leaf.jpg",
+      "license": "Copyright retained by the photographer; no open reuse license stated on source page"
     }
   ],
   "spruce": [
@@ -35,12 +43,12 @@
       "author": "USDA-NRCS PLANTS Database / Herman, D.E. et al. 1996."
     },
     {
-      "caption": "Picea pungens 'Roundabout' Needles & Cones. Nov. 29. Wake Co., NC",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Picea-pungens-Rounda_VVxLl5toGJ5l.jpeg",
-      "license": "<a href='http://creativecommons.org/licenses/by/4.0/legalcode'>CC BY 4.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/picea-pungens/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/b/be/Blue_Spruce_needles_114.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "caption": "File:Blue Spruce needles 114.jpg",
+      "author": "BogTar201213",
+      "source": "https://commons.wikimedia.org/wiki/File:Blue_Spruce_needles_114.jpg",
       "file": "assets/tree-detective/spruce-2.jpg",
-      "author": "Cathy DeWitt"
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a>"
     },
     {
       "caption": "Picea pungens. Seed cones",
@@ -61,12 +69,12 @@
       "author": "brewbooks"
     },
     {
-      "caption": "Leaves and leaf arrangement",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Betula_papyrifera_by_r5ViQ5mZoe5n.jpg",
-      "license": "<a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC BY-SA 3.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/betula-papyrifera/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Paper_Birch_Leaf2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "caption": "File:Paper Birch Leaf2.jpg",
+      "author": "Allyzilla",
+      "source": "https://commons.wikimedia.org/wiki/File:Paper_Birch_Leaf2.jpg",
       "file": "assets/tree-detective/birch-2.jpg",
-      "author": "Walter Siegmund (Wsiegmund)"
+      "license": "<a href='http://creativecommons.org/publicdomain/zero/1.0/deed.en'>CC0</a>"
     },
     {
       "caption": "seeds",
@@ -87,12 +95,12 @@
       "author": "skdavidson"
     },
     {
-      "caption": "Leaves",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/Quercus-alba--Windy-Cutler--CC-BY.jpg",
-      "license": "<a href='http://creativecommons.org/licenses/by/2.0/legalcode'>CC BY 2.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/quercus-alba/",
+      "original": "https://lrsotree.uada.edu/static/gallery/img/white_oak_foliage_4.76b6f11c187c.jpg",
+      "caption": "White oak leaf, upper side",
+      "author": "Bugwood.org, via University of Arkansas System Division of Agriculture",
+      "source": "https://lrsotree.uada.edu/gallery/white_oak/",
       "file": "assets/tree-detective/oak-2.jpg",
-      "author": "Wendy Cutler"
+      "license": "Copyright retained by the photographer; no open reuse license stated on source page"
     },
     {
       "caption": "Leaf and acorn (Cabarrus County, NC)-Fall",
@@ -113,20 +121,20 @@
       "author": "Cathy Dewitt"
     },
     {
-      "caption": "Leaves",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/acer_rubrum_leaves_frankenschultz_CC_BY-NC-SA_2-0.jpg",
-      "license": "<a href='http://creativecommons.org/licenses/by-nc-sa/2.0/legalcode'>CC BY-NC-SA 2.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/acer-rubrum/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/9/94/Maple_Leaf_Red_Rings_2000px.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "caption": "File:Maple Leaf Red Rings 2000px.jpg",
+      "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+      "source": "https://commons.wikimedia.org/wiki/File:Maple_Leaf_Red_Rings_2000px.jpg",
       "file": "assets/tree-detective/maple-2.jpg",
-      "author": "Frankenschulz"
+      "license": "<a href='assets/tree-detective/GFDL-1.2.txt'>GFDL 1.2</a>"
     },
     {
-      "caption": "Double-winged samaras have a red color.",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/acer_rubrum_samara_Carol_Jacobs-Carre_ccbysa20.jpeg",
-      "license": "<a href='https://creativecommons.org/licenses/by-sa/3.0/deed.en'>CC BY-SA 3.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/acer-rubrum/",
+      "original": "https://jeansgarden.wordpress.com/wp-content/uploads/2015/06/red-maple-samara-size.jpg",
+      "caption": "One detached red maple samara beside a penny for scale",
+      "author": "Jean / Jeans Garden",
+      "source": "https://jeansgarden.wordpress.com/2015/06/10/winged-seeds/",
       "file": "assets/tree-detective/maple-3.jpg",
-      "author": "Carol Jacobs-Carre"
+      "license": "© Jeans Garden. No open reuse license stated on source page"
     }
   ],
   "pine": [
@@ -165,12 +173,12 @@
       "author": "F. D. Richards"
     },
     {
-      "caption": "leaf in spring Brunswick Nature Park",
-      "original": "https://eit-planttoolbox-prod.s3.amazonaws.com/media/images/sweet_gum_20200411_1_vcurcbmbVz73.jpg",
-      "license": "<a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA 2.0</a>",
-      "source": "https://plants.ces.ncsu.edu/plants/liquidambar-styraciflua/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/5/54/Backlit_American_sweetgum_%28Liquidambar_styraciflua%29_ref_leaf%2C_Lisbon%2C_Portugal_%28approx._GPS_location%29_julesvernex2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "caption": "File:Backlit American sweetgum (Liquidambar styraciflua) ref leaf, Lisbon, Portugal (approx. GPS location) julesvernex2.jpg",
+      "author": "Jules Verne Times Two / julesvernex2.com",
+      "source": "https://commons.wikimedia.org/wiki/File:Backlit_American_sweetgum_(Liquidambar_styraciflua)_ref_leaf,_Lisbon,_Portugal_(approx._GPS_location)_julesvernex2.jpg",
       "file": "assets/tree-detective/gum-2.jpg",
-      "author": "skdavidson"
+      "license": "<a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a>"
     },
     {
       "caption": "Fruits",
