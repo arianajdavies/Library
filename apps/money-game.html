@@ -45,10 +45,32 @@ function bucket(c){return `<svg class="bucket-art" viewBox="0 0 240 260" fill="n
 function picture(c,scale=5.1){return `<img class="coin-image" src="assets/money-game/${c.id}.jpg" alt="" width="${Math.round(c.size*scale)}" height="${Math.round(c.size*scale)}" draggable="false">`;}
 let sound=true,mode='learn',deck=[],round=0,answered=false,remaining=[],selected=null,sorted=0;
 const speechAvailable='speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const AudioEngine=window.AudioContext||window.webkitAudioContext;
+let coinAudio=null,coinVolume=null;
+async function clink(){
+ if(!sound||!AudioEngine)return;
+ try{
+  if(!coinAudio||coinAudio.state==='closed'){
+   coinAudio=new AudioEngine();coinVolume=coinAudio.createGain();coinVolume.connect(coinAudio.destination);
+  }
+  if(coinAudio.state==='suspended')await coinAudio.resume();
+  if(!sound)return;
+  const now=coinAudio.currentTime;coinVolume.gain.setValueAtTime(.22,now);
+  // Short, inharmonic rings give the coin a light metallic clink.
+  [[2450,.8,.17],[3670,.38,.12],[5210,.18,.07]].forEach(([frequency,volume,decay])=>{
+   const tone=coinAudio.createOscillator(),envelope=coinAudio.createGain();
+   tone.type='sine';tone.frequency.setValueAtTime(frequency,now);
+   envelope.gain.setValueAtTime(.001,now);envelope.gain.exponentialRampToValueAtTime(volume,now+.002);
+   envelope.gain.exponentialRampToValueAtTime(.001,now+decay);
+   tone.connect(envelope);envelope.connect(coinVolume);tone.start(now);tone.stop(now+decay+.02);
+   tone.onended=()=>{tone.disconnect();envelope.disconnect();};
+  });
+ }catch{/* Sorting still works when browser audio is unavailable. */}
+}
 function say(text){if(!sound||!speechAvailable)return;try{window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.82;window.speechSynthesis.speak(u);}catch{/* The visible instructions remain available. */}}
 function shuffle(items){const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;}
-$('sound').onclick=()=>{sound=!sound;$('sound').setAttribute('aria-pressed',String(sound));$('sound').textContent=sound?'Sound on ♪':'Sound off';if(!sound&&speechAvailable)window.speechSynthesis.cancel();else say('Sound on. Let’s learn about coins.');};
-if(!speechAvailable){sound=false;$('sound').disabled=true;$('sound').setAttribute('aria-pressed','false');$('sound').textContent='Sound unavailable';$('speechNote').textContent='Your browser does not support spoken names. The coin names and instructions are shown on screen.';}
+$('sound').onclick=()=>{sound=!sound;$('sound').setAttribute('aria-pressed',String(sound));$('sound').textContent=sound?'Sound on ♪':'Sound off';if(!sound){if(speechAvailable)window.speechSynthesis.cancel();if(coinVolume)coinVolume.gain.setValueAtTime(0,coinAudio.currentTime);}else say('Sound on. Let’s learn about coins.');};
+if(!speechAvailable){$('speechNote').textContent='Your browser does not support spoken names. The coin names and instructions are shown on screen.';if(!AudioEngine){sound=false;$('sound').disabled=true;$('sound').setAttribute('aria-pressed','false');$('sound').textContent='Sound unavailable';}}
 $('guide').innerHTML=coins.map(c=>`<article class="coin-card"><div class="coin-stage">${picture(c)}</div><h3>${c.name}</h3><div class="value">${cents(c)}</div><p>${c.clue}</p><button class="listen" data-coin="${c.id}" aria-label="Hear ${c.name}, ${cents(c)}">Hear it ♪</button></article>`).join('');
 document.querySelectorAll('.listen').forEach(b=>b.onclick=()=>{const c=coins.find(c=>c.id===b.dataset.coin);say(c.name+'. '+cents(c)+'.');});
 function setMode(next){mode=next;if(speechAvailable)window.speechSynthesis.cancel();for(const id of ['learn','find','sort'])$(id).hidden=id!==next;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===next)));if(next==='find'&&!deck.length)startFind();if(next==='sort'&&!remaining.length&&sorted===0)startSort();}
@@ -60,7 +82,7 @@ $('next').onclick=()=>{if(!answered)return;round++;if(round===deck.length){$('fi
 $('repeat').onclick=()=>say('Find the '+deck[round].id+'.');
 function startSort(){remaining=shuffle(coins.flatMap(c=>Array.from({length:3},(_,i)=>({coin:c,key:c.id+'-'+i}))));selected=null;sorted=0;$('sortFinish').hidden=true;$('sortMessage').textContent='Pick any coin from the pile to begin.';$('bins').innerHTML=coins.map(c=>`<button class="bin" data-coin="${c.id}" aria-label="${cents(c)} bucket, ${c.name}">${bucket(c)}<b>${c.value}¢</b><span class="bin-name">${c.name}</span><span class="bin-coins" aria-hidden="true"></span><span class="sr-only bin-count">0 coins sorted here</span></button>`).join('');document.querySelectorAll('.bin').forEach(b=>b.onclick=()=>placeCoin(b));renderPile();}
 function renderPile(){$('sortedCount').textContent=`${sorted} of 12 sorted`;$('sortProgress').style.width=(sorted/12*100)+'%';$('pile').innerHTML=remaining.length?remaining.map((item,i)=>`<button class="pile-coin" data-key="${item.key}" aria-label="Pick up coin ${i+1}" aria-pressed="false">${picture(item.coin,3.25)}</button>`).join(''):'<strong>All sorted! Every coin found a home.</strong>';document.querySelectorAll('.pile-coin').forEach(b=>b.onclick=()=>{selected=remaining.find(item=>item.key===b.dataset.key);document.querySelectorAll('.pile-coin').forEach(other=>other.setAttribute('aria-pressed',String(other===b)));$('sortMessage').textContent=`${selected.coin.name} selected. Which container holds ${cents(selected.coin)}?`;say(selected.coin.name);});}
-function placeCoin(bin){if(!selected){$('sortMessage').textContent=sorted===12?'All 12 coins are sorted! Play again for a new pile.':'First, tap a coin in the pile.';return;}const c=selected.coin;if(c.id!==bin.dataset.coin){$('sortMessage').textContent=`Keep trying! A ${c.id} is worth ${cents(c)}. Tap the ${cents(c)} container.`;say('Try again. A '+c.id+' is worth '+cents(c)+'.');return;}remaining=remaining.filter(item=>item.key!==selected.key);sorted++;bin.querySelector('.bin-coins').insertAdjacentHTML('beforeend',picture(c,1.2));bin.querySelector('.bin-count').textContent=bin.querySelector('.bin-coins').children.length+' coins sorted here';selected=null;renderPile();$('sortMessage').textContent=`Yes! ${c.name} goes in ${cents(c)}. Pick another coin.`;say('Yes! '+c.name+'. '+cents(c)+'.');if(sorted===12){$('sortFinish').hidden=false;$('sortMessage').textContent='You did it! All 12 coins are in the right containers.';$('playSortAgain').focus();say('You did it, Joseph! Every coin is home!');}}
+function placeCoin(bin){if(!selected){$('sortMessage').textContent=sorted===12?'All 12 coins are sorted! Play again for a new pile.':'First, tap a coin in the pile.';return;}const c=selected.coin;if(c.id!==bin.dataset.coin){$('sortMessage').textContent=`Keep trying! A ${c.id} is worth ${cents(c)}. Tap the ${cents(c)} container.`;say('Try again. A '+c.id+' is worth '+cents(c)+'.');return;}clink();remaining=remaining.filter(item=>item.key!==selected.key);sorted++;bin.querySelector('.bin-coins').insertAdjacentHTML('beforeend',picture(c,1.2));bin.querySelector('.bin-count').textContent=bin.querySelector('.bin-coins').children.length+' coins sorted here';selected=null;renderPile();$('sortMessage').textContent=`Yes! ${c.name} goes in ${cents(c)}. Pick another coin.`;say('Yes! '+c.name+'. '+cents(c)+'.');if(sorted===12){$('sortFinish').hidden=false;$('sortMessage').textContent='You did it! All 12 coins are in the right containers.';$('playSortAgain').focus();say('You did it, Joseph! Every coin is home!');}}
 $('startFind').onclick=()=>{setMode('find');};
 $('restartFind').onclick=$('playFindAgain').onclick=startFind;
 $('startSort').onclick=()=>setMode('sort');
