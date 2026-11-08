@@ -432,6 +432,44 @@
         padding-top: 28px;
       }
     }
+    [hidden] { display: none !important; }
+    :is(a, button, textarea):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .book-link { color: inherit; text-decoration: none; }
+    .book-link:hover .book-title { color: var(--accent); text-decoration: underline; }
+    .reading-controls { margin-top: 14px; }
+    .read-button { width: 100%; min-height: 42px; padding: 9px 10px; background: var(--accent); border: 1px solid var(--accent-dark); color: white; font-weight: 800; cursor: pointer; }
+    .read-button[aria-pressed="true"] { color: var(--accent-dark); background: #e5eeE7; }
+    .read-button:hover { filter: brightness(.95); }
+    .rating-panel { padding-top: 10px; }
+    .rating-caption { margin: 0 0 3px; font-size: .85rem; color: var(--muted); }
+    .stars { display: flex; flex-wrap: wrap; }
+    .star { padding: 0; width: 42px; min-height: 44px; border: 0; background: transparent; color: #716654; font-size: 1.9rem; cursor: pointer; }
+    .star.filled, .star:hover { color: #986014; }
+    .text-button { border: 0; background: none; padding: 6px 0; color: var(--muted); text-decoration: underline; cursor: pointer; font-size: .8rem; }
+    .journal-message { margin: 18px 0; padding: 14px; background: #fbf2df; border: 1px solid var(--gold); }
+    .detail-page { padding: 30px 0 64px; }
+    .detail-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 38px; margin-top: 28px; }
+    .detail-cover { width: 100%; box-shadow: var(--shadow); }
+    .detail-cover .fallback-cover strong { font-size: 1.4rem; }
+    .detail-cover .fallback-cover span { font-size: .85rem; }
+    .detail-title { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.08; overflow-wrap: anywhere; }
+    .detail-author { margin: 12px 0 24px; font-size: 1.15rem; color: var(--muted); }
+    .eyebrow { color: var(--accent-dark); font-weight: 800; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; }
+    .detail-panel { background: var(--paper); border: 1px solid var(--line); padding: clamp(18px, 3vw, 30px); margin-bottom: 22px; }
+    .detail-panel h2 { margin: 0 0 16px; font-size: 1.5rem; }
+    .detail-panel h3 { margin: 24px 0 8px; font-size: 1rem; color: var(--accent-dark); }
+    .detail-panel p { line-height: 1.75; }
+    .synopsis { font-size: 1.1rem; }
+    .storage-note, .save-status { font-size: .86rem; color: var(--muted); line-height: 1.6; }
+    .notes-label { margin-bottom: 8px; }
+    textarea { display: block; width: 100%; resize: vertical; min-height: 180px; padding: 14px; border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; line-height: 1.6; }
+    @media (max-width: 680px) {
+      .detail-layout { grid-template-columns: 1fr; gap: 18px; }
+      .detail-sidebar { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 18px; align-items: start; }
+      .detail-sidebar > .storage-note { grid-column: 1 / -1; margin: 0; }
+      .detail-reading .reading-controls { margin-top: 0; }
+      .star { width: 32px; }
+    }
   </style>
 </head>
 <body>
@@ -443,6 +481,8 @@
   </header>
 
   <main class="shell">
+    <p id="journalMessage" class="journal-message" role="status" hidden></p>
+    <section id="bookDetail" class="detail-page" aria-label="Book details" hidden></section>
     <section class="hero" aria-labelledby="page-title">
       <div>
         <h1 id="page-title">Book List</h1>
@@ -507,6 +547,7 @@
     </section>
   </main>
 
+  <script src="assets/book-list-journal.js"></script>
   <script>
     const books = [
       {
@@ -1032,15 +1073,16 @@
         `).join("")}
         ${list.map((book) => `
           <div class="sheet-cell sheet-book">
-            <div class="book-strip">
+            <a class="book-strip book-link" href="#book=${bookId(book)}" aria-label="View details for ${escapeHtml(book.title)}">
               <div class="cover-wrap"><img data-cover="${book.index}" alt="" /></div>
               <div>
                 <h2 class="book-title">${book.title}</h2>
                 <p class="author">${book.author}</p>
               </div>
-            </div>
+            </a>
+            ${readingControls(book)}
           </div>
-          ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : book.plot)}
+          ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : escapeHtml(book.plot.split(/(?<=[.!?])\s+/)[0]))}
           ${sheetCell(book.setting)}
           ${sheetCell(book.magic)}
           ${sheetCell(book.romance)}
@@ -1103,7 +1145,7 @@
     });
 
     renderChips();
-    renderCards();
+    initJournal();
   </script>
 </body>
 </html>
