@@ -100,6 +100,7 @@ function detailRoute() {
             <h3>Series and reading order</h3><p>${escapeHtml(book.series)}</p>
             <div class="source-list">${book.sources.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noreferrer">${escapeHtml(s.label)} ↗</a>`).join('')}</div>
           </section>
+          ${seriesDetails(book)}
           <section class="detail-panel" aria-labelledby="notesTitle">
             <h2 id="notesTitle">Your notes</h2>
             <p class="storage-note">Favorite moments, quotes, questions, or thoughts for later. Notes save as you type.</p>
@@ -160,4 +161,28 @@ function initJournal() {
       document.getElementById('notesStatus').textContent = 'Notes updated from browser storage.';
     }
   });
+}
+function seriesDetails(book) {
+  const entries = book.seriesBooks || [];
+  if (!entries.length) {
+    return `<section class="detail-panel" aria-labelledby="seriesTitle"><h2 id="seriesTitle">Series guide</h2><p>${escapeHtml(book.seriesNote || book.series)}</p></section>`;
+  }
+  const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return `<section class="detail-panel" aria-labelledby="seriesTitle">
+    <p class="eyebrow">Series guide · Checked November 8, 2026</p>
+    <h2 id="seriesTitle">${escapeHtml(book.seriesName || 'Books in this series')}</h2>
+    <p>${escapeHtml(book.seriesNote || 'Read in the order below. Companion stories are labeled separately.')}</p>
+    <p class="storage-note">Later-book descriptions may reveal the setup of earlier books.</p>
+    <ol class="series-list">${entries.map((entry, index) => {
+      const tracked = books.find(candidate => normalize(candidate.title) === normalize(entry.title) && candidate.author === book.author);
+      const current = tracked && bookId(tracked) === bookId(book);
+      const title = tracked && !current ? `<a href="#book=${bookId(tracked)}">${escapeHtml(entry.title)}</a>` : escapeHtml(entry.title);
+      return `<li class="series-entry${current ? ' current-book' : ''}">
+        <div class="series-entry-heading"><h3>${title}</h3>${current ? '<span class="tag">This book</span>' : ''}</div>
+        <p class="series-kind">${escapeHtml(entry.kind || `Book ${index + 1}`)}</p>
+        <p>${escapeHtml(entry.synopsis)}</p>
+        ${entry.url ? `<a class="series-source" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">Book details ↗</a>` : ''}
+      </li>`;
+    }).join('')}</ol>
+  </section>`;
 }

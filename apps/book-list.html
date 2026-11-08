@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book List</title>
-  <meta name="description" content="A browseable fantasy and romance book tracker with plot, setting, tropes, series, romance, and magic notes." />
+  <meta name="description" content="A personal book tracker with plot summaries, series reading orders, ratings, and notes across fiction and nonfiction." />
   <style>
     :root {
       --ink: #1b2226;
@@ -470,6 +470,15 @@
       .detail-reading .reading-controls { margin-top: 0; }
       .star { width: 32px; }
     }
+    .series-list { margin: 24px 0 0; padding: 0; list-style: none; counter-reset: reading-order; }
+    .series-entry { position: relative; padding: 20px 18px 20px 58px; border-top: 1px solid var(--line); counter-increment: reading-order; }
+    .series-entry::before { content: counter(reading-order, decimal-leading-zero); position: absolute; left: 12px; top: 23px; font-size: .9rem; font-weight: 800; color: var(--accent-dark); }
+    .series-entry.current-book { background: #edf3ed; }
+    .series-entry-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+    .series-entry-heading h3 { margin: 0; font-size: 1.05rem; }
+    .series-entry p { margin: 7px 0; }
+    .series-entry .series-kind { color: var(--muted); font-size: .8rem; font-weight: 800; }
+    .series-source { color: var(--accent-dark); font-size: .82rem; }
   </style>
 </head>
 <body>
@@ -547,6 +556,7 @@
     </section>
   </main>
 
+  <script src="assets/book-list-catalog.js"></script>
   <script src="assets/book-list-journal.js"></script>
   <script>
     const books = [
@@ -955,6 +965,8 @@
       }
     ];
 
+    extendBookCatalog(books);
+
     const chipData = [
       "romantasy",
       "epic fantasy",
@@ -1000,6 +1012,9 @@
         book.romance,
         book.series,
         book.seriesStatus,
+        ...(book.aliases || []),
+        book.seriesName || '',
+        ...(book.seriesBooks || []).map(entry => entry.title),
         ...book.tropes
       ].join(" ").toLowerCase();
     }
