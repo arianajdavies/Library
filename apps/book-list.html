@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book List</title>
+  <title>Book Tracker and List</title>
   <meta name="description" content="A personal book tracker with plot summaries, series reading orders, ratings, and notes across fiction and nonfiction." />
   <style>
     :root {
@@ -135,7 +135,7 @@
 
     .control-row {
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(150px, 200px));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px;
     }
 
@@ -197,7 +197,7 @@
     .book-sheet {
       min-width: 1600px;
       display: grid;
-      grid-template-columns: 250px 280px 260px 270px 280px 240px 300px 240px;
+      grid-template-columns: 250px 560px 180px 180px 190px 200px 230px 170px;
     }
 
     .sheet-cell {
@@ -479,13 +479,27 @@
     .series-entry p { margin: 7px 0; }
     .series-entry .series-kind { color: var(--muted); font-size: .8rem; font-weight: 800; }
     .series-source { color: var(--accent-dark); font-size: .82rem; }
+    .priority-label { margin-top: 12px; font-size: .72rem; }
+    .priority-label select { font-size: .85rem; min-height: 40px; text-transform: none; }
+    .priority-label[data-level="high"] select { background: #fff0ce; border-color: var(--gold); color: #69410b; }
+    .priority-label[data-level="low"] select { background: #edf0f2; color: #52646f; }
+    .genre-tag { background: #e9f0ed; border-color: #becfc7; color: var(--accent-dark); }
+    .focus-tag { background: #f4ecdf; color: #69410b; }
+    .series-focus-note { margin-top: 10px; }
+    .series-order-note { margin-top: 12px; color: var(--muted); font-size: .85rem; }
+    .character-focus { border-left: 3px solid var(--accent); padding: 10px 14px; background: #edf3ed; margin: 18px 0; }
+    .character-focus h3 { margin-top: 0; }
+    .cover-wrap img { object-fit: contain; background: #eee8df; }
+    .sources-disclosure summary { color: var(--accent-dark); font-size: .85rem; font-weight: 800; cursor: pointer; }
+    .tag-browser { margin-top: 14px; }
+    .tag-browser summary { color: var(--accent-dark); cursor: pointer; font-weight: 800; padding: 6px 0; }
   </style>
 </head>
 <body>
   <header>
     <nav class="shell" aria-label="Main navigation">
       <a class="back" href="../index.html">Back to Library</a>
-      <strong>Book List</strong>
+      <strong>Book Tracker and List</strong>
     </nav>
   </header>
 
@@ -494,7 +508,7 @@
     <section id="bookDetail" class="detail-page" aria-label="Book details" hidden></section>
     <section class="hero" aria-labelledby="page-title">
       <div>
-        <h1 id="page-title">Book List</h1>
+        <h1 id="page-title">Book Tracker and List</h1>
         <p class="lead">Browse the books by plot, setting, magic, romance, tropes, and series status so the next read is easier to pick.</p>
       </div>
       <div class="stats" aria-label="Book list summary">
@@ -513,7 +527,20 @@
       <div class="control-row">
         <label>
           Search
-          <input id="searchInput" type="search" placeholder="Title, author, trope, setting..." />
+          <input id="searchInput" type="search" placeholder="Title, author, genre, trope, setting..." />
+        </label>
+        <label>
+          Genre
+          <select id="genreFilter"><option value="">All genres</option></select>
+        </label>
+        <label>
+          Read priority
+          <select id="priorityFilter">
+            <option value="">Any priority</option>
+            <option value="high">High priority</option>
+            <option value="low">Low priority</option>
+            <option value="unset">Not set</option>
+          </select>
         </label>
         <label>
           Romance
@@ -542,10 +569,11 @@
             <option value="title">Title</option>
             <option value="author">Author</option>
             <option value="series">Series status</option>
+            <option value="priority">Read priority (high first)</option>
           </select>
         </label>
       </div>
-      <div class="chips" id="chips" aria-label="Browse by category"></div>
+      <details class="tag-browser"><summary>Browse genre and trope tags</summary><div class="chips" id="chips" aria-label="Browse by category"></div></details>
     </section>
 
     <section class="content" aria-label="Book spreadsheet">
@@ -557,6 +585,7 @@
   </main>
 
   <script src="assets/book-list-catalog.js"></script>
+  <script src="assets/book-list-metadata.js"></script>
   <script src="assets/book-list-journal.js"></script>
   <script>
     const books = [
@@ -966,8 +995,10 @@
     ];
 
     extendBookCatalog(books);
+    applyBookMetadata(books);
 
-    const chipData = [
+    const genreTags = [...new Set(books.flatMap(book => book.genres || []))].sort();
+    const chipData = [...new Set([...genreTags,
       "romantasy",
       "epic fantasy",
       "political fantasy",
@@ -979,15 +1010,17 @@
       "complete",
       "ongoing",
       "needs confirmation"
-    ];
+    ])];
 
     const state = {
       query: "",
+      genre: "",
+      priority: "",
       romance: "",
       series: "",
       sort: "list",
       chip: "",
-      sydneyFilter: true
+      sydneyFilter: false
     };
 
     const grid = document.querySelector("#bookGrid");
@@ -997,6 +1030,7 @@
     const chips = document.querySelector("#chips");
 
     totalBooks.textContent = books.length;
+    document.querySelector('#genreFilter').innerHTML += genreTags.map(genre => `<option value="${escapeHtml(genre)}">${escapeHtml(genre)}</option>`).join('');
 
     function coverFallback(book) {
       return `<div class="fallback-cover"><strong>${book.title}</strong><span>${book.author}</span></div>`;
@@ -1015,12 +1049,15 @@
         ...(book.aliases || []),
         book.seriesName || '',
         ...(book.seriesBooks || []).map(entry => entry.title),
+        ...(book.genres || []),
+        book.seriesFocusNote || "",
         ...book.tropes
       ].join(" ").toLowerCase();
     }
 
     function matchesChip(book) {
       if (!state.chip) return true;
+      if (genreTags.includes(state.chip)) return (book.genres || []).includes(state.chip);
       if (state.chip === "YA") return searchText(book).includes(" ya ") || searchText(book).includes("young adult");
       if (["standalone", "complete", "ongoing"].includes(state.chip)) return book.seriesStatus === state.chip;
       if (state.chip === "needs confirmation") return book.seriesStatus === "uncertain" || searchText(book).includes("needs confirmation");
@@ -1034,43 +1071,32 @@
         .filter((book) => !query || searchText(book).includes(query))
         .filter((book) => !state.romance || book.romanceLevel === state.romance)
         .filter((book) => !state.series || book.seriesStatus === state.series)
+        .filter(book => !state.genre || (book.genres || []).includes(state.genre))
+        .filter(book => !state.priority || (state.priority === 'unset' ? !reading(book).priority : reading(book).priority === state.priority))
         .filter(matchesChip);
 
       if (state.sort === "title") list.sort((a, b) => a.title.localeCompare(b.title));
       if (state.sort === "author") list.sort((a, b) => a.author.localeCompare(b.author));
       if (state.sort === "series") list.sort((a, b) => a.seriesStatus.localeCompare(b.seriesStatus) || a.title.localeCompare(b.title));
+      if (state.sort === 'priority') {
+        const rank = book => ({high: 0, '': 1, low: 2})[reading(book).priority];
+        list.sort((a,b) => rank(a) - rank(b) || a.index - b.index);
+      }
       return list;
     }
 
-    function setManualCover(book, img, urlIndex = 0) {
-      const urls = book.coverUrls || [];
-      if (!urls[urlIndex]) return false;
-      img.onerror = () => {
-        if (!setManualCover(book, img, urlIndex + 1)) {
-          img.onerror = null;
-          findCover(book, img, true);
-        }
-      };
-      img.src = urls[urlIndex];
-      img.alt = `${book.title} cover`;
-      return true;
-    }
-
-    async function findCover(book, img, skipManual = false) {
-      if (!skipManual && setManualCover(book, img)) return;
-      const params = new URLSearchParams({ q: book.coverQuery || `${book.title} ${book.author}`, limit: "1" });
-      try {
-        const response = await fetch(`https://openlibrary.org/search.json?${params.toString()}`);
-        if (!response.ok) throw new Error("Cover lookup failed");
-        const data = await response.json();
-        const coverId = data.docs && data.docs[0] && data.docs[0].cover_i;
-        if (!coverId) throw new Error("No cover");
-        img.src = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
-        img.alt = `${book.title} cover`;
-      } catch {
-        const wrap = img.closest(".cover-wrap");
+    function findCover(book, img) {
+      const urls = [...new Set([book.coverPath, ...(book.coverUrls || [])].filter(Boolean))];
+      let index = 0;
+      img.alt = book.title + ' by ' + book.author + ' — book cover';
+      function next() {
+        if (index < urls.length) { img.src = urls[index++]; return; }
+        img.onerror = null;
+        const wrap = img.closest('.cover-wrap');
         if (wrap) wrap.innerHTML = coverFallback(book);
       }
+      img.onerror = next;
+      next();
     }
 
     function renderCards() {
@@ -1083,13 +1109,13 @@
           <span>Plot</span>
           <button class="sydney-toggle" id="sydneyToggle" type="button">${state.sydneyFilter ? "Sydney Filter: ON" : "Sydney Filter: OFF"}</button>
         </div>
-        ${["Setting", "Magic System", "Romance", "Tropes", "Series", "Sources"].map((heading) => `
+        ${["Setting", "Magic System", "Romance", "Genres & Tropes", "Series & Characters", "Sources"].map((heading) => `
           <div class="sheet-cell sheet-head">${heading}</div>
         `).join("")}
         ${list.map((book) => `
           <div class="sheet-cell sheet-book">
             <a class="book-strip book-link" href="#book=${bookId(book)}" aria-label="View details for ${escapeHtml(book.title)}">
-              <div class="cover-wrap"><img data-cover="${book.index}" alt="" /></div>
+              <div class="cover-wrap"><img data-cover="${book.index}" alt="" loading="lazy" /></div>
               <div>
                 <h2 class="book-title">${book.title}</h2>
                 <p class="author">${book.author}</p>
@@ -1097,17 +1123,18 @@
             </a>
             ${readingControls(book)}
           </div>
-          ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : escapeHtml(book.plot.split(/(?<=[.!?])\s+/)[0]))}
+          ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : escapeHtml(book.plot))}
           ${sheetCell(book.setting)}
           ${sheetCell(book.magic)}
           ${sheetCell(book.romance)}
-          <div class="sheet-cell"><div class="meta-row">${book.tropes.map((trope) => `<span class="tag">${trope}</span>`).join("")}</div></div>
-          ${sheetCell(book.series)}
+          <div class="sheet-cell"><div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join("")}${book.tropes.map((trope) => `<span class="tag">${trope}</span>`).join("")}</div></div>
+          <div class="sheet-cell"><span class="tag focus-tag">${escapeHtml(seriesFocusLabel(book))}</span><p class="quick series-focus-note">${escapeHtml((book.seriesFocusNote || "").split(/(?<=[.!?])\s+/)[0])}</p><details class="series-order-note"><summary>Reading order</summary><p>${escapeHtml(book.series)}</p></details></div>
           <div class="sheet-cell">
-            <div class="source-list">
+            <details class="sources-disclosure"><summary>View sources (${book.sources.length})</summary><div class="source-list">
               ${book.sources.map((source) => `<a href="${source.url}" target="_blank" rel="noreferrer">${source.label}</a>`).join("")}
+              ${book.coverSource ? `<a href="${escapeHtml(book.coverSource)}" target="_blank" rel="noreferrer">Cover source</a>` : ""}
               <a href="https://openlibrary.org/search?q=${encodeURIComponent(book.coverQuery || book.title)}" target="_blank" rel="noreferrer">Cover lookup</a>
-            </div>
+            </div></details>
           </div>
         `).join("")}
       `;
@@ -1159,6 +1186,14 @@
       renderCards();
     });
 
+    document.querySelector('#genreFilter').addEventListener('change', event => {
+      state.genre = event.target.value;
+      renderCards();
+    });
+    document.querySelector('#priorityFilter').addEventListener('change', event => {
+      state.priority = event.target.value;
+      renderCards();
+    });
     renderChips();
     initJournal();
   </script>

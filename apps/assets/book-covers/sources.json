@@ -1,0 +1,638 @@
+[
+  {
+    "title": "To Cage a Wild Bird",
+    "author": "Brooke Fast",
+    "path": "assets/book-covers/to-cage-a-wild-bird-brooke-fast.jpg",
+    "sourceUrl": "https://www.supersummary.com/to-cage-a-wild-bird/summary/",
+    "imageUrl": "https://cdn.penguin.co.uk/dam-assets/books/9781911751007/9781911751007-jacket-large.jpg",
+    "width": 331,
+    "height": 500
+  },
+  {
+    "title": "Kings of the Wyld",
+    "author": "Nicholas Eames",
+    "path": "assets/book-covers/kings-of-the-wyld-nicholas-eames.jpg",
+    "sourceUrl": "https://www.hachette.co.uk/titles/nicholas-eames/kings-of-the-wyld/9780356509020/",
+    "imageUrl": "https://www.hachette.co.uk/wp-content/uploads/2019/02/hbg-title-kings-of-the-wyld-305.jpg",
+    "width": 796,
+    "height": 1250
+  },
+  {
+    "title": "The Raven Scholar",
+    "author": "Antonia Hodgson",
+    "path": "assets/book-covers/the-raven-scholar-antonia-hodgson.jpg",
+    "sourceUrl": "https://www.hachette.co.uk/titles/antonia-hodgson-2/the-raven-scholar/9781399750660/",
+    "imageUrl": "https://www.hachette.co.uk/wp-content/uploads/2025/02/hbg-title-the-raven-scholar-3-63.jpg",
+    "width": 811,
+    "height": 1250
+  },
+  {
+    "title": "Alchemised",
+    "author": "SenLinYu",
+    "path": "assets/book-covers/alchemised-senlinyu.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/769257/alchemised-by-senlinyu/",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780593972700",
+    "width": 297,
+    "height": 450
+  },
+  {
+    "title": "Empire of the Vampire",
+    "author": "Jay Kristoff",
+    "path": "assets/book-covers/empire-of-the-vampire-jay-kristoff.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9781250245298/empireofthevampire/",
+    "imageUrl": "https://images.macmillan.com/folio-assets/macmillan_us_frontbookcovers_1000H/9781250245298.jpg",
+    "width": 663,
+    "height": 1000
+  },
+  {
+    "title": "Moon Chosen",
+    "author": "P. C. Cast",
+    "path": "assets/book-covers/moon-chosen-p-c-cast.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9781250100740/moonchosen/",
+    "imageUrl": "https://images.macmillan.com/folio-assets/macmillan_us_frontbookcovers_1000H/9781250100740.jpg",
+    "width": 667,
+    "height": 1000
+  },
+  {
+    "title": "The Road of Bones",
+    "author": "Demi Winters",
+    "path": "assets/book-covers/the-road-of-bones-demi-winters.png",
+    "sourceUrl": "https://demiwinters.com/books/the-road-of-bones/",
+    "imageUrl": "https://demiwinters.com/wp-content/uploads/2024/04/Road-of-Bones-Cover-768x1024.png",
+    "width": 768,
+    "height": 1024
+  },
+  {
+    "title": "Soulbound",
+    "author": "Bethany Adams",
+    "path": "assets/book-covers/soulbound-bethany-adams.jpg",
+    "sourceUrl": "https://bethanyadamsbooks.com/books/soulbound/",
+    "imageUrl": "https://covers.openlibrary.org/b/isbn/9780997532005-L.jpg",
+    "width": 324,
+    "height": 500
+  },
+  {
+    "title": "The Bridge Kingdom",
+    "author": "Danielle L. Jensen",
+    "path": "assets/book-covers/the-bridge-kingdom-danielle-l-jensen.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/series/KB3/the-bridge-kingdom/",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780593975183",
+    "width": 300,
+    "height": 450
+  },
+  {
+    "title": "Mystic and Rider",
+    "author": "Sharon Shinn",
+    "path": "assets/book-covers/mystic-and-rider-sharon-shinn.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/291945/mystic-and-rider-by-sharon-shinn/",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780441013036",
+    "width": 283,
+    "height": 450
+  },
+  {
+    "title": "Penric's Demon",
+    "author": "Lois McMaster Bujold",
+    "path": "assets/book-covers/penric-s-demon-lois-mcmaster-bujold.jpg",
+    "sourceUrl": "https://subterraneanpress.com/penrics-demon/",
+    "imageUrl": "https://cdn11.bigcommerce.com/s-65f8qukrjx/products/5822/images/16927/Bujold_Penric%2527s_Demon_cover__56878.1687451106.386.513.jpg?c=1",
+    "width": 386,
+    "height": 508
+  },
+  {
+    "title": "By the Sword",
+    "author": "Mercedes Lackey",
+    "path": "assets/book-covers/by-the-sword-mercedes-lackey.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/331869/by-the-sword-by-mercedes-lackey/",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780886774639",
+    "width": 272,
+    "height": 450
+  },
+  {
+    "title": "An Ember in the Ashes",
+    "author": "Sabaa Tahir",
+    "path": "assets/book-covers/an-ember-in-the-ashes-sabaa-tahir.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/318882/an-ember-in-the-ashes-by-sabaa-tahir/",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9781595148032",
+    "width": 301,
+    "height": 450
+  },
+  {
+    "title": "The Winner's Curse",
+    "author": "Marie Rutkoski",
+    "path": "assets/book-covers/the-winner-s-curse-marie-rutkoski.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9780374384685/thewinnerscurse/",
+    "imageUrl": "https://images.macmillan.com/folio-assets/macmillan_us_frontbookcovers_1000H/9780374384685.jpg",
+    "width": 667,
+    "height": 1000
+  },
+  {
+    "title": "Dance of Thieves",
+    "author": "Mary E. Pearson",
+    "path": "assets/book-covers/dance-of-thieves-mary-e-pearson.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9781250159014/danceofthieves/",
+    "imageUrl": "https://images.macmillan.com/folio-assets/macmillan_us_frontbookcovers_1000H/9781250159014.jpg",
+    "width": 662,
+    "height": 1000
+  },
+  {
+    "title": "The Tome of Beginnings",
+    "author": "Patrick Michael",
+    "path": "assets/book-covers/the-tome-of-beginnings-patrick-michael.jpg",
+    "sourceUrl": "https://www.goodreads.com/series/390136-legends-are-made",
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0674/5433/7265/files/9798888787205_p0.jpg?v=1768490272",
+    "width": 247,
+    "height": 396
+  },
+  {
+    "title": "Jade City",
+    "author": "Fonda Lee",
+    "path": "assets/book-covers/jade-city-fonda-lee.jpg",
+    "sourceUrl": "https://www.fondalee.com/jade-city",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780316440882",
+    "width": 266,
+    "height": 400
+  },
+  {
+    "title": "The Mist Thief",
+    "author": "L. J. Andrews",
+    "path": "assets/book-covers/the-mist-thief-l-j-andrews.jpg",
+    "sourceUrl": "https://www.ljandrews.com/books",
+    "imageUrl": "https://images.penguinrandomhouse.com/cover/9780593955086",
+    "width": 290,
+    "height": 450
+  },
+  {
+    "title": "In Your Dreams",
+    "author": "Sarah Adams",
+    "path": "assets/book-covers/in-your-dreams-sarah-adams.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/735444/in-your-dreams-by-sarah-adams/paperback/",
+    "imageUrl": "https://images3.penguinrandomhouse.com/cover/9780593723715",
+    "width": 292,
+    "height": 450
+  },
+  {
+    "title": "The Bird and the Sword",
+    "author": "Amy Harmon",
+    "path": "assets/book-covers/the-bird-and-the-sword-amy-harmon.png",
+    "sourceUrl": "https://www.authoramyharmon.com/the-bird-and-the-sword.html",
+    "imageUrl": "https://www.authoramyharmon.com/uploads/4/6/3/2/46322333/6530749_orig.png",
+    "width": 300,
+    "height": 451
+  },
+  {
+    "title": "The Work of Art",
+    "author": "Mimi Matthews",
+    "path": "assets/book-covers/the-work-of-art-mimi-matthews.jpg",
+    "sourceUrl": "https://www.mimimatthews.com/books/somerset-stories/the-work-of-art/",
+    "imageUrl": "https://www.mimimatthews.com/wp-content/uploads/2025/07/The-Work-of-Art-2025-Ebook-e1752270622373.jpg",
+    "width": 450,
+    "height": 720
+  },
+  {
+    "title": "The Belle of Belgrave Square",
+    "author": "Mimi Matthews",
+    "path": "assets/book-covers/the-belle-of-belgrave-square-mimi-matthews.jpg",
+    "sourceUrl": "https://www.mimimatthews.com/books/belles-of-london/the-belle-of-belgrave-square/",
+    "imageUrl": "https://www.mimimatthews.com/wp-content/uploads/2022/02/The-Belle-of-Belgrave-Square-by-Mimi-Matthews-high-res-cover-with-endorsement-small-e1644947466916.jpg",
+    "width": 400,
+    "height": 600
+  },
+  {
+    "title": "The Siren of Sussex",
+    "author": "Mimi Matthews",
+    "path": "assets/book-covers/the-siren-of-sussex-mimi-matthews.jpg",
+    "sourceUrl": "https://www.mimimatthews.com/books/belles-of-london/the-siren-of-sussex/",
+    "imageUrl": "https://www.mimimatthews.com/wp-content/uploads/2022/02/The-Siren-of-Sussex-by-Mimi-Matthews-High-Res-Cover-with-Endorsement-Small.jpg",
+    "width": 400,
+    "height": 604
+  },
+  {
+    "title": "Beneath the Silent Stars",
+    "author": "Miranda L",
+    "path": "assets/book-covers/beneath-the-silent-stars-miranda-l.jpg",
+    "sourceUrl": "https://www.thenile.com.au/books/miranda-l/beneath-the-silent-stars/9798349534553",
+    "imageUrl": "https://images.thenile.io/r1000/9798349534553.jpg",
+    "width": 1000,
+    "height": 1439
+  },
+  {
+    "title": "Shiver",
+    "author": "Maggie Stiefvater",
+    "path": "assets/book-covers/shiver-maggie-stiefvater.jpg",
+    "sourceUrl": "https://www.scholastic.ca/our-books/book/shiver-9780545682787",
+    "imageUrl": "https://www.scholastic.ca/hipoint/648/?src=9780545682787.jpg&w=380",
+    "width": 380,
+    "height": 578
+  },
+  {
+    "title": "Induction",
+    "author": "Lee Fleishman",
+    "path": "assets/book-covers/induction-lee-fleishman.webp",
+    "sourceUrl": "https://www.leefleishman.com/warborn-saga",
+    "imageUrl": "https://images.squarespace-cdn.com/content/v1/6997dd6416dd14613ee75ae9/ecf0e7b1-32b6-443f-9cc5-6b29fe2fe8a9/Warborn+Saga+induction.jpg?format=1000w",
+    "width": 1000,
+    "height": 1500
+  },
+  {
+    "title": "The Knight and the Moth",
+    "author": "Rachel Gillig",
+    "path": "assets/book-covers/the-knight-and-the-moth-rachel-gillig.jpg",
+    "sourceUrl": "https://www.hachette.co.uk/titles/rachel-gillig/the-knight-and-the-moth/9780356522951/",
+    "imageUrl": "https://www.hachette.co.uk/wp-content/uploads/2024/11/hbg-title-the-knight-and-the-moth-3-80.jpg",
+    "width": 833,
+    "height": 1250
+  },
+  {
+    "title": "Dungeon Crawler Carl",
+    "author": "Matt Dinniman",
+    "path": "assets/book-covers/dungeon-crawler-carl-matt-dinniman.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/series/43C/dungeon-crawler-carl/",
+    "imageUrl": "https://images1.penguinrandomhouse.com/cover/9780593820254",
+    "width": 300,
+    "height": 450
+  },
+  {
+    "title": "Half a Soul",
+    "author": "Olivia Atwater",
+    "path": "assets/book-covers/half-a-soul-olivia-atwater.jpg",
+    "sourceUrl": "https://www.hachette.co.uk/titles/olivia-atwater/half-a-soul/9780356518763/",
+    "imageUrl": "https://www.hachette.co.uk/wp-content/uploads/2021/12/hbg-title-half-a-soul-2-80.jpg",
+    "width": 795,
+    "height": 1250
+  },
+  {
+    "title": "The Deed of Paksenarrion",
+    "author": "Elizabeth Moon",
+    "path": "assets/book-covers/the-deed-of-paksenarrion-elizabeth-moon.jpg",
+    "sourceUrl": "https://www.baen.com/Chapters/0743471601/0743471601__c_.htm",
+    "imageUrl": "https://www.baen.com/Chapters/0743471601/0743471601.jpg",
+    "width": 153,
+    "height": 240
+  },
+  {
+    "title": "Radiance",
+    "author": "Grace Draven",
+    "path": "assets/book-covers/radiance-grace-draven.jpg",
+    "sourceUrl": "https://www.gracedraven.com/",
+    "imageUrl": "https://www.gracedraven.com/wp-content/uploads/2025/04/radiance-sm.jpg",
+    "width": 321,
+    "height": 445
+  },
+  {
+    "title": "Beguilement",
+    "author": "Lois McMaster Bujold",
+    "path": "assets/book-covers/beguilement-lois-mcmaster-bujold.jpg",
+    "sourceUrl": "https://www.dendarii.com/biblio.html",
+    "imageUrl": "https://covers.openlibrary.org/b/isbn/9780061139079-L.jpg",
+    "width": 310,
+    "height": 500
+  },
+  {
+    "title": "Malice",
+    "author": "John Gwynne",
+    "path": "assets/book-covers/malice-john-gwynne.jpg",
+    "sourceUrl": "https://orbitworks.net/titles/john-gwynne/malice/9780316399739/",
+    "imageUrl": "https://covers.openlibrary.org/b/isbn/9780316399739-L.jpg",
+    "width": 320,
+    "height": 500
+  },
+  {
+    "title": "Starter Villain",
+    "author": "John Scalzi",
+    "path": "assets/book-covers/starter-villain-john-scalzi.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9780765389237/startervillain/",
+    "imageUrl": "https://covers.openlibrary.org/b/isbn/9780765389220-L.jpg",
+    "width": 288,
+    "height": 445
+  },
+  {
+    "title": "Red Adam's Lady",
+    "author": "Grace Ingram",
+    "isbn": "9781613739679",
+    "path": "assets/book-covers/red-adam-s-lady-grace-ingram.jpg",
+    "sourceUrl": "https://www.chicagoreviewpress.com/red-adam-s-lady-products-9781613739679.php",
+    "imageUrl": "https://images.bookstore.ipgbook.com/images/book_image/large/9781613739679.jpg",
+    "width": 283,
+    "height": 425
+  },
+  {
+    "title": "Divine Rivals",
+    "author": "Rebecca Ross",
+    "isbn": "9781250857439",
+    "path": "assets/book-covers/divine-rivals-rebecca-ross.jpg",
+    "sourceUrl": "https://academic.macmillan.com/academictrade/9781250857439/divinerivals/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1250857430.01.LZZZZZZZ.jpg",
+    "width": 329,
+    "height": 500
+  },
+  {
+    "title": "The Blue Castle",
+    "author": "L. M. Montgomery",
+    "isbn": "9781402289361",
+    "path": "assets/book-covers/the-blue-castle-l-m-montgomery.jpg",
+    "sourceUrl": "https://www.sourcebooks.com/9781402289361-the-blue-castle-tp.html",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1402289367.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "The Unselected Journals of Emma M. Lion: Vol. 1",
+    "author": "Beth Brower",
+    "isbn": "9780143139706",
+    "path": "assets/book-covers/the-unselected-journals-of-emma-m-lion-vol-1-beth-brower.jpg",
+    "sourceUrl": "https://www.tatteredcover.com/products/9780143139706",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0143139703.01.LZZZZZZZ.jpg",
+    "width": 328,
+    "height": 500
+  },
+  {
+    "title": "The Soulmate Equation",
+    "author": "Christina Lauren",
+    "isbn": "9781982171117",
+    "path": "assets/book-covers/the-soulmate-equation-christina-lauren.jpg",
+    "sourceUrl": "https://www.simonandschuster.com/books/The-Soulmate-Equation/Christina-Lauren/9781982171117",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1982171111.01.LZZZZZZZ.jpg",
+    "width": 322,
+    "height": 500
+  },
+  {
+    "title": "Theo of Golden",
+    "author": "Allen Levi",
+    "isbn": "9781668236512",
+    "path": "assets/book-covers/theo-of-golden-allen-levi.jpg",
+    "sourceUrl": "https://www.simonandschuster.com/books/Theo-of-Golden/Allen-Levi/9781668236512",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1668236516.01.LZZZZZZZ.jpg",
+    "width": 322,
+    "height": 500
+  },
+  {
+    "title": "Tears of the Wolf",
+    "author": "Elisabeth Wheatley",
+    "isbn": "9798991524469",
+    "path": "assets/book-covers/tears-of-the-wolf-elisabeth-wheatley.jpg",
+    "sourceUrl": "https://www.goodreads.com/work/editions/230976737-tears-of-the-wolf-wrath-and-weeping-1",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/B0DYCFX34V.01.LZZZZZZZ.jpg",
+    "width": 324,
+    "height": 500
+  },
+  {
+    "title": "The Second Death of Locke",
+    "author": "V. L. Bovalino",
+    "isbn": "9781538776575",
+    "path": "assets/book-covers/the-second-death-of-locke-v-l-bovalino.jpg",
+    "sourceUrl": "https://www.hbglibrary.com/titles/v-l-bovalino/the-second-death-of-locke/9781538776575/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/153877657X.01.LZZZZZZZ.jpg",
+    "width": 328,
+    "height": 500
+  },
+  {
+    "title": "A Far Wilder Magic",
+    "author": "Allison Saft",
+    "isbn": "9781250322340",
+    "path": "assets/book-covers/a-far-wilder-magic-allison-saft.jpg",
+    "sourceUrl": "https://academic.macmillan.com/academictrade/9781250322340/afarwildermagic/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1250322340.01.LZZZZZZZ.jpg",
+    "width": 326,
+    "height": 500
+  },
+  {
+    "title": "The Cruel Prince",
+    "author": "Holly Black",
+    "isbn": "9780316310277",
+    "path": "assets/book-covers/the-cruel-prince-holly-black.jpg",
+    "sourceUrl": "https://en.wikipedia.org/wiki/The_Folk_of_the_Air_(series)",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0316310271.01.LZZZZZZZ.jpg",
+    "width": 331,
+    "height": 500
+  },
+  {
+    "title": "What Darkness Brings",
+    "author": "Jenna Wolfhart",
+    "isbn": "9781915537607",
+    "path": "assets/book-covers/what-darkness-brings-jenna-wolfhart.jpg",
+    "sourceUrl": "https://www.brownsbfs.co.uk/Product/Wolfhart-Jenna/What-Darkness-Brings/9781915537607",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1915537606.01.LZZZZZZZ.jpg",
+    "width": 313,
+    "height": 500
+  },
+  {
+    "title": "Spark of the Everflame",
+    "author": "Penn Cole",
+    "isbn": "9781668085738",
+    "path": "assets/book-covers/spark-of-the-everflame-penn-cole.jpg",
+    "sourceUrl": "https://www.simonandschuster.net/books/Spark-of-the-Everflame/Penn-Cole/The-Kindred-s-Curse-Saga/9781668085738",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1668085739.01.LZZZZZZZ.jpg",
+    "width": 322,
+    "height": 500
+  },
+  {
+    "title": "The Dragon's Path",
+    "author": "Daniel Abraham",
+    "isbn": "9781841498881",
+    "path": "assets/book-covers/the-dragon-s-path-daniel-abraham.jpg",
+    "sourceUrl": "https://www.littlebrown.co.uk/titles/daniel-abraham/the-dragons-path/9781841498881/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1841498882.01.LZZZZZZZ.jpg",
+    "width": 318,
+    "height": 500
+  },
+  {
+    "title": "Best Served Cold",
+    "author": "Joe Abercrombie",
+    "isbn": "9780316198356",
+    "path": "assets/book-covers/best-served-cold-joe-abercrombie.jpg",
+    "sourceUrl": "https://orbitworks.net/titles/joe-abercrombie/best-served-cold/9780316198356/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0316198358.01.LZZZZZZZ.jpg",
+    "width": 321,
+    "height": 500
+  },
+  {
+    "title": "Piranesi",
+    "author": "Susanna Clarke",
+    "isbn": "9781526622426",
+    "path": "assets/book-covers/piranesi-susanna-clarke.jpg",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Piranesi_(novel)",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1526622424.01.LZZZZZZZ.jpg",
+    "width": 350,
+    "height": 500
+  },
+  {
+    "title": "Ten Thousand Stitches",
+    "author": "Olivia Atwater",
+    "isbn": "9780316462907",
+    "path": "assets/book-covers/ten-thousand-stitches-olivia-atwater.jpg",
+    "sourceUrl": "https://www.richlandlibrary.com/catalog/detail/1962308",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/031646290X.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "The Magicians and Mrs. Quent",
+    "author": "Galen Beckett",
+    "isbn": "9780553592559",
+    "path": "assets/book-covers/the-magicians-and-mrs-quent-galen-beckett.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/10490/the-magicians-and-mrs-quent-by-galen-beckett/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0553592556.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "Prostho Plus",
+    "author": "Piers Anthony",
+    "isbn": "9780812531169",
+    "path": "assets/book-covers/prostho-plus-piers-anthony.jpg",
+    "sourceUrl": "https://openlibrary.org/works/OL80852W/Prostho_Plus",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0812531167.01.LZZZZZZZ.jpg",
+    "width": 393,
+    "height": 648
+  },
+  {
+    "title": "Shades of Milk and Honey",
+    "author": "Mary Robinette Kowal",
+    "isbn": "9780765325600",
+    "path": "assets/book-covers/shades-of-milk-and-honey-mary-robinette-kowal.jpg",
+    "sourceUrl": "https://us.macmillan.com/books/9780765325600/shadesofmilkandhoney/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0765325608.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "Tempest in the Tea Leaves",
+    "author": "Kari Lee Townsend",
+    "isbn": "9780425242759",
+    "path": "assets/book-covers/tempest-in-the-tea-leaves-kari-lee-townsend.jpg",
+    "sourceUrl": "https://www.goodreads.com/work/editions/14565325-tempest-in-the-tea-leaves-a-fortune-teller-mystery-1?expanded=true",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0425242757.01.LZZZZZZZ.jpg",
+    "width": 306,
+    "height": 500
+  },
+  {
+    "title": "Unflappable",
+    "author": "Suzie Gilbert",
+    "isbn": "9780578612003",
+    "path": "assets/book-covers/unflappable-suzie-gilbert.jpg",
+    "sourceUrl": "https://www.publishersweekly.com/978-0-578-61200-3",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0578612003.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "Crystal Singer",
+    "author": "Anne McCaffrey",
+    "isbn": "9780345327864",
+    "path": "assets/book-covers/crystal-singer-anne-mccaffrey.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/110269/crystal-singer-by-anne-mccaffrey/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0345327861.01.LZZZZZZZ.jpg",
+    "width": 306,
+    "height": 500
+  },
+  {
+    "title": "Dragonflight",
+    "author": "Anne McCaffrey",
+    "isbn": "9780345335463",
+    "path": "assets/book-covers/dragonflight-anne-mccaffrey.jpg",
+    "sourceUrl": "https://openlibrary.org/books/OL3667543M/Dragonflight",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0345335465.01.LZZZZZZZ.jpg",
+    "width": 306,
+    "height": 500
+  },
+  {
+    "title": "Newt's Emerald",
+    "author": "Garth Nix",
+    "isbn": "9780062360045",
+    "path": "assets/book-covers/newt-s-emerald-garth-nix.jpg",
+    "sourceUrl": "https://www.goodreads.com/work/editions/26729226-newt-s-emerald?expanded=true",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0062360043.01.LZZZZZZZ.jpg",
+    "width": 330,
+    "height": 500
+  },
+  {
+    "title": "The Innocent Mage",
+    "author": "Karen Miller",
+    "isbn": "9781841499314",
+    "path": "assets/book-covers/the-innocent-mage-karen-miller.jpg",
+    "sourceUrl": "https://www.littlebrown.co.uk/titles/karen-miller/the-innocent-mage/9781841499314/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1841499315.01.LZZZZZZZ.jpg",
+    "width": 321,
+    "height": 500
+  },
+  {
+    "title": "Puddle Jumpers",
+    "author": "Brandon Webb",
+    "isbn": "9798893311884",
+    "path": "assets/book-covers/puddle-jumpers-brandon-webb.jpg",
+    "sourceUrl": "https://www.simonandschuster.com/books/Puddle-Jumpers/Brandon-Webb/9798893311884",
+    "imageUrl": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9798893311884/puddle-jumpers-9798893311884_lg.jpg",
+    "width": 264,
+    "height": 400
+  },
+  {
+    "title": "Kingdom of the Wicked",
+    "author": "Kerri Maniscalco",
+    "isbn": "9780316428460",
+    "path": "assets/book-covers/kingdom-of-the-wicked-kerri-maniscalco.jpg",
+    "sourceUrl": "https://www.littlebrownlibrary.com/titles/kerri-maniscalco/kingdom-of-the-wicked/9780316428460/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0316428469.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "The One",
+    "author": "John Marrs",
+    "isbn": "9781335998859",
+    "path": "assets/book-covers/the-one-john-marrs.jpg",
+    "sourceUrl": "https://pangobooks.com/pricing/the-one-3",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1335998853.01.LZZZZZZZ.jpg",
+    "width": 333,
+    "height": 500
+  },
+  {
+    "title": "Mage's Blood",
+    "author": "David Hair",
+    "isbn": "9781780871974",
+    "path": "assets/book-covers/mage-s-blood-david-hair.jpg",
+    "sourceUrl": "https://www.goodreads.com/work/editions/21480549-mage-s-blood",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/178087197X.01.LZZZZZZZ.jpg",
+    "width": 326,
+    "height": 500
+  },
+  {
+    "title": "Daddy-Long-Legs",
+    "author": "Jean Webster",
+    "isbn": "9781847496515",
+    "path": "assets/book-covers/daddy-long-legs-jean-webster.jpg",
+    "sourceUrl": "https://www.bloomsbury.com/uk/daddylonglegs-9781847496515/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/1847496512.01.LZZZZZZZ.jpg",
+    "width": 323,
+    "height": 500
+  },
+  {
+    "title": "The Book of Five Rings",
+    "author": "Miyamoto Musashi",
+    "isbn": "9780553351705",
+    "path": "assets/book-covers/the-book-of-five-rings-miyamoto-musashi.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/119121/the-book-of-five-rings-by-miyamoto-musashi/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0553351702.01.LZZZZZZZ.jpg",
+    "width": 318,
+    "height": 500
+  },
+  {
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "isbn": "9780593314661",
+    "path": "assets/book-covers/the-art-of-war-sun-tzu.jpg",
+    "sourceUrl": "https://www.penguinrandomhouse.com/books/288100/the-art-of-war-by-sun-tzu/",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0593314662.01.LZZZZZZZ.jpg",
+    "width": 324,
+    "height": 500
+  },
+  {
+    "title": "The Big Sleep",
+    "author": "Raymond Chandler",
+    "isbn": "9780394758282",
+    "path": "assets/book-covers/the-big-sleep-raymond-chandler.jpg",
+    "sourceUrl": "https://www.richlandlibrary.com/catalog/detail/949568",
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/P/0394758285.01.LZZZZZZZ.jpg",
+    "width": 324,
+    "height": 500
+  }
+]

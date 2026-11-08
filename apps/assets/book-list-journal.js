@@ -24,7 +24,8 @@ function reading(book) {
   return {
     read: entry.read === true,
     rating: Number.isInteger(entry.rating) && entry.rating >= 1 && entry.rating <= 5 ? entry.rating : 0,
-    notes: typeof entry.notes === 'string' ? entry.notes : ''
+    notes: typeof entry.notes === 'string' ? entry.notes : '',
+    priority: ['high', 'low'].includes(entry.priority) ? entry.priority : ''
   };
 }
 function showJournalMessage(message) {
@@ -54,6 +55,13 @@ function readingControls(book) {
       </div>
       ${entry.rating ? `<button type="button" class="text-button" data-clear-rating="${id}">Clear rating</button>` : ''}
     </div>` : ''}
+    <label class="priority-label" data-level="${entry.priority}">Read priority
+      <select data-priority="${id}" aria-label="Read priority for ${escapeHtml(book.title)}">
+        <option value="" ${!entry.priority ? 'selected' : ''}>Not set</option>
+        <option value="high" ${entry.priority === 'high' ? 'selected' : ''}>High priority</option>
+        <option value="low" ${entry.priority === 'low' ? 'selected' : ''}>Low priority</option>
+      </select>
+    </label>
   </div>`;
 }
 function updateReadingControls(book, focusSelector) {
@@ -72,13 +80,13 @@ function detailRoute() {
   const isDetail = Boolean(id);
   document.querySelectorAll('main > .hero, main > .toolbar, main > .content').forEach(el => { el.hidden = isDetail; });
   detail.hidden = !isDetail;
-  document.title = book ? `${book.title} | Book List` : 'Book List';
+  document.title = book ? `${book.title} | Book Tracker and List` : 'Book Tracker and List';
   if (!isDetail) return;
   if (!book) {
-    detail.innerHTML = '<a class="back" href="#">← Back to Book List</a><h1 class="detail-title" tabindex="-1">Book not found</h1><p>Return to your list to choose a book.</p>';
+    detail.innerHTML = '<a class="back" href="#">← Back to Book Tracker and List</a><h1 class="detail-title" tabindex="-1">Book not found</h1><p>Return to your list to choose a book.</p>';
   } else {
     const entry = reading(book);
-    detail.innerHTML = `<a class="back" href="#">← Back to Book List</a>
+    detail.innerHTML = `<a class="back" href="#">← Back to Book Tracker and List</a>
       <div class="detail-layout">
         <aside class="detail-sidebar">
           <div class="cover-wrap detail-cover"><img id="detailCover" alt="" /></div>
@@ -96,7 +104,7 @@ function detailRoute() {
             <p>${escapeHtml(book.setting)} ${escapeHtml(book.magic)}</p>
             <h3>What to expect</h3>
             <p>${escapeHtml(book.romance)}</p>
-            <div class="meta-row">${book.tropes.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+            <div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join('')}${book.tropes.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
             <h3>Series and reading order</h3><p>${escapeHtml(book.series)}</p>
             <div class="source-list">${book.sources.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noreferrer">${escapeHtml(s.label)} ↗</a>`).join('')}</div>
           </section>
@@ -144,6 +152,17 @@ function initJournal() {
       updateReadingControls(book, `[data-rate="${id}"]`);
     }
   });
+  document.addEventListener('change', event => {
+    const select = event.target.closest('[data-priority]');
+    if (!select) return;
+    const book = books.find(item => bookId(item) === select.dataset.priority);
+    if (!book) return;
+    saveReading(book, { priority: select.value });
+    updateReadingControls(book);
+    if (document.getElementById('bookDetail').hidden) renderCards();
+    const scope = document.getElementById('bookDetail').hidden ? grid : document.getElementById('bookDetail');
+    scope.querySelector(`[data-priority="${bookId(book)}"]`)?.focus();
+  });
   window.addEventListener('hashchange', () => {
     detailRoute();
     if (!location.hash.startsWith('#book=')) renderCards();
@@ -165,12 +184,13 @@ function initJournal() {
 function seriesDetails(book) {
   const entries = book.seriesBooks || [];
   if (!entries.length) {
-    return `<section class="detail-panel" aria-labelledby="seriesTitle"><h2 id="seriesTitle">Series guide</h2><p>${escapeHtml(book.seriesNote || book.series)}</p></section>`;
+    return `<section class="detail-panel" aria-labelledby="seriesTitle"><h2 id="seriesTitle">Series guide</h2>${characterFocus(book)}<p>${escapeHtml(book.seriesNote || book.series)}</p></section>`;
   }
   const normalize = value => value.toLowerCase().replace(/[^a-z0-9]/g, '');
   return `<section class="detail-panel" aria-labelledby="seriesTitle">
     <p class="eyebrow">Series guide · Checked November 8, 2026</p>
     <h2 id="seriesTitle">${escapeHtml(book.seriesName || 'Books in this series')}</h2>
+    ${characterFocus(book)}
     <p>${escapeHtml(book.seriesNote || 'Read in the order below. Companion stories are labeled separately.')}</p>
     <p class="storage-note">Later-book descriptions may reveal the setup of earlier books.</p>
     <ol class="series-list">${entries.map((entry, index) => {
@@ -185,4 +205,18 @@ function seriesDetails(book) {
       </li>`;
     }).join('')}</ol>
   </section>`;
+}
+function seriesFocusLabel(book) {
+  const labels = {
+    'same characters': 'Same main characters',
+    'different leads': 'Different leads · same world',
+    'ensemble': 'Ensemble cast',
+    'mixed / linked stories': 'Mixed / linked stories',
+    'standalone': 'Standalone',
+    'not yet established': 'Series focus not yet established'
+  };
+  return labels[book.seriesFocus] || book.seriesFocus || 'Series focus to confirm';
+}
+function characterFocus(book) {
+  return `<div class="character-focus"><h3>${escapeHtml(seriesFocusLabel(book))}</h3><p>${escapeHtml(book.seriesFocusNote || '')}</p></div>`;
 }
