@@ -1,0 +1,9 @@
+# Art Studio maintenance
+
+`apps/art-studio.html` is a buildless app linked under Joseph on the homepage. Lesson content is in `apps/art-studio-data.js`; behavior and styling are in the adjacent JavaScript and CSS files. It uses browser-local storage and optional browser speech synthesis. Fonts have system fallbacks; all artwork images are local.
+
+The first 16 works follow the family's book selections. Fifteen now use matching online reproductions, documented in `apps/assets/art-studio/online-sources.json`; only the unidentified carved pole retains a clearly labeled reference crop. `download-art-assets.ps1` downloads those online sources and generates the companion JavaScript metadata. Use `-Only <id>` for a single image. Full compositions are preserved and large images are resized to at most 1600 pixels. Blue Atmosphere's matching source is only 300 × 494 pixels and is not artificially enlarged. Five additional images are from the Art Institute's public-domain API; Mona Lisa is from Wikimedia Commons/C2RMF. Do not substitute a different version or invent uncertain maker attributions. Preserve image credits and license links in the gallery.
+
+For browser verification, serve the repository on `http://127.0.0.1:4173`, make Playwright available to Node, and run `node scripts/verify-art-studio.cjs`. It uses installed Chrome, exercises all 16 modules and 64 questions, retries, gallery, artist game, local persistence, supply filters, interactive tools, homepage links, and desktop/mobile overflow. QA screenshots go to the OS temporary directory. No runtime dependencies or build step are needed for the app itself.
+
+Standards research and object-caption clarifications are visible in **For grown-ups**. Optional extensions default off and can be enabled independently. Standards alignments are instructional interpretations, not certification. Research was checked November 12, 2026.
