@@ -464,5 +464,29 @@ const ARTIST_GALLERIES = [
         "file": "styles/met-545564.jpg"
       }
     ]
+  },
+  {
+    "artist": "Claude Lorrain",
+    "notice": "Look for tall trees or buildings framing the view, small figures near the front, and a glowing sky beyond. Follow paths and water into the distance.",
+    "works": [
+      {
+        "id": "aic-43145",
+        "title": "View of Delphi with a Procession",
+        "date": "1673",
+        "file": "styles/aic-43145.jpg",
+        "url": "https://www.artic.edu/iiif/2/2e7e28aa-a77b-c7f8-852b-708c1171f928/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/43145",
+        "credit": "Art Institute of Chicago, public-domain image"
+      },
+      {
+        "id": "wiki-seaport-with-the-embarkation-of-the-queen-of-sheba",
+        "title": "Seaport with the Embarkation of the Queen of Sheba",
+        "date": "1648",
+        "file": "styles/wiki-seaport-with-the-embarkation-of-the-queen-of-sheba.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Claude_Lorrain_008.jpg",
+        "source": "https://www.nationalgallery.org.uk/paintings/claude-seaport-with-the-embarkation-of-the-queen-of-sheba",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; National Gallery, London"
+      }
+    ]
   }
 ];

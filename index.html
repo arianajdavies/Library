@@ -153,33 +153,45 @@
       font-weight: 700;
     }
 
-    .app-card {
+    .app-grid {
       display: grid;
-      grid-template-columns: 180px minmax(0, 1fr) auto;
-      align-items: center;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
-      padding: 22px;
+    }
+
+    .app-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
       box-shadow: 0 10px 30px rgba(35, 31, 24, 0.08);
     }
 
-    .app-card + .app-card {
-      margin-top: 18px;
+    .app-icon { position: relative; }
+    .app-icon img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 8 / 5;
+      object-fit: cover;
     }
-
-    .app-icon {
-      aspect-ratio: 16 / 10;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(195, 139, 47, 0.18)),
-        var(--bg);
-      border: 1px solid var(--line);
-      color: var(--accent-dark);
-      font-size: 2.8rem;
-      font-weight: 900;
+    .app-number {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 3px 9px;
+      border: 1px solid rgba(23, 32, 38, 0.12);
+      border-radius: 20px;
+      background: rgba(255, 253, 248, 0.9);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 800;
     }
+    .app-card > div:not(.app-icon) { padding: 22px 22px 24px; }
+    .app-card > .button { margin: auto 22px 22px; }
 
     .app-card h3 {
       margin: 0 0 8px;
@@ -210,8 +222,7 @@
     }
 
     @media (max-width: 820px) {
-      .hero,
-      .app-card {
+      .hero {
         grid-template-columns: 1fr;
       }
 
@@ -224,13 +235,8 @@
         max-width: 420px;
       }
 
-      .app-icon {
-        width: min(100%, 260px);
-      }
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-      .button {
-        width: 100%;
-      }
     }
 
     [hidden] { display: none !important; }
@@ -276,6 +282,7 @@
     }
 
     @media (max-width: 600px) {
+      .app-grid { grid-template-columns: 1fr; }
       .people { grid-template-columns: 1fr; gap: 14px; }
       .person-button { min-height: 108px; padding: 20px; }
     }
@@ -299,15 +306,15 @@
         <p class="lead">Choose a name to find your apps, games, and next good read.</p>
       </div>
       <aside class="summary" aria-label="Repository summary">
-        <strong data-app-total>08</strong>
-        <p>Eight apps available: practical trackers, playful learning games, an art curriculum, and a book browser for choosing the next read.</p>
+        <strong data-app-total>07</strong>
+        <p>Seven apps available: practical trackers, playful learning games, an art curriculum, and a book browser for choosing the next read.</p>
       </aside>
     </section>
 
     <section class="apps shell" id="apps" aria-labelledby="apps-title">
       <div class="section-title">
         <h2 id="apps-title">Choose your library</h2>
-        <span class="count" data-app-count>8 apps available</span>
+        <span class="count" data-app-count>7 apps available</span>
       </div>
       <div class="people" aria-label="Choose a person">
         <button class="person-button" type="button" id="ariana-button" aria-controls="ariana" aria-expanded="true">Ariana</button>
@@ -321,8 +328,9 @@
           <h2 id="ariana-title">Ariana</h2>
           <span class="count">2 apps</span>
         </div>
+        <div class="app-grid">
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">01</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/writing-fighting-watchlist.svg" alt="" width="480" height="300" /><span class="app-number">01</span></div>
           <div>
             <h3>Writing Fighting Watchlist</h3>
             <p>Browse the Writing Fighting videos by the number in each title, mark videos watched, filter the list, and move anything back to Need to Watch.</p>
@@ -330,37 +338,31 @@
           <a class="button" href="apps/writing-fighting-watchlist.html">Open app</a>
         </article>
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">03</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/book-list.svg" alt="" width="480" height="300" /><span class="app-number">03</span></div>
           <div>
             <h3>Book Tracker and List</h3>
             <p>Track books, ratings, notes, and reading priorities; browse genres, plots, and series reading orders.</p>
           </div>
           <a class="button" href="apps/book-list.html">Open app</a>
         </article>
+        </div>
       </section>
       <section class="person-panel" id="joseph" aria-labelledby="joseph-title">
         <div class="section-title">
           <h2 id="joseph-title">Joseph</h2>
-          <span class="count">6 apps</span>
+          <span class="count">5 apps</span>
         </div>
+        <div class="app-grid">
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">02</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/pattern-detectives.svg" alt="" width="480" height="300" /><span class="app-number">04</span></div>
           <div>
-            <h3>Sparkle Sums</h3>
-            <p>A bright addition game for kids with quick problems, cheerful feedback, score tracking, streaks, and rising levels.</p>
-          </div>
-          <a class="button" href="apps/sparkle-sums.html">Open app</a>
-        </article>
-        <article class="app-card">
-          <div class="app-icon" aria-hidden="true">04</div>
-          <div>
-            <h3>Pattern Detectives</h3>
+            <h3>Groupings Game</h3>
             <p>Explore picture puzzles about similarities, spot the odd one out, guess sorting rules, and find where new objects belong.</p>
           </div>
           <a class="button" href="apps/pattern-detectives.html">Open app</a>
         </article>
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">05</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/shape-garden.svg" alt="" width="480" height="300" /><span class="app-number">05</span></div>
           <div>
             <h3>Shape Garden</h3>
             <p>Learn eight shapes, count their sides, find and color hidden shapes in 20 scenes, finish shape and color patterns, and make your own.</p>
@@ -368,15 +370,15 @@
           <a class="button" href="apps/shape-garden.html">Open app</a>
         </article>
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">06</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/tree-detective.svg" alt="" width="480" height="300" /><span class="app-number">06</span></div>
           <div>
-            <h3>Tree Detective</h3>
+            <h3>Tree Identification</h3>
             <p>Identify seven trees from photos of their shape, leaves or needles, and seeds, with hints and a field guide.</p>
           </div>
           <a class="button" href="apps/tree-detective.html">Open app</a>
         </article>
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">07</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/money-game.svg" alt="" width="480" height="300" /><span class="app-number">07</span></div>
           <div>
             <h3>Money Game</h3>
             <p>Meet pennies, nickels, dimes, and quarters, find the right coin, and sort a pile into containers while hearing each coin's name.</p>
@@ -384,13 +386,14 @@
           <a class="button" href="apps/money-game.html">Open app</a>
         </article>
         <article class="app-card">
-          <div class="app-icon" aria-hidden="true">08</div>
+          <div class="app-icon" aria-hidden="true"><img src="apps/assets/library-thumbnails/art-studio.svg" alt="" width="480" height="300" /><span class="app-number">08</span></div>
           <div>
             <h3>Joseph’s Art Studio</h3>
             <p>Explore art through short lessons, visual games, famous artists, and 26 projects using everyday supplies.</p>
           </div>
           <a class="button" href="apps/art-studio.html">Open app</a>
         </article>
+        </div>
       </section>
       <section class="person-panel" id="dean" aria-labelledby="dean-title">
         <div class="section-title">

@@ -14,7 +14,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),os=require(
   const same=await page.locator('#mixASwatch').evaluate(e=>getComputedStyle(e).backgroundColor)===await page.locator('#mixBSwatch').evaluate(e=>getComputedStyle(e).backgroundColor);assert.equal(same,a===b);
  }
  await page.screenshot({path:path.join(os.tmpdir(),'art-mixing-desktop.png'),fullPage:true});
- await go('artists');assert.equal(await page.locator('.artist-study [data-more-artist]').count(),22);
+ await go('artists');assert.equal(await page.locator('.artist-study [data-more-artist]').count(),24);
  const ids=await page.evaluate(()=>ART.map(a=>a.id));
  for(const id of ids){
   await page.locator(`.artist-study [data-more-artist="${id}"]`).click();await page.locator('#artDialog').waitFor();
@@ -33,5 +33,5 @@ const assert=require('node:assert/strict'),path=require('node:path'),os=require(
   await page.setViewportSize({width,height:844});await go('lesson/mix');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.locator('#mixA').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(os.tmpdir(),`art-mixing-controls-${width}.png`)});
   await go('artists');await page.locator('.artist-study [data-more-artist="gourmet"]').click();assert.equal(await page.locator('#artDialog').evaluate(e=>e.scrollWidth>e.clientWidth),false);await page.screenshot({path:path.join(os.tmpdir(),`art-artist-style-${width}.png`)});await page.locator('#closeArt').click();
  }
- assert.deepEqual(errors,[]);console.log('PASS: removed module, supplied chart, color swatches, all 22 artwork style buttons and 38 additional images, quiz feedback and replay, mobile/desktop layouts.');await browser.close();
+ assert.deepEqual(errors,[]);console.log('PASS: removed module, supplied chart, color swatches, all 24 artwork style buttons and 40 additional images, quiz feedback and replay, mobile/desktop layouts.');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});
