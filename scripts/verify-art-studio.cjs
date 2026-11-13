@@ -7,9 +7,9 @@ const fs=require('node:fs');const path=require('node:path');const assert=require
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().startsWith('http://127.0.0.1'))errors.push(r.status()+' '+r.url());});
  let visit=0;
  const go=async hash=>{await page.goto('http://127.0.0.1:4173/apps/art-studio.html?check='+(visit++)+'#'+hash);await page.locator('main h1').waitFor();};
- await go('home');await page.evaluate(()=>{state.sound=false;save();soundLabel();});assert.equal(await page.locator('.module').count(),12);
+ await go('home');await page.evaluate(()=>{state.sound=false;save();soundLabel();});assert.equal(await page.locator('.module').count(),11);
  await go('grownups');assert.equal(await page.locator('[data-extra]:checked').count(),0);for(const c of await page.locator('[data-extra]').all())await c.check();
- await go('home');assert.equal(await page.locator('.module').count(),16);
+ await go('home');assert.equal(await page.locator('.module').count(),15);
  const ids=await page.evaluate(()=>MODULES.map(m=>m.id));
  for(const id of ids){
   await go('lesson/'+id);assert.ok(await page.locator('.lesson-intro').isVisible());
@@ -22,8 +22,7 @@ const fs=require('node:fs');const path=require('node:path');const assert=require
   }
   await page.locator('#quizFinish').click();await page.locator('#note').fill('I noticed the shapes.');await page.locator('#completeModule').click();
  }
- await page.reload();assert.equal(await page.evaluate(()=>state.done.length),16);assert.equal(await page.evaluate(()=>Object.keys(state.notes).length),16);
- await go('lesson/patterns');await page.locator('[data-shape]').first().click();await page.locator('#repeat').click();assert.equal(await page.locator('#patternOut').textContent(),'●   |   ●   |   ●');
+ await page.reload();assert.equal(await page.evaluate(()=>state.done.length),15);assert.equal(await page.evaluate(()=>Object.keys(state.notes).length),15);
  await go('lesson/mix');await page.locator('#mixA').selectOption('Blue');await page.locator('#mixB').selectOption('Yellow');assert.equal(await page.locator('#mixed').textContent(),'Green');
  await go('lesson/mobiles');await page.locator('#balance').fill('0');assert.match(await page.locator('#balanceText').textContent(),/Balanced!/);
  await go('lesson/lines');const canvas=page.locator('canvas');await canvas.scrollIntoViewIfNeeded();const rect=await canvas.boundingBox();await page.mouse.move(rect.x+20,rect.y+20);await page.mouse.down();await page.mouse.move(rect.x+100,rect.y+100);await page.mouse.up();assert.equal(await page.evaluate(()=>document.querySelector('canvas').getContext('2d').getImageData(0,0,1200,480).data.some((v,i)=>i%4!==3&&v<250)),true);await page.locator('#undoDraw').click();
@@ -33,5 +32,5 @@ const fs=require('node:fs');const path=require('node:path');const assert=require
  for(const size of [{width:1440,height:1000},{width:390,height:844}]){await page.setViewportSize(size);for(const route of ['home','lesson/lines','lesson/lines/play','projects','gallery','grownups']){await go(route);const over=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth);assert.equal(over,false,`${route} overflows at ${size.width}`);}await go('home');await page.screenshot({path:path.join(require('node:os').tmpdir(),`art-studio-qa-${size.width}.png`),fullPage:true});}
  await page.goto('http://127.0.0.1:4173/index.html#joseph');assert.equal(await page.locator('#joseph .app-card').count(),6);assert.equal(await page.locator('[data-app-total]').textContent(),'08');await page.getByRole('link',{name:'Open app'}).last().click();assert.match(page.url(),/art-studio/);
  const html=fs.readFileSync('index.html','utf8');for(const match of html.matchAll(/href="(apps\/[^"#]+)"/g))assert.ok(fs.existsSync(path.resolve(match[1])),`Missing ${match[1]}`);
- assert.deepEqual(errors,[]);console.log('PASS: 16 lesson flows, 64 questions with retries, 6 artist questions, storage, labs, project filters, 22 gallery images, 390/1440 layouts, and homepage links.');await browser.close();
+ assert.deepEqual(errors,[]);console.log('PASS: 15 lesson flows, 60 questions with retries, 6 artist questions, storage, labs, project filters, 22 gallery images, 390/1440 layouts, and homepage links.');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});

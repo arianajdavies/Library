@@ -1,0 +1,468 @@
+[
+  {
+    "artist": "Mary Cassatt",
+    "notice": "Look for everyday moments, caring gestures, soft brush marks, and people who seem absorbed in what they are doing.",
+    "works": [
+      {
+        "id": "aic-26650",
+        "title": "On a Balcony",
+        "date": "1878–79",
+        "url": "https://www.artic.edu/iiif/2/f0150d21-33ab-f6ea-0d4d-32d459f091fe/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/26650",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-26650.jpg"
+      },
+      {
+        "wiki": "Young_Mother_Sewing_(Mary_Cassatt)",
+        "title": "Young Mother Sewing",
+        "date": "1900",
+        "id": "wiki-young-mother-sewing-mary-cassatt-",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Young_Mother_Sewing_MET_DP139632.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "source": "https://en.wikipedia.org/wiki/Young_Mother_Sewing_(Mary_Cassatt)",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-young-mother-sewing-mary-cassatt-.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Henry Ossawa Tanner",
+    "notice": "Look at the gentle light on faces and hands. Notice how quiet poses help people seem thoughtful and real.",
+    "works": [
+      {
+        "id": "aic-87643",
+        "title": "The Two Disciples at the Tomb",
+        "date": "c. 1906",
+        "url": "https://www.artic.edu/iiif/2/46ff0699-8905-a7d7-92f3-5210c2cc5e51/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/87643",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-87643.jpg"
+      },
+      {
+        "wiki": "The_Thankful_Poor",
+        "title": "The Thankful Poor",
+        "date": "1894",
+        "id": "wiki-the-thankful-poor",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/The_Thankful_Poor%2C_1894._Henry_Ossawa_Tanner.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "source": "https://en.wikipedia.org/wiki/The_Thankful_Poor",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-thankful-poor.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Pablo Picasso",
+    "notice": "Look for faces and objects built from angular shapes, with more than one viewpoint at once. Le Gourmet is an early Blue Period picture; these examples show the familiar Cubist style he developed later.",
+    "works": [
+      {
+        "id": "picasso-still-life",
+        "title": "Still Life",
+        "date": "1918",
+        "url": "https://api.nga.gov/iiif/3cbe6c4a-79c1-479a-b0d3-3ac903c96310/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/46670-still-life",
+        "credit": "National Gallery of Art, Chester Dale Collection; © Estate of Pablo Picasso / ARS",
+        "file": "styles/picasso-still-life.jpg"
+      },
+      {
+        "id": "picasso-seated-woman",
+        "title": "The Red Armchair",
+        "date": "1931",
+        "url": "https://www.artic.edu/iiif/2/c617e2f0-d5fe-0772-390e-6d8c83895815/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/5357",
+        "credit": "Art Institute of Chicago; © Estate of Pablo Picasso / ARS",
+        "file": "styles/picasso-seated-woman.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Pieter Bruegel the Elder",
+    "notice": "Look for busy scenes, many little people, earthy colors, and a viewpoint that lets you see a whole place.",
+    "works": [
+      {
+        "wiki": "The_Peasant_Wedding",
+        "title": "The Peasant Wedding",
+        "date": "1567",
+        "id": "wiki-the-peasant-wedding",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Pieter_Bruegel_the_Elder_-_Peasant_Wedding_-_Google_Art_Project_2.jpg/3840px-Pieter_Bruegel_the_Elder_-_Peasant_Wedding_-_Google_Art_Project_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/The_Peasant_Wedding",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-peasant-wedding.jpg"
+      },
+      {
+        "wiki": "The_Tower_of_Babel_(Bruegel)",
+        "title": "The Tower of Babel",
+        "date": "1563",
+        "id": "wiki-the-tower-of-babel-bruegel-",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg/3840px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/The_Tower_of_Babel_(Bruegel)",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-tower-of-babel-bruegel-.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Winslow Homer",
+    "notice": "Look for believable people outdoors, strong shapes, and the way light makes water and movement feel real.",
+    "works": [
+      {
+        "id": "aic-25865",
+        "title": "The Herring Net",
+        "date": "1885",
+        "url": "https://www.artic.edu/iiif/2/5dca7347-c6dc-24dd-d073-d705b9cdc575/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/25865",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-25865.jpg"
+      },
+      {
+        "wiki": "The_Fog_Warning",
+        "title": "The Fog Warning",
+        "date": "1885",
+        "id": "wiki-the-fog-warning",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Winslow_Homer_-_The_Fog_Warning_-_Google_Art_Project.jpg/3840px-Winslow_Homer_-_The_Fog_Warning_-_Google_Art_Project.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/The_Fog_Warning",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-fog-warning.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Alexander Calder",
+    "notice": "Look for hanging shapes, fine connecting rods, lots of open space, and carefully balanced moving parts.",
+    "works": [
+      {
+        "id": "calder-triple-gong",
+        "title": "Triple Gong",
+        "date": "1951",
+        "url": "https://api.nga.gov/iiif/605adc2f-9188-4962-aa0a-e1ef5b3f693d/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/92737-triple-gong",
+        "credit": "National Gallery of Art; © Calder Foundation / ARS",
+        "file": "styles/calder-triple-gong.jpg"
+      },
+      {
+        "id": "calder-ten-red",
+        "title": "Black, White, and Ten Red",
+        "date": "1957",
+        "url": "https://api.nga.gov/iiif/d4922984-1d81-4488-8d8e-30edcda840e2/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/92738-black-white-and-ten-red",
+        "credit": "National Gallery of Art; © Calder Foundation / ARS",
+        "file": "styles/calder-ten-red.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Frédéric Auguste Bartholdi",
+    "notice": "Notice the big, clear shapes and strong poses that make these public monuments stand out.",
+    "works": [
+      {
+        "id": "bartholdi-lion",
+        "title": "Lion of Belfort",
+        "date": "1875–1880",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Lion_de_Belfort.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Lion_de_Belfort.jpg",
+        "credit": "Patmill; visibility adjustment by Beyond My Ken, CC BY-SA 3.0, via Wikimedia Commons. Resized JPEG; image remains under the same license.",
+        "file": "styles/bartholdi-lion.jpg"
+      },
+      {
+        "id": "bartholdi-lafayette",
+        "title": "Lafayette Memorial",
+        "date": "1873; dedicated 1876",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Lafayette_statue_Union_Square_closeup.jpg",
+        "source": "https://www.si.edu/object/lafayette-memorial-sculpture:siris_ari_7679",
+        "credit": "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons. Resized JPEG; image remains under the same license.",
+        "file": "styles/bartholdi-lafayette.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Daniel Chester French",
+    "notice": "Notice the lifelike figures, carefully folded clothes, and poses that suggest a person’s character.",
+    "works": [
+      {
+        "id": "french-minute-man",
+        "title": "The Minute Man",
+        "date": "1875",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Minute_Man_Statue.jpg/960px-Minute_Man_Statue.jpg",
+        "source": "https://www.chesterwood.org/daniel-chester-french/",
+        "credit": "Ethan David Smith (Edsmith24), CC BY-SA 4.0, via Wikimedia Commons. Resized JPEG; image remains under the same license.",
+        "file": "styles/french-minute-man.jpg"
+      },
+      {
+        "id": "french-harvard",
+        "title": "John Harvard",
+        "date": "1884",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/John_harvard_statue.jpg",
+        "source": "https://concordlibrary.org/special-collections/fin_aids/DCFrench",
+        "credit": "ericodeg, CC BY-SA 2.0, via Wikimedia Commons. Resized JPEG; image remains under the same license.",
+        "file": "styles/french-harvard.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Henri Matisse",
+    "notice": "Look for bold color areas, curving shapes, and a lively rhythm made by repeating colors and forms.",
+    "works": [
+      {
+        "id": "matisse-beasts",
+        "title": "Beasts of the Sea",
+        "date": "1950",
+        "url": "https://api.nga.gov/iiif/1ca608d9-a02e-4a8a-8a77-f0af60381371/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/53815-beasts-sea",
+        "credit": "National Gallery of Art; © Succession H. Matisse / ARS",
+        "file": "styles/matisse-beasts.jpg"
+      },
+      {
+        "id": "matisse-window",
+        "title": "Open Window, Collioure",
+        "date": "1905",
+        "url": "https://api.nga.gov/iiif/a808f8b1-2567-4c5a-b227-220f5c1fd470/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/106384-open-window-collioure",
+        "credit": "National Gallery of Art; © Succession H. Matisse / ARS",
+        "file": "styles/matisse-window.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Katsushika Hokusai",
+    "notice": "Look for clear outlines, carefully arranged shapes, and nature made dramatic with lines and color.",
+    "works": [
+      {
+        "wiki": "Fine_Wind,_Clear_Morning",
+        "title": "Fine Wind, Clear Morning (Red Fuji)",
+        "date": "about 1830–1832",
+        "id": "wiki-fine-wind-clear-morning",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/%E3%80%8C%E5%AF%8C%E5%B6%BD%E4%B8%89%E5%8D%81%E5%85%AD%E6%99%AF_%E5%87%B1%E9%A2%A8%E5%BF%AB%E6%99%B4%E3%80%8D-South_Wind%2C_Clear_Sky_%28Gaif%C5%AB_kaisei%29%2C_also_known_as_Red_Fuji%2C_from_the_series_Thirty-six_Views_of_Mount_Fuji_%28Fugaku_sanj%C5%ABrokkei%29_MET_DP141062.jpg/3840px-thumbnail.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/Fine_Wind%2C_Clear_Morning",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-fine-wind-clear-morning.jpg"
+      },
+      {
+        "id": "aic-21720",
+        "title": "Cranes on snow-covered pine",
+        "date": "c. 1834",
+        "url": "https://www.artic.edu/iiif/2/cc5fce96-3635-35da-e7fd-a68f4b2a26c3/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/21720",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-21720.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Joan Miró",
+    "notice": "Look for playful signs, floating shapes, thin black lines, and bright colors. What imaginary creatures do you see?",
+    "works": [
+      {
+        "id": "miro-peasant",
+        "title": "Head of a Catalan Peasant",
+        "date": "1924",
+        "url": "https://api.nga.gov/iiif/4ce3a582-bbd3-43ff-bd7e-ec3d71bd6444/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/60661-head-catalan-peasant",
+        "credit": "National Gallery of Art; © Successió Miró / ARS",
+        "file": "styles/miro-peasant.jpg"
+      },
+      {
+        "id": "miro-dragonfly",
+        "title": "Flight of the Dragonfly in Front of the Sun",
+        "date": "1968",
+        "url": "https://api.nga.gov/iiif/ca4a3f2e-57d5-40f9-91b5-479e041f1273/full/!800,800/0/default.jpg",
+        "source": "https://www.nga.gov/artworks/61373-flight-dragonfly-front-sun",
+        "credit": "National Gallery of Art; © Successió Miró / ARS",
+        "file": "styles/miro-dragonfly.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Helen Frankenthaler",
+    "notice": "Look for broad pools of color, soft edges, and areas that seem to flow into the canvas.",
+    "works": [
+      {
+        "id": "frankenthaler-canyon",
+        "title": "Canyon",
+        "date": "1965",
+        "url": "https://www.phillipscollection.org/sites/default/files/styles/feature_extra_large_no_crop_1200_/public/collection/2001.003.0001.jpg?itok=9hNYBi13",
+        "source": "https://www.phillipscollection.org/collection/canyon-0",
+        "credit": "The Phillips Collection; © Helen Frankenthaler Foundation / ARS",
+        "file": "styles/frankenthaler-canyon.jpg"
+      },
+      {
+        "id": "frankenthaler-bay",
+        "title": "The Bay",
+        "date": "1963",
+        "url": "https://dia.widen.net/content/s6tdsxbsvy/webp/65.60-d1-2020-11-09-2020-11-09.webp?quality=75",
+        "source": "https://dia.org/collection/bay/45380",
+        "credit": "Detroit Institute of Arts; © Helen Frankenthaler Foundation / ARS",
+        "file": "styles/frankenthaler-bay.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Paul Gauguin",
+    "notice": "Look for broad, flat areas of rich color, strong outlines, and simplified shapes in landscapes and people.",
+    "works": [
+      {
+        "id": "aic-111062",
+        "title": "Te raau rahi (The Big Tree)",
+        "date": "1891",
+        "url": "https://www.artic.edu/iiif/2/916405d1-1407-d90e-1be8-f8c77f26f546/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/111062",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-111062.jpg"
+      },
+      {
+        "id": "aic-19339",
+        "title": "Arlésiennes (Mistral)",
+        "date": "1888",
+        "url": "https://www.artic.edu/iiif/2/ae6ac285-6887-dd76-4570-d379c786dfae/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/19339",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-19339.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Vincent van Gogh",
+    "notice": "Look for lively, visible brush marks, strong outlines, and bright colors that make the scene feel full of energy.",
+    "works": [
+      {
+        "id": "aic-80607",
+        "title": "Self-Portrait",
+        "date": "1887",
+        "url": "https://www.artic.edu/iiif/2/47c5bcb8-62ef-e5d7-55e7-f5121f409a30/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/80607",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-80607.jpg"
+      },
+      {
+        "id": "aic-14586",
+        "title": "The Poet's Garden",
+        "date": "1888",
+        "url": "https://www.artic.edu/iiif/2/fa5aaa98-8095-07d6-3b7d-3dfccc518191/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/14586",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-14586.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Claude Monet",
+    "notice": "Look for small, soft brush marks and changing light. Colors suggest water, air, and reflections instead of hard outlines.",
+    "works": [
+      {
+        "id": "aic-87088",
+        "title": "Water Lily Pond",
+        "date": "1900",
+        "url": "https://www.artic.edu/iiif/2/8534685d-1102-e1e3-e194-94f6e925e8b0/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/87088",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-87088.jpg"
+      },
+      {
+        "id": "aic-64818",
+        "title": "Stacks of Wheat (End of Summer)",
+        "date": "1890–91",
+        "url": "https://www.artic.edu/iiif/2/a38e2828-ec6f-ece1-a30f-70243449197b/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/64818",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-64818.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Georges Seurat",
+    "notice": "Look for many tiny touches of color and carefully arranged figures or shapes. Step back and see the marks become a scene.",
+    "works": [
+      {
+        "wiki": "The_Circus_(Seurat)",
+        "title": "The Circus",
+        "date": "1890–1891",
+        "id": "wiki-the-circus-seurat-",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Georges_Seurat%2C_1891%2C_Le_Cirque_%28The_Circus%29%2C_oil_on_canvas%2C_185_x_152_cm%2C_Mus%C3%A9e_d%27Orsay.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+        "source": "https://en.wikipedia.org/wiki/The_Circus_(Seurat)",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-circus-seurat-.jpg"
+      },
+      {
+        "wiki": "The_Lighthouse_at_Honfleur",
+        "title": "The Lighthouse at Honfleur",
+        "date": "1886",
+        "id": "wiki-the-lighthouse-at-honfleur",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Georges_Seurat%2C_The_Lighthouse_at_Honfleur%2C_1886%2C_NGA_61383.jpg/3840px-Georges_Seurat%2C_The_Lighthouse_at_Honfleur%2C_1886%2C_NGA_61383.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/The_Lighthouse_at_Honfleur",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-the-lighthouse-at-honfleur.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Piet Mondrian",
+    "notice": "Look for straight horizontal and vertical lines, rectangles, and carefully balanced areas of red, blue, yellow, white, and gray.",
+    "works": [
+      {
+        "wiki": "Composition_with_Red_Blue_and_Yellow",
+        "title": "Composition with Red, Blue and Yellow",
+        "date": "1930",
+        "id": "wiki-composition-with-red-blue-and-yellow",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Piet_Mondriaan%2C_1930_-_Mondrian_Composition_II_in_Red%2C_Blue%2C_and_Yellow.jpg/3840px-Piet_Mondriaan%2C_1930_-_Mondrian_Composition_II_in_Red%2C_Blue%2C_and_Yellow.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+        "source": "https://en.wikipedia.org/wiki/Composition_with_Red%2C_Blue_and_Yellow",
+        "credit": "Public-domain artwork reproduction via Wikimedia Commons; see source record.",
+        "file": "styles/wiki-composition-with-red-blue-and-yellow.jpg"
+      },
+      {
+        "id": "aic-65821",
+        "title": "Composition (No. 1) Gray-Red",
+        "date": "1935",
+        "url": "https://www.artic.edu/iiif/2/254c654f-354a-0f4f-28b5-8eb01a02e95c/full/843,/0/default.jpg",
+        "source": "https://www.artic.edu/artworks/65821",
+        "credit": "Art Institute of Chicago, public-domain image",
+        "file": "styles/aic-65821.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Leonardo da Vinci",
+    "notice": "Look at the softly shaded faces, turned bodies, and thoughtful eyes in these portraits.",
+    "works": [
+      {
+        "id": "leonardo-ermine",
+        "title": "Lady with an Ermine",
+        "date": "about 1490",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Lady_with_the_ermine.jpg",
+        "source": "https://mnk.pl/en/collections/lady-with-an-ermine/",
+        "credit": "National Museum in Kraków; public-domain reproduction via Wikimedia Commons",
+        "file": "styles/leonardo-ermine.jpg"
+      },
+      {
+        "id": "leonardo-ferronniere",
+        "title": "La Belle Ferronnière",
+        "date": "1490–1497",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/La_belle_ferronni%C3%A8re%2CLeonardo_da_Vinci_-_Louvre.jpg",
+        "source": "https://collections.louvre.fr/ark:/53355/cl010062372",
+        "credit": "Livioandronico2013, CC BY-SA 4.0, via Wikimedia Commons. Resized JPEG; image remains under the same license.",
+        "file": "styles/leonardo-ferronniere.jpg"
+      }
+    ]
+  },
+  {
+    "artist": "Artist’s name unknown",
+    "related": true,
+    "notice": "We do not know these individual makers’ names. These are related ancient Egyptian faience figures, not works we can attribute to William’s artist. Look for blue surfaces, rounded forms, and plant decorations.",
+    "works": [
+      {
+        "id": "met-545724",
+        "title": "Standing Hippopotamus",
+        "date": "ca. 1810–1700 B.C.",
+        "url": "https://images.metmuseum.org/CRDImages/eg/web-large/DP229651.jpg",
+        "source": "https://www.metmuseum.org/art/collection/search/545724",
+        "credit": "The Metropolitan Museum of Art, 26.7.898; public-domain image",
+        "file": "styles/met-545724.jpg"
+      },
+      {
+        "id": "met-545564",
+        "title": "Hippopotamus",
+        "date": "ca. 1981–1650 B.C.",
+        "url": "https://images.metmuseum.org/CRDImages/eg/web-large/LC-32_1_230_EGDP026460.jpg",
+        "source": "https://www.metmuseum.org/art/collection/search/545564",
+        "credit": "The Metropolitan Museum of Art, 32.1.230; public-domain image",
+        "file": "styles/met-545564.jpg"
+      }
+    ]
+  }
+]
