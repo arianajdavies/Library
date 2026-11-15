@@ -794,11 +794,46 @@ const bookMetadata = {
   }
 };
 
+// The only genre tags exposed by the tracker. Other catalog fields stay searchable.
+const BOOK_GENRE_TAGS = ['historical romance', 'romantic fantasy', 'regency fantasy', 'urban fantasy', 'science fiction', 'nonfiction', 'LitRPG'];
+function trackerGenres(book, originalGenres) {
+  const aliases = {'fantasy romance':'romantic fantasy', 'fantasy regency romance':'regency fantasy'};
+  const genres = new Set(originalGenres.map(genre => aliases[genre] || genre));
+  if (['Alchemised'].includes(book.title)) genres.add('romantic fantasy');
+  if (book.title === 'The Magicians and Mrs. Quent') genres.add('regency fantasy');
+  return BOOK_GENRE_TAGS.filter(genre => genres.has(genre));
+}
+// Reader-reported on-page sexual content. Sources are exposed in each book's source list.
+const sexualContentSources = {
+  'Empire of the Vampire': 'https://jaykristoff.com/the-new-thing/',
+  'To Cage a Wild Bird': 'https://www.romance.io/books/68888d3f8c5d2cf5bb26adf4/to-cage-a-wild-bird-brooke-fast',
+  'Beguilement': 'https://www.romance.io/books/6409861d8a0cadd8353692b6/beguilement-lois-mcmaster-bujold',
+  'Soulbound': 'https://www.romance.io/books/57283fa8c62092c0440805d1/soulbound-bethany-adams',
+  'The Road of Bones': 'https://www.romance.io/books/64a27af614ecc6bb4bc7cee6/the-road-of-bones-demi-winters',
+  'The Knight and the Moth': 'https://thecrossandthequill.ca/enchanted-quill-book-reviews/the-knight-and-the-moth',
+  'The Second Death of Locke': 'https://www.reddit.com/r/fantasyromance/comments/1okx49c/the_second_death_of_locke_final_discussion/',
+  'What Darkness Brings': 'https://www.reddit.com/r/Romantasy/comments/1ux6kfy/i_enjoyed_rites_of_the_starling_by_devney_perry/',
+  'In Your Dreams': 'https://app.thestorygraph.com/reviews/fbc02989-20d0-4e8f-97ad-7181465bbb8a',
+  'Tears of the Wolf': 'https://app.thestorygraph.com/book_reviews/96f86424-cd7c-418d-bfd6-b24a7d452b0e?sort=most_liked',
+  'Divine Rivals': 'https://www.bookreviewguide.com/books/divine-rivals-rebecca-ross',
+  'A Far Wilder Magic': 'https://goodeyreads.com/2022/03/03/arc-book-review-a-far-wilder-magic-by-alison-saft/',
+  'Spark of the Everflame': 'https://romancebookfinder.com/books/spark-of-the-everflame/',
+  'Jade City': 'https://app.thestorygraph.com/books/18b825f0-6ee0-4622-a568-ff894760ab59/content_warnings',
+  'Best Served Cold': 'https://app.thestorygraph.com/books/e21a7178-8e47-4032-992a-bd9ff690c1c8/content_warnings',
+  "Mage's Blood": 'https://app.thestorygraph.com/book_reviews/3c72abe4-64ab-4fb6-bdb0-abc7e54619e7?sort=lowest_rated'
+};
 function applyBookMetadata(catalog) {
   catalog.forEach(book => {
+    const warningSource = sexualContentSources[book.title];
+    if (book.romanceLevel === 'explicit' || warningSource) {
+      book.sexualContentWarning = ['Divine Rivals', 'A Far Wilder Magic'].includes(book.title)
+        ? 'On-page sex (open door), described briefly with limited detail.'
+        : 'Explicit sex / on-page sexual content (open door).';
+      if (warningSource && !book.sources.some(source => source.url === warningSource)) book.sources.push({label:'Sexual content details',url:warningSource});
+    }
     const metadata = bookMetadata[book.title];
-    if (!metadata) return;
-    book.genres = metadata.genres;
+    if (!metadata) { book.genres = trackerGenres(book, book.genres || []); return; }
+    book.genres = trackerGenres(book, metadata.genres);
     book.seriesFocus = metadata.seriesFocus;
     book.seriesFocusNote = metadata.seriesFocusNote;
     book.coverPath = metadata.coverPath;

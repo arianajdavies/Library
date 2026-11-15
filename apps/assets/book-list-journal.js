@@ -43,6 +43,10 @@ function saveReading(book, updates) {
     return false;
   }
 }
+function contentWarning(book) {
+  if (!book.sexualContentWarning) return '';
+  return `<span class="content-warning"><strong>Content warning:</strong> ${escapeHtml(book.sexualContentWarning)}</span>`;
+}
 function readingControls(book) {
   const entry = reading(book);
   const id = bookId(book);
@@ -104,7 +108,8 @@ function detailRoute() {
             <p>${escapeHtml(book.setting)} ${escapeHtml(book.magic)}</p>
             <h3>What to expect</h3>
             <p>${escapeHtml(book.romance)}</p>
-            <div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join('')}${book.tropes.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+            ${contentWarning(book)}
+            <div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join('')}</div>
             <h3>Series and reading order</h3><p>${escapeHtml(book.series)}</p>
             <div class="source-list">${book.sources.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noreferrer">${escapeHtml(s.label)} ↗</a>`).join('')}</div>
           </section>
@@ -150,6 +155,11 @@ function initJournal() {
     } else {
       saveReading(book, { rating: 0 });
       updateReadingControls(book, `[data-rate="${id}"]`);
+    }
+    if (document.getElementById('bookDetail').hidden && state.readStatus) {
+      renderCards();
+      const updatedButton = grid.querySelector(`[data-read="${id}"]`);
+      (updatedButton || document.getElementById('readStatusFilter')).focus();
     }
   });
   document.addEventListener('change', event => {

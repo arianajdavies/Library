@@ -491,6 +491,7 @@
     .character-focus h3 { margin-top: 0; }
     .cover-wrap img { object-fit: contain; background: #eee8df; }
     .sources-disclosure summary { color: var(--accent-dark); font-size: .85rem; font-weight: 800; cursor: pointer; }
+    .content-warning { display: block; margin: 12px 0 0; padding: 10px 12px; border-left: 4px solid var(--berry); background: #f9edf0; color: #682d49; font-size: .88rem; line-height: 1.5; }
     .tag-browser { margin-top: 14px; }
     .tag-browser summary { color: var(--accent-dark); cursor: pointer; font-weight: 800; padding: 6px 0; }
   </style>
@@ -509,7 +510,7 @@
     <section class="hero" aria-labelledby="page-title">
       <div>
         <h1 id="page-title">Book Tracker and List</h1>
-        <p class="lead">Browse the books by plot, setting, magic, romance, tropes, and series status so the next read is easier to pick.</p>
+        <p class="lead">Browse by genre, plot, reading status, and series. Mark books as read to keep track of your reading.</p>
       </div>
       <div class="stats" aria-label="Book list summary">
         <div class="stat">
@@ -543,13 +544,11 @@
           </select>
         </label>
         <label>
-          Romance
-          <select id="romanceFilter">
-            <option value="">Any romance level</option>
-            <option value="none">None or minimal</option>
-            <option value="subplot">Subplot</option>
-            <option value="central">Central</option>
-            <option value="explicit">Explicit/open door</option>
+          Reading status
+          <select id="readStatusFilter">
+            <option value="">All books</option>
+            <option value="read">Already read</option>
+            <option value="unread">Unread</option>
           </select>
         </label>
         <label>
@@ -573,7 +572,7 @@
           </select>
         </label>
       </div>
-      <details class="tag-browser"><summary>Browse genre and trope tags</summary><div class="chips" id="chips" aria-label="Browse by category"></div></details>
+      <details class="tag-browser"><summary>Browse genre tags</summary><div class="chips" id="chips" aria-label="Browse by category"></div></details>
     </section>
 
     <section class="content" aria-label="Book spreadsheet">
@@ -997,26 +996,14 @@
     extendBookCatalog(books);
     applyBookMetadata(books);
 
-    const genreTags = [...new Set(books.flatMap(book => book.genres || []))].sort();
-    const chipData = [...new Set([...genreTags,
-      "romantasy",
-      "epic fantasy",
-      "political fantasy",
-      "YA",
-      "gothic",
-      "found family",
-      "enemies to lovers",
-      "standalone",
-      "complete",
-      "ongoing",
-      "needs confirmation"
-    ])];
+    const genreTags = [...BOOK_GENRE_TAGS];
+    const chipData = genreTags;
 
     const state = {
       query: "",
       genre: "",
       priority: "",
-      romance: "",
+      readStatus: "",
       series: "",
       sort: "list",
       chip: "",
@@ -1056,12 +1043,7 @@
     }
 
     function matchesChip(book) {
-      if (!state.chip) return true;
-      if (genreTags.includes(state.chip)) return (book.genres || []).includes(state.chip);
-      if (state.chip === "YA") return searchText(book).includes(" ya ") || searchText(book).includes("young adult");
-      if (["standalone", "complete", "ongoing"].includes(state.chip)) return book.seriesStatus === state.chip;
-      if (state.chip === "needs confirmation") return book.seriesStatus === "uncertain" || searchText(book).includes("needs confirmation");
-      return searchText(book).includes(state.chip.toLowerCase());
+      return !state.chip || (book.genres || []).includes(state.chip);
     }
 
     function filteredBooks() {
@@ -1069,7 +1051,7 @@
       let list = books
         .map((book, index) => ({ ...book, index }))
         .filter((book) => !query || searchText(book).includes(query))
-        .filter((book) => !state.romance || book.romanceLevel === state.romance)
+        .filter(book => !state.readStatus || reading(book).read === (state.readStatus === 'read'))
         .filter((book) => !state.series || book.seriesStatus === state.series)
         .filter(book => !state.genre || (book.genres || []).includes(state.genre))
         .filter(book => !state.priority || (state.priority === 'unset' ? !reading(book).priority : reading(book).priority === state.priority))
@@ -1109,7 +1091,7 @@
           <span>Plot</span>
           <button class="sydney-toggle" id="sydneyToggle" type="button">${state.sydneyFilter ? "Sydney Filter: ON" : "Sydney Filter: OFF"}</button>
         </div>
-        ${["Setting", "Magic System", "Romance", "Genres & Tropes", "Series & Characters", "Sources"].map((heading) => `
+        ${["Setting", "Magic System", "Romance & Content", "Genres", "Series & Characters", "Sources"].map((heading) => `
           <div class="sheet-cell sheet-head">${heading}</div>
         `).join("")}
         ${list.map((book) => `
@@ -1126,9 +1108,9 @@
           ${sheetCell(state.sydneyFilter ? `<span class="plot-hidden">Plot hidden for Sydney Filter.</span>` : escapeHtml(book.plot))}
           ${sheetCell(book.setting)}
           ${sheetCell(book.magic)}
-          ${sheetCell(book.romance)}
-          <div class="sheet-cell"><div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join("")}${book.tropes.map((trope) => `<span class="tag">${trope}</span>`).join("")}</div></div>
-          <div class="sheet-cell"><span class="tag focus-tag">${escapeHtml(seriesFocusLabel(book))}</span><p class="quick series-focus-note">${escapeHtml((book.seriesFocusNote || "").split(/(?<=[.!?])\s+/)[0])}</p><details class="series-order-note"><summary>Reading order</summary><p>${escapeHtml(book.series)}</p></details></div>
+          ${sheetCell(escapeHtml(book.romance) + contentWarning(book))}
+          <div class="sheet-cell"><div class="meta-row">${(book.genres || []).map(genre => `<span class="tag genre-tag">${escapeHtml(genre)}</span>`).join("")}</div></div>
+          <div class="sheet-cell"><p class="quick"><strong>${escapeHtml(seriesFocusLabel(book))}</strong></p><p class="quick series-focus-note">${escapeHtml((book.seriesFocusNote || "").split(/(?<=[.!?])\s+/)[0])}</p><details class="series-order-note"><summary>Reading order</summary><p>${escapeHtml(book.series)}</p></details></div>
           <div class="sheet-cell">
             <details class="sources-disclosure"><summary>View sources (${book.sources.length})</summary><div class="source-list">
               ${book.sources.map((source) => `<a href="${source.url}" target="_blank" rel="noreferrer">${source.label}</a>`).join("")}
@@ -1171,8 +1153,8 @@
       renderCards();
     });
 
-    document.querySelector("#romanceFilter").addEventListener("change", (event) => {
-      state.romance = event.target.value;
+    document.querySelector('#readStatusFilter').addEventListener('change', event => {
+      state.readStatus = event.target.value;
       renderCards();
     });
 
